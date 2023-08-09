@@ -16,7 +16,12 @@ class ProductManager{
             stock: stock
         }
 
-        if(newProduct.title == null || newProduct.description == null || newProduct.price == null || newProduct.thumbnail == null || newProduct.code == null || newProduct.stock == null){
+        const dataProduct = Object.values(newProduct);
+
+        // Se chequea si alguna propiedad es nula
+        const existsPropertyNull = (property) => property == null;
+
+        if(dataProduct.some(existsPropertyNull)){
             return console.log("Error. All product fields must be complete!");
         }
         
@@ -43,11 +48,8 @@ class ProductManager{
     getProductById(id){
         const foundProduct = this.products.find((prod) => prod.id === id);
 
-        if(foundProduct){
-            console.log(foundProduct);
-        } else {
-            console.log("Not found"); 
-        }
+        if(foundProduct) return console.log(foundProduct);
+        return console.log("Not found"); 
     }
 }
 
@@ -56,4 +58,4 @@ pm.getProducts();
 pm.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
 pm.getProducts();
 pm.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-pm.getProductById(1);
+pm.getProductById(3);
