@@ -1,15 +1,16 @@
+const fs = require('fs');
+
 class ProductManager{
     
-    constructor(){
-        this.products = [];
-        this.path = './files/products.json';
+    constructor(path){
+        this.path = path;
     } 
     
     /**** Metodos ****/ 
     
     addProduct(title, description, price, thumbnail, code, stock){
-        const fs = require('fs');
-        
+        let products = this.getProducts();
+
         let newProduct = {
             title: title, 
             description: description, 
@@ -23,87 +24,83 @@ class ProductManager{
 
         // Se chequea si alguna propiedad es nula
         const existsPropertyNull = (property) => property == null;
-
-        if(dataProduct.some(existsPropertyNull)){
-            return console.log("Error. All product fields must be complete!");
-        }
         
-        const productWithSameCode = this.products.filter((prod) => prod.code === newProduct.code); // retorna un arreglo con los objetos (productos) que coincidan con el codigo del producto que se desea agregar
+        if(dataProduct.some(existsPropertyNull)) return console.log("Error. All product fields must be complete!");
         
-        if(productWithSameCode.length > 0){
-            // se repitieron los codigos en distintos productos
-            return console.log("Error. Cannot be different products with the same code!"); 
-        }
+        // Se chequea si se repitieron los codigos en distintos productos
+        const productWithSameCode = products.filter((prod) => prod.code === newProduct.code); // retorna un arreglo con los objetos (productos) que coincidan con el codigo del producto que se desea agregar
         
-        if(this.products.length === 0){
+        if(productWithSameCode.length > 0) return console.log("Error. Cannot be different products with the same code!"); 
+        
+        // El producto no tiene ningun campo vacio ni se repite ningun codigo
+        if(products.length === 0){
             newProduct.id = 1;
         } else {
-            newProduct.id = this.products.length + 1;
+            newProduct.id = products.length + 1;
         }
-
-        this.products.push(newProduct);
         
-        return fs.writeFileSync(this.path, JSON.stringify(this.products, null, '\t'));
+        products.push(newProduct);
+        
+        return fs.writeFileSync(this.path, JSON.stringify(products, null, '\t'));
     }
     
     getProducts(){
-        const fs = require('fs');
-
-        let viewProducts = JSON.parse(fs.readFileSync(this.path, 'utf8'));
-        return console.log(viewProducts);
+        if(!fs.existsSync(this.path)) return [];
+        
+        let viewProducts = JSON.parse(fs.readFileSync(this.path, 'utf-8')); 
+        return viewProducts;
     }
     
     getProductById(id){
-        const fs = require('fs');
-
-        let dataProducts;
-
-        if(fs.existsSync(this.path)){
-            dataProducts = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
-        }
-
-        const foundProduct = dataProducts.find((prod) => prod.id === id);
+        let products = this.getProducts();
+        
+        let foundProduct = products.find((prod) => prod.id === id);
 
         if(foundProduct) return foundProduct;
-        return console.log("Not found"); 
+        return "Product not found"; 
     }
 
-    // updateProduct(id, campo, content){
-    //     const fs = require('fs');
-
-    //     let dataProducts;
-
-    //     if(fs.existsSync(this.path)){
-    //         dataProducts = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
-    //     }
-
-    //     const foundProductById = dataProducts.find((prod) => prod.id === id);
+    updateProduct(id, field, content){
+        let products = this.getProducts();
+        let foundProduct = this.getProductById(id);
         
-    //     if(foundProductById){
-    //         foundProductById.campo = content;
-    //     }
-
-    //     return console.log(fs.writeFileSync(this.path, JSON.stringify(this.products, null, '\t')));
-    // }
+        if(!Object.keys(foundProduct).includes(field)){
+            console.log("El campo que desea modificar no se encuentra definido");
+            return;
+        }
+        
+        // Se paso por parametro un campo que se encuentra definido  
+        const keys = Object.keys(foundProduct);
+        const idxToModify = keys.findIndex(key => key === field);
+        const key = keys[idxToModify]; 
+        
+        foundProduct[key] = content;
+        products[id-1] = foundProduct;
+        
+        return fs.writeFileSync(this.path, JSON.stringify(products, null, '\t'));
+    }
     
     deleteProduct(id){
-        const foundProductById = this.getProductById(id);
+        let products = this.getProducts();
+        let foundProductById = this.getProductById(id);
         
         if(foundProductById){
             const idxRemoveProduct = foundProductById.id - 1;
-            this.products.splice(idxRemoveProduct,1);
-            return this.products;
+            products.splice(idxRemoveProduct,1);
+            return fs.writeFileSync(this.path, JSON.stringify(products, null, '\t'));;
         }
         
         return console.log("El producto que desea eliminar no existe");
     }
 }
 
-let pm = new ProductManager();
-pm.getProducts();
+let path = "./files/products.json";
+let pm = new ProductManager(path);
+console.log(pm.getProducts());
 pm.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-pm.getProducts();
-// pm.getProductById(1);
-// // pm.updateProduct(1, "price", 400);
-// pm.deleteProduct(1);
-// pm.getProducts();
+console.log(pm.getProducts());
+console.log(pm.getProductById(1));
+pm.updateProduct(1, "price", 1000);
+console.log(pm.getProducts());
+pm.deleteProduct(1);
+console.log(pm.getProducts());
