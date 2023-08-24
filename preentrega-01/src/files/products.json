@@ -1,0 +1,17 @@
+[
+	{
+		"id": 2,
+		"title": "Producto prueba dos modficado",
+		"description": "Este es un producto prueba dos modficado",
+		"code": "abc120",
+		"price": 100,
+		"status": true,
+		"stock": 25,
+		"category": "deco",
+		"thumbnails": [
+			"ruta-thumbnail-12",
+			"ruta-thumbnail-22",
+			"ruta-thumbnail-32"
+		]
+	}
+]
