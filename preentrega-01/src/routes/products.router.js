@@ -61,7 +61,7 @@ router.post('/',(req,res)=>{
     let products = getProducts();
     
     let id = 1;
-    if(products.length > 0) id = products.length + 1;
+    if(products.length > 0) id = products[products.length-1].id + 1;
 
     let newProduct = {
         id: id, 
