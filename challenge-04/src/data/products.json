@@ -1,0 +1,107 @@
+[
+	{
+		"id": 1,
+		"title": "Producto uno",
+		"description": "Este es un producto prueba uno",
+		"code": "abc123p1",
+		"price": 200,
+		"status": true,
+		"stock": 12,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p1-1",
+			"thumbnail-p1-2",
+			"thumbnail-p1-3"
+		]
+	},
+	{
+		"id": 2,
+		"title": "Producto dos",
+		"description": "Este es un producto prueba dos",
+		"code": "abc123p2",
+		"price": 200,
+		"status": true,
+		"stock": 12,
+		"category": "mesas",
+		"thumbnails": [
+			"thumbnail-p2-1",
+			"thumbnail-p2-2",
+			"thumbnail-p2-3"
+		]
+	},
+	{
+		"id": 3,
+		"title": "Producto tres",
+		"description": "Este es un producto prueba tres",
+		"code": "abc123p3",
+		"price": 224,
+		"status": true,
+		"stock": 8,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p3-1",
+			"thumbnail-p3-2",
+			"thumbnail-p3-3"
+		]
+	},
+	{
+		"id": 4,
+		"title": "Producto cuatro",
+		"description": "Este es un producto prueba cuatro",
+		"code": "abc123p4",
+		"price": 423,
+		"status": true,
+		"stock": 9,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p4-1",
+			"thumbnail-p4-2",
+			"thumbnail-p4-3"
+		]
+	},
+	{
+		"id": 5,
+		"title": "Producto cinco",
+		"description": "Este es un producto prueba cinco",
+		"code": "abc123p5",
+		"price": 2334,
+		"status": true,
+		"stock": 30,
+		"category": "roperos",
+		"thumbnails": [
+			"thumbnail-p5-1",
+			"thumbnail-p5-2",
+			"thumbnail-p5-3"
+		]
+	},
+	{
+		"id": 6,
+		"title": "Producto seis",
+		"description": "Este es un producto prueba seis",
+		"code": "abc123p6",
+		"price": 3340,
+		"status": true,
+		"stock": 20,
+		"category": "mesas",
+		"thumbnails": [
+			"thumbnail-p6-1",
+			"thumbnail-p6-2",
+			"thumbnail-p6-3"
+		]
+	},
+	{
+		"id": 7,
+		"title": "Producto siete",
+		"description": "Este es un producto prueba siete",
+		"code": "abc123p7",
+		"price": 340,
+		"status": true,
+		"stock": 10,
+		"category": "roperos",
+		"thumbnails": [
+			"thumbnail-p7-1",
+			"thumbnail-p7-2",
+			"thumbnail-p7-3"
+		]
+	}
+]
