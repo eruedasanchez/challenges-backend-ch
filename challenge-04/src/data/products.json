@@ -103,5 +103,124 @@
 			"thumbnail-p7-2",
 			"thumbnail-p7-3"
 		]
+	},
+	{
+		"id": 8,
+		"title": "Producto ocho",
+		"description": "Este es un producto prueba ocho",
+		"code": "abc123p8",
+		"price": 370,
+		"status": true,
+		"stock": 5,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p8-1",
+			"thumbnail-p8-2"
+		]
+	},
+	{
+		"id": 9,
+		"title": "Producto nueve",
+		"description": "Este es un producto prueba nueve",
+		"code": "abc123p9",
+		"price": 37004,
+		"status": true,
+		"stock": 8,
+		"category": "roperos",
+		"thumbnails": [
+			"thumbnail-p9-1",
+			"thumbnail-p9-2",
+			"thumbnail-p9-3"
+		]
+	},
+	{
+		"id": 10,
+		"title": "Producto diez",
+		"description": "Este es un producto prueba diez",
+		"code": "abc123p10",
+		"price": 3704,
+		"status": true,
+		"stock": 20,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p10-1",
+			"thumbnail-p10-2",
+			"thumbnail-p10-3"
+		]
+	},
+	{
+		"id": 11,
+		"title": "Producto once",
+		"description": "Este es un producto prueba once",
+		"code": "abc123p11",
+		"price": 37,
+		"status": true,
+		"stock": 10,
+		"category": "roperos",
+		"thumbnails": [
+			"thumbnail-p11-1",
+			"thumbnail-p11-2",
+			"thumbnail-p11-3"
+		]
+	},
+	{
+		"id": 12,
+		"title": "Producto doce",
+		"description": "Este es un producto prueba doce",
+		"code": "abc123p12",
+		"price": 72,
+		"status": true,
+		"stock": 21,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p12-1",
+			"thumbnail-p12-2",
+			"thumbnail-p12-3"
+		]
+	},
+	{
+		"id": 13,
+		"title": "Producto trece",
+		"description": "Este es un producto prueba trece",
+		"code": "abc123p13",
+		"price": 23,
+		"status": true,
+		"stock": 14,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p13-1",
+			"thumbnail-p13-2",
+			"thumbnail-p13-3"
+		]
+	},
+	{
+		"id": 14,
+		"title": "Producto catorce",
+		"description": "Este es un producto prueba catorce",
+		"code": "abc123p14",
+		"price": 214,
+		"status": true,
+		"stock": 6,
+		"category": "roperos",
+		"thumbnails": [
+			"thumbnail-p14-1",
+			"thumbnail-p14-2",
+			"thumbnail-p14-3"
+		]
+	},
+	{
+		"id": 15,
+		"title": "Producto quince",
+		"description": "Este es un producto prueba quince",
+		"code": "abc123p15",
+		"price": 421,
+		"status": true,
+		"stock": 26,
+		"category": "roperos",
+		"thumbnails": [
+			"thumbnail-p15-1",
+			"thumbnail-p15-2",
+			"thumbnail-p15-3"
+		]
 	}
 ]

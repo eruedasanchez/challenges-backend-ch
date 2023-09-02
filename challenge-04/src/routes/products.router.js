@@ -126,6 +126,4 @@ router.delete('/:pid', (req,res) => {
     res.status(200).json({deletedProduct});
 })
 
-// module.exports = router;
-
 
