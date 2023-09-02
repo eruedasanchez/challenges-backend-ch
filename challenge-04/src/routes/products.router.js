@@ -58,7 +58,17 @@ router.post('/',(req,res)=>{
         return res.status(400).json({error:'Los campos title, description, code, price, status, stock y category son obligatorios. Ademas, el campo status se debe setear por defecto en true.'});
     }
 
+    if(isNaN(price) || price <= 0) return res.status(400).json({error:'El precio debe ser numerico y mayor (estricto) que 0'});
+
     let products = getProducts();
+
+    let codes = [];
+    for(const prod of products){
+        codes.push(prod.code);
+    }
+    
+    // Se chequea que el codigo ingresado no se encuentre repetido
+    if(codes.includes(code)) return res.status(400).json({error:`El codigo ${code} ya se encuentra asignado a otro producto. Por favor, ingrese uno distinto`}); 
     
     let id = 1;
     if(products.length > 0) id = products[products.length-1].id + 1;
@@ -93,7 +103,18 @@ router.put('/:pid', (req, res) => {
         return res.status(400).json({error:'Complete los campos title, description, code, price, status, stock o category que desea modificar en el body'});
     }
     
+    if(isNaN(price) || price <= 0) return res.status(400).json({error:'El precio debe ser numerico y mayor (estricto) que 0'});
+
     let products = getProducts();
+
+    let codes = [];
+    for(const prod of products){
+        codes.push(prod.code);
+    }
+    
+    // Se chequea que el codigo ingresado no se encuentre repetido
+    if(codes.includes(code)) return res.status(400).json({error:`El codigo ${code} ya se encuentra asignado a otro producto. Por favor, ingrese uno distinto`}); 
+    
     let idxSelectedProduct = products.findIndex(prod => prod.id === pid);
 
     if(idxSelectedProduct === -1) return res.status(400).json({error:`El producto con ID ${id} no existe`});
@@ -116,14 +137,13 @@ router.delete('/:pid', (req,res) => {
     let products = getProducts();
     let idxDeletedProduct = products.findIndex(prod => prod.id === pid);
 
-    if(idxDeletedProduct === -1) return res.status(400).json({error:`El producto con ID ${id} no existe`});
+    if(idxDeletedProduct === -1) return res.status(400).json({error:`El producto con ID ${pid} no existe`});
     
-
-    let deletedProduct = products.splice(idxDeletedProduct, 1);
+    let deletedProduct = (products.splice(idxDeletedProduct, 1))[0]; // Se captura al objeto que contiene al producto eliminado del arreglo deletedProduct
 
     saveProducts(products);
 
-    res.status(200).json({deletedProduct});
+    res.status(200).json(deletedProduct);
 })
 
 
