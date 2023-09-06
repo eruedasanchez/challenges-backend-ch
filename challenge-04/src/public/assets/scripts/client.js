@@ -80,6 +80,8 @@ const loadProducts = async () => {
 
 loadProducts();
 
+// Se intenta pushear el archivo client.js que no se dejaba ver anteriormente
+
 
 
 
