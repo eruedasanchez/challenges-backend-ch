@@ -1,5 +1,11 @@
 const fs = require('fs');
 
+const INCOMPLETE_FIELDS_ERR = "Error. All product fields must be complete!";
+const SAME_CODE_ERR = "Error. Cannot be different products with the same code!";
+const NOT_FOUND_SEARCH = "Error. The product you want search doesn't exist";
+const NOT_FOUND_DEL = "Error. The product you want delete doesn't exist";
+const UNDEF_FIELD_ERR = "Error. The field you want modify is not defined";
+
 class ProductManager{
     
     constructor(path){
@@ -25,12 +31,12 @@ class ProductManager{
         // Se chequea si alguna propiedad es nula
         const existsPropertyNull = (property) => property == null;
         
-        if(dataProduct.some(existsPropertyNull)) return console.log("Error. All product fields must be complete!");
+        if(dataProduct.some(existsPropertyNull)) return INCOMPLETE_FIELDS_ERR;
         
         // Se chequea si se repitieron los codigos en distintos productos
         const productWithSameCode = products.filter((prod) => prod.code === newProduct.code); // retorna un arreglo con los objetos (productos) que coincidan con el codigo del producto que se desea agregar
         
-        if(productWithSameCode.length > 0) return console.log("Error. Cannot be different products with the same code!"); 
+        if(productWithSameCode.length > 0) return SAME_CODE_ERR; 
         
         // El producto no tiene ningun campo vacio ni se repite ningun codigo
         if(products.length === 0){
@@ -56,26 +62,25 @@ class ProductManager{
         
         let foundProduct = products.find((prod) => prod.id === id);
 
-        if(foundProduct) return foundProduct;
-        return "Product not found"; 
+        if(foundProduct){
+            return foundProduct;
+        } else {
+            return NOT_FOUND_SEARCH;
+        } 
     }
 
     updateProduct(id, field, content){
         let products = this.getProducts();
         let foundProduct = this.getProductById(id);
+
+        if(foundProduct === NOT_FOUND_SEARCH) return NOT_FOUND_SEARCH;
         
-        if(!Object.keys(foundProduct).includes(field)){
-            console.log("El campo que desea modificar no se encuentra definido");
-            return;
-        }
+        if(!Object.keys(foundProduct).includes(field)) return UNDEF_FIELD_ERR;
         
         // Se paso por parametro un campo que se encuentra definido  
-        const keys = Object.keys(foundProduct);
-        const idxToModify = keys.findIndex(key => key === field);
-        const key = keys[idxToModify]; 
-        
-        foundProduct[key] = content;
-        products[id-1] = foundProduct;
+        const idxFoundProduct = products.findIndex(prod => prod.id === id);
+        foundProduct[field] = content;
+        products[idxFoundProduct] = foundProduct;
         
         return fs.writeFileSync(this.path, JSON.stringify(products, null, '\t'));
     }
@@ -84,13 +89,13 @@ class ProductManager{
         let products = this.getProducts();
         let foundProductById = this.getProductById(id);
         
-        if(foundProductById){
-            const idxRemoveProduct = foundProductById.id - 1;
+        if(foundProductById !== NOT_FOUND_SEARCH){
+            const idxRemoveProduct = products.findIndex(prod => prod.id === id);
             products.splice(idxRemoveProduct,1);
             return fs.writeFileSync(this.path, JSON.stringify(products, null, '\t'));;
         }
         
-        return console.log("El producto que desea eliminar no existe");
+        return NOT_FOUND_DEL;
     }
 }
 
@@ -101,8 +106,9 @@ pm.addProduct("Producto prueba dos", "Este es un producto prueba dos ", 200, "Si
 pm.addProduct("Producto prueba tres", "Este es un producto prueba tres", 300, "Sin imagen", "abc122", 23);
 pm.addProduct("Producto prueba cuatro", "Este es un producto prueba cuatro", 400, "Sin imagen", "abc123", 22);
 pm.addProduct("Producto prueba cinco", "Este es un producto prueba cinco", 500, "Sin imagen", "abc124", 21);
-pm.addProduct("Producto prueba seis", "Este es un producto prueba seis", 600, "Sin imagen", "abc125", 20);
-pm.addProduct("Producto prueba siete", "Este es un producto prueba siete", 700, "Sin imagen", "abc126", 19);
-pm.addProduct("Producto prueba ocho", "Este es un producto prueba ocho", 800, "Sin imagen", "abc127", 18);
-pm.addProduct("Producto prueba nueve", "Este es un producto prueba nuevo", 900, "Sin imagen", "abc128", 17);
-pm.addProduct("Producto prueba diez", "Este es un producto prueba diez", 1000, "Sin imagen", "abc129", 16);
+console.log(pm.getProducts());
+console.log(pm.getProductById(2));
+console.log(pm.deleteProduct(3));
+console.log(pm.updateProduct(1, "pepe", "Producto prueba cinco modificado"));
+
+
