@@ -1,3 +1,5 @@
+const NOT_FOUND = "Not found";
+
 class ProductManager{
     
     constructor(){
@@ -22,14 +24,16 @@ class ProductManager{
         const existsPropertyNull = (property) => property == null;
 
         if(dataProduct.some(existsPropertyNull)){
-            return console.log("Error. All product fields must be complete!");
+            console.log("Error. All product fields must be complete!");
+            return;
         }
         
         const productWithSameCode = this.products.filter((prod) => prod.code === newProduct.code); // retorna un arreglo con los objetos (productos) que coincidan con el codigo del producto que se desea agregar
         
         if(productWithSameCode.length > 0){
             // se repitieron los codigos en distintos productos
-            return console.log("Error. Cannot be different products with the same code!"); 
+            console.log("Error. Cannot be different products with the same code!"); 
+            return;
         }
         
         if(this.products.length === 0){
@@ -38,24 +42,27 @@ class ProductManager{
             newProduct.id = this.products.length + 1;
         }
         
-        return this.products.push(newProduct);
+        this.products.push(newProduct);
     }
     
     getProducts(){
-        console.log(this.products);
+        return this.products;
     }
     
     getProductById(id){
         const foundProduct = this.products.find((prod) => prod.id === id);
-
-        if(foundProduct) return console.log(foundProduct);
-        return console.log("Not found"); 
+        
+        if(foundProduct){
+            return foundProduct;
+        } else {
+            return NOT_FOUND;
+        } 
     }
 }
 
 let pm = new ProductManager();
-pm.getProducts();
+console.log("Products", pm.getProducts());
 pm.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-pm.getProducts();
-pm.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
-pm.getProductById(3);
+pm.addProduct("producto prueba dos", "Este es un producto prueba dos", 200, "Sin imagen", "abc1232", 25);
+console.log("Products", pm.getProducts());
+console.log("Product ID", pm.getProductById(5));
