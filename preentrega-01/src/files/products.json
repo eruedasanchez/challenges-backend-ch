@@ -13,5 +13,35 @@
 			"ruta-thumbnail-22",
 			"ruta-thumbnail-32"
 		]
+	},
+	{
+		"id": 3,
+		"title": "producto 3 nuevamente",
+		"description": "hola",
+		"code": "abc123p3",
+		"price": 155,
+		"status": true,
+		"stock": 155,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p5-1",
+			"thumbnail-p5-2",
+			"thumbnail-p5-3"
+		]
+	},
+	{
+		"id": 5,
+		"title": "Producto cinco",
+		"description": "Este es un producto prueba cinco",
+		"code": "abc123p5",
+		"price": 155,
+		"status": true,
+		"stock": 155,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p5-1",
+			"thumbnail-p5-2",
+			"thumbnail-p5-3"
+		]
 	}
 ]
