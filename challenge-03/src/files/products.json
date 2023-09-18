@@ -88,5 +88,14 @@
 		"code": "abc129",
 		"stock": 16,
 		"id": 10
+	},
+	{
+		"title": "Producto prueba once",
+		"description": "Este es un producto prueba once",
+		"price": 1000,
+		"thumbnail": "Sin imagen",
+		"code": "abc1210",
+		"stock": 16,
+		"id": 11
 	}
 ]

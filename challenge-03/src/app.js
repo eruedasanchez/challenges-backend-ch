@@ -1,16 +1,21 @@
 const express = require("express");
+const ProductManager = require("./ProductManager.js");
 
-const products = require("./files/products.json");
-
+const productManager = new ProductManager(__dirname + "/files/products.json");
 const PORT = 8080;
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 app.get("/", (req, res) => {
-    res.send("Bienvenidos al server de Product Manager desarrollado con Express JS")
+    res.send("Bienvenidos al server de Product Manager desarrollado con Express JS");
 })
 
 app.get("/products", (req, res) => {
+    const products = productManager.getProducts();
+    
     if(Object.keys(req.query).length === 0){
         // No se pasan query params por URL
         return res.json({status:'ok', prods:products}); 
@@ -29,6 +34,7 @@ app.get("/products", (req, res) => {
 })
 
 app.get("/products/:pid", (req, res) => {
+    const products = productManager.getProducts();
     let pid = parseInt(req.params.pid);
     
     if(isNaN(pid)){
