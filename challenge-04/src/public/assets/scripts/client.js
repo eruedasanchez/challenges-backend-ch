@@ -26,7 +26,7 @@ socket.on('newProduct', (newProduct, products) => {
 })
 
 socket.on('deletedProduct', (deletedProduct, products) => {
-    console.log(`Se ha eliminado el ${deletedProduct.title} de la lista de productos`);
+    console.log(`Se ha eliminado el ${deletedProduct[0].title} de la lista de productos`);
     
     let ul = '';
     products.forEach(prod => {
@@ -80,7 +80,6 @@ const loadProducts = async () => {
 
 loadProducts();
 
-// Se intenta pushear el archivo client.js que no se dejaba ver anteriormente
 
 
 

@@ -30,63 +30,18 @@
 		]
 	},
 	{
-		"id": 6,
-		"title": "Producto seis",
-		"description": "Este es un producto prueba seis",
-		"code": "abc123p6",
-		"price": 3340,
+		"id": 18,
+		"title": "Producto dieciocho",
+		"description": "Este es un producto prueba dieciocho",
+		"code": "abc123p18",
+		"price": 224,
 		"status": true,
-		"stock": 20,
-		"category": "mesas",
-		"thumbnails": [
-			"thumbnail-p6-1",
-			"thumbnail-p6-2",
-			"thumbnail-p6-3"
-		]
-	},
-	{
-		"id": 11,
-		"title": "Producto once",
-		"description": "Este es un producto prueba once",
-		"code": "abc123p11",
-		"price": 37,
-		"status": true,
-		"stock": 10,
-		"category": "roperos",
-		"thumbnails": [
-			"thumbnail-p11-1",
-			"thumbnail-p11-2",
-			"thumbnail-p11-3"
-		]
-	},
-	{
-		"id": 15,
-		"title": "Producto quince",
-		"description": "Este es un producto prueba quince",
-		"code": "abc123p15",
-		"price": 421,
-		"status": true,
-		"stock": 26,
-		"category": "roperos",
-		"thumbnails": [
-			"thumbnail-p15-1",
-			"thumbnail-p15-2",
-			"thumbnail-p15-3"
-		]
-	},
-	{
-		"id": 17,
-		"title": "Producto diecisiete",
-		"description": "Este es un producto prueba diecisiete",
-		"code": "abc123p17",
-		"price": 214,
-		"status": true,
-		"stock": 65,
+		"stock": 3,
 		"category": "muebles",
 		"thumbnails": [
-			"thumbnail-p17-1",
-			"thumbnail-p17-2",
-			"thumbnail-p17-3"
+			"thumbnail-p18-1",
+			"thumbnail-p18-2",
+			"thumbnail-p18-3"
 		]
 	}
 ]
