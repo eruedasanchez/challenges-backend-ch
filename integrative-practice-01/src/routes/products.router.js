@@ -1,4 +1,3 @@
-import fs from 'fs';
 import __dirname from '../utils.js';
 import path from 'path';
 import express from 'express';
@@ -7,10 +6,6 @@ export const router = express.Router();
 
 const route = path.join(__dirname, 'data', 'products.json');
 const productManager = new ProductManager(route);
-
-const save = (products) => {
-    fs.writeFileSync(route, JSON.stringify(products, null, '\t'));
-}
 
 /*------------------------------*\
         #MIDDLEWARES GET '/'
