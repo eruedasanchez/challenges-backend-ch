@@ -1,15 +1,66 @@
-import mongoose from "mongoose";
+import fs from 'fs';
 
-const cartsCollection = 'carts'; // 'products' coresponde al nombre de la coleccion definida en Atlas
-const cartsSchema = new mongoose.Schema({
-    title: {type: String, require: true, unique: true},
-	description: {type: String, require: true, unique: true},
-	code: {type: String, require: true, unique: true},
-	price: {type: String, require: true},
-	status: {type: Boolean, require: true},
-	stock: {type: Number, require: true},
-	category: {type: String, require: true},
-	thumbnails: {type: [String], require: true}  
-}, {strict: false})  
+class CartManager{
+    
+    constructor(path){
+        this.path = path;
+    } 
+    
+    /**** Metodos ****/
 
-export const productsModel = mongoose.model(cartsCollection, cartsSchema);
+    createCart(){
+        let carts = this.getCarts();
+
+        let carritoId = 1;
+        if(carts.length > 0) carritoId = carts[carts.length-1].cartId + 1;
+
+        let newCart = {
+			cartId: carritoId, 
+			products: []
+        }
+        
+        carts.push(newCart);
+        
+        return fs.writeFileSync(this.path, JSON.stringify(carts, null, '\t'));
+    }
+    
+    getCarts(){
+        if(!fs.existsSync(this.path)) return [];
+        
+		let viewCarts = JSON.parse(fs.readFileSync(this.path, 'utf-8')); 
+        return viewCarts;
+    }
+    
+    getCartById(cid){
+        let carts = this.getCarts();
+        
+        let foundCart = carts.find((cart) => cart.cartId === cid);
+        return foundCart;
+    }
+
+	addProduct(cid, pid){
+		let carts = this.getCarts();
+    
+		let idxCart = carts.findIndex(cart => cart.cartId === cid);
+		let productsSelected = carts[idxCart].products;
+		
+		let idxPid = productsSelected.findIndex(prod => prod.productId === pid);
+		if(idxPid === -1){
+			// El producto no se encuentra definido en esta orden de compra.
+			// Se agrega de a una unidad como solicita el enunciado
+			let newProductAdded = {
+				productId: pid,
+				quantity: 1 
+			}
+			productsSelected.push(newProductAdded);
+			carts[idxCart].products = productsSelected; 
+		} else {
+			// Se aumenta en uno la cantidad del producto como solicita el enunciado
+			productsSelected[idxPid].quantity += 1;
+		}
+
+		return fs.writeFileSync(this.path, JSON.stringify(carts, null, '\t'));
+	}
+}
+
+export default CartManager;

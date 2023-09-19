@@ -1,20 +1,11 @@
-import fs from 'fs';
-import path from 'path';
 import __dirname from '../utils.js';
+import path from 'path';
 import express from 'express';
+import CartManager from '../dao/fs-manager/CartManager.js';
 export const router = express.Router();
 
 const route = path.join(__dirname, 'data', 'cart.json');
-
-const getCart = () => {
-    if(!fs.existsSync(route)) return [];
-    
-    return JSON.parse(fs.readFileSync(route, 'utf-8'));
-}
-
-const save = cart => {
-    fs.writeFileSync(route, JSON.stringify(cart, null, '\t'));
-}
+const cartManager = new CartManager(route);
 
 /*------------------------------*\
     #MIDDLEWARES GET '/:cid'
@@ -29,7 +20,7 @@ const nanMid = (req, res, next) => {
 }
 
 const invalidPidMid = (req, res, next) => {
-    let cart = getCart();
+    let cart = cartManager.getCarts();
     let cid = parseInt(req.params.cid);
     
     let cartSelected = cart.filter(cart => cart.cartId === cid);
@@ -62,7 +53,7 @@ const pidInvalid = (req, res, next) => {
 }
 
 const invalidCidMid = (req, res, next) => {
-    let cart = getCart();
+    let cart = cartManager.getCarts();
     let cid = parseInt(req.params.cid);
     
     let idxCart = cart.findIndex(cart => cart.cartId === cid);
@@ -76,56 +67,27 @@ const invalidCidMid = (req, res, next) => {
 \*------------------------------*/
 
 router.post('/', (req,res) => {
-    let cart = getCart();
+    cartManager.createCart();
     
-    let carritoId = 1;
-    if(cart.length > 0) carritoId = cart[cart.length-1].cartId + 1;
-
-    let newCart = {
-        cartId: carritoId, 
-        products: [] 
-    }
-    
-    cart.push(newCart);
-
-    save(cart);
-
-    res.status(200).json(newCart);
+    res.setHeader('Content-Type','application/json');
+    res.status(200).json({status: 'ok'});
 })
 
 router.get('/:cid', nanMid, invalidPidMid, (req, res) => {
-    let cart = getCart();
     let cid = parseInt(req.params.cid);
+    let cartSelected = cartManager.getCartById(cid);
     
-    let cartSelected = cart.filter(cart => cart.cartId === cid);
-    return res.status(200).json({status:'ok', cartProducts: cartSelected[0].products});                              // Caso en el que se cumple http://localhost:8080/api/carts/2
+    res.setHeader('Content-Type','application/json');
+    return res.status(200).json({status:'ok', cartProducts: cartSelected.products});                              // Caso en el que se cumple http://localhost:8080/api/carts/2
 })
 
 router.post('/:cid/product/:pid', nanCidPid, pidInvalid, invalidCidMid, (req,res) => {
-    let cart = getCart();
     let cid = parseInt(req.params.cid);
     let pid = parseInt(req.params.pid);
+
+    cartManager.addProduct(cid, pid);
     
-    let idxCart = cart.findIndex(cart => cart.cartId === cid);
-    let productsSelected = cart[idxCart].products;
-
-    let idxPid = productsSelected.findIndex(prod => prod.productId === pid);
-    if(idxPid === -1){
-        // El producto no se encuentra definido en esta orden de compra.
-        // Se agrega de a una unidad como solicita el enunciado
-        let newProductAdded = {
-            productId: pid,
-            quantity: 1 
-        }
-        productsSelected.push(newProductAdded);
-        cart[idxCart].products = productsSelected; 
-    } else {
-        // Se aumenta en uno la cantidad del producto como solicita el enunciado
-        productsSelected[idxPid].quantity += 1;
-    }
-
-    save(cart);
-
-    res.status(200).json({cart});
+    res.setHeader('Content-Type','application/json');
+    res.status(200).json({status: 'ok'});
 })
 
