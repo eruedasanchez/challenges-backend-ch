@@ -10,6 +10,6 @@ const productsSchema = new mongoose.Schema({
 	stock: {type: Number, require: true},
 	category: {type: String, require: true},
 	thumbnails: {type: [String], require: true}  
-})  
+}, {strict: true})  
 
 export const productsModel = mongoose.model(productsCollection, productsSchema);
