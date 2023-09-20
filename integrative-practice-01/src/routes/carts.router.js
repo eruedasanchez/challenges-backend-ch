@@ -1,31 +1,30 @@
-import __dirname from '../utils.js';
-import path from 'path';
 import express from 'express';
-import CartManager from '../dao/fs-manager/CartManager.js';
+import mongoose from 'mongoose';
+import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js';
 export const router = express.Router();
 
-const route = path.join(__dirname, 'data', 'cart.json');
-const cartManager = new CartManager(route);
+const mongoCartManager = new MongoCartManager();
 
 /*------------------------------*\
     #MIDDLEWARES GET '/:cid'
 \*------------------------------*/
 
-const nanMid = (req, res, next) => {
-    let cid = parseInt(req.params.cid);
+const invalidObjectCidMid = (req, res, next) => {
+    let cid = req.params.cid;
     
-    if(isNaN(cid)) return res.status(400).json({status:'error', message:'Requiere un argumento cid de tipo numerico'});
+    if(!mongoose.Types.ObjectId.isValid(cid)) return res.status(400).json({status:'error', error:'El pid ingresado tiene un formato invalido'});
 
     next();
 }
 
-const invalidPidMid = (req, res, next) => {
-    let cart = cartManager.getCarts();
-    let cid = parseInt(req.params.cid);
+const invalidCidMid = async (req, res, next) => {
+    let carts = await mongoCartManager.getCarts();
+    let cid = req.params.cid;
     
-    let cartSelected = cart.filter(cart => cart.cartId === cid);
-    if(cartSelected.length === 0){
-        return res.status(400).json({status:'error', message:`El carrito con CID ${cid} no existe`}); // Caso en el que se cumple http://localhost:8080/api/carts/34123123
+    let cartCid = carts.filter(cart => cart._id.equals(new mongoose.Types.ObjectId(cid)));
+    
+    if(cartCid.length === 0){
+        return res.status(400).json({status:'error', message:`El carrito con CID ${cid} no existe`}); 
     }
 
     next();
@@ -35,29 +34,18 @@ const invalidPidMid = (req, res, next) => {
     #MIDDLEWARES POST '/:cid/product/:pid'
 \*------------------------------------------*/
 
-const nanCidPid = (req, res, next) => {
-    let cid = parseInt(req.params.cid);
+const nanPidMid = (req, res, next) => {
     let pid = parseInt(req.params.pid);
     
-    if(isNaN(cid) || isNaN(pid)) return res.status(400).json({status:'error', message:'Se requieren argumentos cid y pid de tipo numerico'});
+    if(isNaN(pid)) return res.status(400).json({status:'error', message:'Se requiere argumento pid de tipo numerico'});
 
     next();
 }
 
-const pidInvalid = (req, res, next) => {
+const negativePidMid = (req, res, next) => {
     let pid = parseInt(req.params.pid);
 
     if(pid < 1) return res.status(400).json({status:'error', message:`El PID ${pid} es invalido. Deben ser mayores o iguales a 1`});
-
-    next();
-}
-
-const invalidCidMid = (req, res, next) => {
-    let cart = cartManager.getCarts();
-    let cid = parseInt(req.params.cid);
-    
-    let idxCart = cart.findIndex(cart => cart.cartId === cid);
-    if(idxCart === -1) return res.status(400).json({error:`El carrito con CID ${cid} no existe`});
 
     next();
 }
@@ -66,28 +54,35 @@ const invalidCidMid = (req, res, next) => {
         #CART ROUTES
 \*------------------------------*/
 
-router.post('/', (req,res) => {
-    cartManager.createCart();
-    
-    res.setHeader('Content-Type','application/json');
-    res.status(200).json({status: 'ok'});
+router.post('/', async (req,res) => {
+    try {
+        let cartAdded = await mongoCartManager.createCart();
+        res.status(200).json({status: 'ok', newCart:cartAdded})
+    } catch (error) {
+        res.status(500).json({error:'Error inesperado', detalle:error.message})
+        
+    }
 })
 
-router.get('/:cid', nanMid, invalidPidMid, (req, res) => {
-    let cid = parseInt(req.params.cid);
-    let cartSelected = cartManager.getCartById(cid);
-    
-    res.setHeader('Content-Type','application/json');
-    return res.status(200).json({status:'ok', cartProducts: cartSelected.products});                              // Caso en el que se cumple http://localhost:8080/api/carts/2
+router.get('/:cid', invalidObjectCidMid, invalidCidMid, async (req, res) => {
+    try {
+        let cid = req.params.cid;
+        let cartSelected = await mongoCartManager.getCartById(cid); 
+        res.status(200).json({status:'ok', MongoDBCart:cartSelected});                           
+    } catch (error) {
+        res.status(500).json({error:'Unexpected error', detail:error.message});
+    }
 })
 
-router.post('/:cid/product/:pid', nanCidPid, pidInvalid, invalidCidMid, (req,res) => {
-    let cid = parseInt(req.params.cid);
-    let pid = parseInt(req.params.pid);
-
-    cartManager.addProduct(cid, pid);
-    
-    res.setHeader('Content-Type','application/json');
-    res.status(200).json({status: 'ok'});
+router.post('/:cid/product/:pid', invalidObjectCidMid, invalidCidMid, nanPidMid, negativePidMid, async (req,res) => {
+    try {
+        let cid = req.params.cid;
+        let pid = parseInt(req.params.pid);
+        
+        let cartSel = await mongoCartManager.addProduct(cid, pid);
+        res.status(200).json({status: 'ok', cartSelected:cartSel});
+    } catch (error) {
+        res.status(500).json({error:'Unexpected error', detail:error.message});
+    }
 })
 

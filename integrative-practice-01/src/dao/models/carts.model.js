@@ -8,9 +8,9 @@ const productIdQuantity = new mongoose.Schema({
 const cartsCollection = 'carts';                                            // 'carts' coresponde al nombre de la coleccion definida en Atlas
 const cartsSchema = new mongoose.Schema({
     products: {type: [productIdQuantity], require: true}
-})  
+}, {strict: true})  
 
-export const productsModel = mongoose.model(cartsCollection, cartsSchema);
+export const cartsModel = mongoose.model(cartsCollection, cartsSchema);
 
 
 
