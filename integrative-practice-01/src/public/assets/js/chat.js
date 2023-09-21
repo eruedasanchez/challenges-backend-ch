@@ -26,7 +26,6 @@ Swal.fire({
     },
     allowOutsideClick:false
 }).then(result => {
-    console.log(typeof result.value);
     userEmail = result.value;
     document.title = userEmail; // se coloca al userEmail en la pestaña
 

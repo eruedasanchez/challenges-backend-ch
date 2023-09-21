@@ -1,6 +1,11 @@
-# Challenge-04
+# Integrative Practice 01
 
-This project was generated with [Express JS](https://github.com/expressjs/express)
+This project was generated with the following dependencies: 
+
+- [Express JS](https://github.com/expressjs/express): Version 4.18.2
+- [Express Handlebars](https://github.com/express-handlebars/express-handlebars): Version 7.1.2
+- [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2  
+- [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2 
 
 ## Installation
 
@@ -12,16 +17,16 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 The quickest way to run this project with express is run the commands to generate an application as shown below:
 
-Create a folder in your desktop directory with the name you want (E.g: challenge-04-backend-ch):
+Create a folder in your desktop directory with the name you want (E.g: challenges-backend-ch):
 
 ```bash
-$ mkdir challenge-04-backend-ch
+$ mkdir challenges-backend-ch
 ```
 
 Open the contents of that folder:
 
 ```bash
-$ cd challenge-04-backend-ch
+$ cd challenges-backend-ch
 ```
 
 Clone the repository in that folder:
@@ -30,10 +35,10 @@ Clone the repository in that folder:
 $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 ```
 
-Open challenge-04 folder and install dependencies:
+Open integrative-practice-01 folder and install dependencies:
 
 ```bash
-$ cd challenge-04
+$ cd integrative-practice-01
 $ npm install
 ```
 
@@ -43,4 +48,4 @@ Start the server and nodemon:
 $ npm run dev 
 ```
 
-View the website at: http://localhost:8080 or perform the flow by [Postman](https://www.postman.com/)
+View the website at: http://localhost:8080/chat for chat application and perform the flow by [Postman](https://www.postman.com/) for Products and Carts collections

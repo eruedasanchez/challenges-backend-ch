@@ -1,5 +1,4 @@
 import express from 'express';
-// import mongoose from 'mongoose';
 import MongoChatManager from '../dao/mongoDB-manager/MongoChatManager.js';
 import { serverSocket } from '../app.js';
 export const router = express.Router();
