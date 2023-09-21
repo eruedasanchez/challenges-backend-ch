@@ -7,6 +7,7 @@ import {Server} from 'socket.io';
 import {router as productsRouter} from './routes/products.router.js';
 import {router as cartsRouter} from './routes/carts.router.js';
 import {router as viewsRouter} from './routes/views.router.js';
+import {initChat, router as chatRouter} from './routes/chat.router.js';
 import ProductManager from './dao/fs-manager/ProductManager.js'; 
 
 const route = path.join(__dirname, 'data', 'products.json');
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/realtimeproducts', viewsRouter);
+app.use('/chat', chatRouter);
 
 app.get('/', (req,res) => {
     const products = productManager.getProducts();
@@ -85,9 +87,14 @@ const serverExpress = app.listen(PORT, () => {
 // serverSocket para el servidor de socket.io
 export const serverSocket = new Server(serverExpress);
 
-serverSocket.on('connection', socket => {
-    console.log(`Se ha conectado un cliente con ID ${socket.id}`);
-})
+// serverSocket.on('connection', socket => {
+//     console.log(`Se ha conectado un cliente con ID ${socket.id}`);
+// })
+
+initChat(serverSocket);
+
+
+
 
 // Se establece la conexion con la base de datos de MongoDB Atlas
 try {

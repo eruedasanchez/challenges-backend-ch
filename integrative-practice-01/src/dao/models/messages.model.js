@@ -6,4 +6,4 @@ const messagesSchema = new mongoose.Schema({
     message: {type: String, require: true}
 })  
 
-export const productsModel = mongoose.model(messagesCollection, messagesSchema);
+export const messagesModel = mongoose.model(messagesCollection, messagesSchema);
