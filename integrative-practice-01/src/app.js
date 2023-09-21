@@ -87,14 +87,7 @@ const serverExpress = app.listen(PORT, () => {
 // serverSocket para el servidor de socket.io
 export const serverSocket = new Server(serverExpress);
 
-// serverSocket.on('connection', socket => {
-//     console.log(`Se ha conectado un cliente con ID ${socket.id}`);
-// })
-
 initChat(serverSocket);
-
-
-
 
 // Se establece la conexion con la base de datos de MongoDB Atlas
 try {
