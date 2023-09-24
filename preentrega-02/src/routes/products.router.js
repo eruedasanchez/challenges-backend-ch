@@ -3,38 +3,498 @@ import mongoose from 'mongoose';
 import MongoProductManager from '../dao/mongoDB-manager/MongoProductManager.js';
 export const router = express.Router();
 
+const ASC = "asc";
+const DESC = "desc";
 const mongoProductManager = new MongoProductManager();
+
+const formatResults = (productsData, prodsRes)  => {
+    return {
+        status: 'success',
+        payload: prodsRes,
+        totalPages: productsData.totalPages, 
+        prevPage: productsData.prevPage, 
+        nextPage: productsData.nextPage,
+        page: productsData.page,
+        hasPrevPage: productsData.hasPrevPage, 
+        hasNextPage: productsData.hasNextPage,
+        prevLink: productsData.hasPrevPage ? `http://localhost:8080/products?page=${productsData.prevPage}` : null,
+        nextLink: productsData.hasNextPage ? `http://localhost:8080/products?page=${productsData.nextPage}` : null   
+    }
+}
 
 /*------------------------------*\
         #MIDDLEWARES GET '/'
 \*------------------------------*/
 
-const noLimitMid = async (req, res, next) => {
-    let products = await mongoProductManager.getProducts();
+// 1. no se pasa ningun param LISTO!!!
+const noParamsMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
     
-    if(Object.keys(req.query).length === 0) return res.status(200).json({status:'ok', MongoDBProducts:products}); 
-    
-    next();
-}
-
-const nanLimitMid = (req, res, next) => {
-    let {limit} = req.query;
-    
-    if(isNaN(limit)) return res.status(400).json({status:'error', message:'El argumento LIMIT es de tipo numerico'});
-
-    next();
-}
-
-const limitInvalidMid = async (req, res, next) => {
-    let products = await mongoProductManager.getProducts();
-    let {limit} = req.query;
-    
-    if(parseInt(limit) < 1 || parseInt(limit) > products.length){
-        return res.status(400).send(`Error. LIMIT ${limit} no esta permitido. Por favor, ingrese un LIMIT entre 1 y ${products.length} inclusive`)
+    if(!limit && !page && !query && !sort){
+        let productsData = await mongoProductManager.getProductsPaginate(10, 1);
+        let products = formatResults(productsData, productsData.docs);
+        
+        return res.status(201).json({MongoDBProducts:products});  
     }
-
+    
     next();
 }
+
+// 2. solo se pasa por param lim LISTO!!!
+const limitMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(limit && !page && !query && !sort){
+        if(isNaN(limit)) return res.status(400).json({status:'error', message:'El argumento LIMIT es de tipo numerico'});
+
+        let productsData = await mongoProductManager.getProductsPaginate(limit, 1);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El argumento LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+        
+        let products = formatResults(productsData, productsData.docs);
+        return res.status(201).json({MongoDBProductsLimited:products});  
+    }
+    
+    next();
+}
+
+// 3. solo se pasa page por param LISTO!!!
+const pageMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(!limit && page && !query && !sort){
+        if(isNaN(page)) return res.status(400).json({status:'error', message:'El argumento Page es de tipo numerico'});
+
+        let productsData = await mongoProductManager.getProductsPaginate(10, page);
+        
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El argumento Page debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+        
+        let products = formatResults(productsData, productsData.docs);
+        return res.status(201).json({MongoDBProductsRequestedPage:products});  
+    }
+    
+    next();
+}
+
+// 4. solo se pasa query por param LISTO!!!
+const queryMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(!limit && !page && query && !sort){
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+        
+        let productsData = await mongoProductManager.getProductsPaginate(10, 1);
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+        
+        let products = formatResults(productsData, filterProducts);
+        return res.status(201).json({MongoDBProductsRequested:products});  
+    }
+    
+    next();
+}
+
+// 5. solo se pasa sort por parametro (ordenar asc o desc segun precio) LISTO!!!
+const sortMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    
+    if(!limit && !page && !query && sort){
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro Sort solo admite los valores asc o desc.'});
+        }
+        
+        let productsData = await mongoProductManager.getProductsPaginate(10, 1);
+        let productsSorted = productsData.docs.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = productsData.docs.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+    }
+    
+    next();
+}
+
+// 6. combinacion limit y query => limito tantos productos de la categoria pasada por param LISTO!!!
+const limitQueryMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(limit && !page && query && !sort){
+        if(isNaN(limit)) return res.status(400).json({status:'error', message:'El argumento LIMIT es de tipo numerico'});
+
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+        
+        let productsData = await mongoProductManager.getProductsPaginate(limit, 1);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El argumento LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+        
+        let products = formatResults(productsData, filterProducts);
+        return res.status(201).json({MongoDBProductsRequested:products}); 
+    }
+    
+    next();
+}
+
+// 7. combinacion limit y page => limito tantos productos de la page pasada por param  (LISTO!!!)
+const limitPageMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    
+    if(limit && page && !query && !sort){
+        if(isNaN(limit) || isNaN(page)){
+            return res.status(400).json({status:'error', message:'Los parametros LIMIT y PAGE son de tipo numerico'});
+        }
+
+        let productsData = await mongoProductManager.getProductsPaginate(limit, page);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El argumento LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El argumento PAGE debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+
+        let products = formatResults(productsData, productsData.docs);
+        return res.status(201).json({MongoDBProdsLimitPage:products});
+    }
+    
+    next();
+}
+
+// 8. combinacion limit y sort => limito tantos productos pasado por param y los ordeno por precio LISTO!!!
+const limitSortMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    
+    if(limit && !page && !query && sort){
+        if(isNaN(limit)){
+            return res.status(400).json({status:'error', message:'El parametro LIMIT es de tipo numerico'});
+        }
+
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro SORT solo admite los valores asc o desc.'});
+        }
+        
+        let productsData = await mongoProductManager.getProductsPaginate(limit, 1);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El parametro LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+        
+        let productsSorted = productsData.docs.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = productsData.docs.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+    }
+    
+    next();
+}
+
+// 9. combinacion limit, page y query => filtrar limit prods por categoria de la pagina page  LISTO!!!
+const limitPageQueryMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(limit && page && query && !sort){
+        if(isNaN(limit)) return res.status(400).json({status:'error', message:'El argumento LIMIT es de tipo numerico'});
+
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+        
+        let productsData = await mongoProductManager.getProductsPaginate(limit, page);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El argumento LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El argumento PAGE debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+
+        let products = formatResults(productsData, filterProducts);
+        return res.status(201).json({MongoDBProdsLimitPage:products});
+    }
+    
+    next();
+}
+
+// 10. combinacion limit, page y sort => filtrar limit prods de la pagina page y ordenarlos segun precio LISTO!!!
+const limitPageSortMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    
+    if(limit && page && !query && sort){
+        if(isNaN(limit) || isNaN(page)){
+            return res.status(400).json({status:'error', message:'Los parametros LIMIT y PAGE son de tipo numerico'});
+        }
+
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro SORT solo admite los valores asc o desc.'});
+        }
+
+        let productsData = await mongoProductManager.getProductsPaginate(limit, page);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El parametro LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El parametro PAGE debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+        
+        let productsSorted = productsData.docs.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = productsData.docs.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+    }
+    
+    next();
+}
+
+// 11. combinacion page y query => filtrar los elementos por categoria pasada de la pagina page LISTO!!!
+const pageQueryMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(!limit && page && query && !sort){
+        
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+        
+        if(isNaN(page)) return res.status(400).json({status:'error', message:'El parametro PAGE son de tipo numerico'});
+    
+        let productsData = await mongoProductManager.getProductsPaginate(10, page);
+        
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El argumento PAGE debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+
+        let products = formatResults(productsData, filterProducts);
+        return res.status(201).json({MongoDBProdsLimitPage:products});
+    }
+    
+    next();
+}
+
+// 12. combinacion page y sort => ordenar los prods de la pagina page por precio LISTO!!!
+const pageSortMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    
+    if(!limit && page && !query && sort){
+        if(isNaN(page)){
+            return res.status(400).json({status:'error', message:'El parametro PAGE es de tipo numerico'});
+        }
+
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro SORT solo admite los valores asc o desc.'});
+        }
+
+        let productsData = await mongoProductManager.getProductsPaginate(10, page);
+        
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El parametro PAGE debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+        
+        let productsSorted = productsData.docs.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = productsData.docs.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+    }
+    
+    next();
+}
+
+// 13. combinacion page, query y sort => ordenar los prods de la pagina categoria y luego por precio LISTO!!!
+const pageQuerySortMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(!limit && page && query && sort){
+        
+        if(isNaN(page)) return res.status(400).json({status:'error', message:'El parametro PAGE es de tipo numerico'});
+        
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+        
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro SORT solo admite los valores asc o desc.'});
+        }
+        
+        let productsData = await mongoProductManager.getProductsPaginate(10, page);
+        
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El argumento PAGE debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+        
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+
+        let productsSorted = filterProducts.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = filterProducts.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+    }
+    
+    next();
+}
+
+// 14. combinacion query y sort => ordenar por categoria y luego por precio LISTO!!!
+const querySortMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(!limit && !page && query && sort){
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+        
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro SORT solo admite los valores asc o desc.'});
+        }
+        
+        let productsData = await mongoProductManager.getProductsPaginate(10, 1);
+        
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+
+        let productsSorted = filterProducts.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = filterProducts.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+    }
+    
+    next();
+}
+
+// 15. combinacion limit, query y sort => ordenar por categoria, cortar por lim y ordenar por precio
+const limitQuerySortMid = async (req, res, next) => {
+    let {limit, page, query, sort}  = req.query;
+    
+    if(limit && !page && query && sort){
+
+        if(isNaN(limit)) return res.status(400).json({status:'error', message:'El argumento LIMIT es de tipo numerico'});
+
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro SORT solo admite los valores asc o desc.'});
+        }
+        
+        let productsData = await mongoProductManager.getProductsPaginate(limit, 1);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El argumento LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+        
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+
+        let productsSorted = filterProducts.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = filterProducts.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+    }
+    
+    next();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const noLimitMid = async (req, res, next) => {
+//     let products = await mongoProductManager.getProducts();
+    
+//     if(Object.keys(req.query).length === 0) return res.status(200).json({status:'ok', MongoDBProducts:products}); 
+    
+//     next();
+// }
+
+// const nanLimitMid = (req, res, next) => {
+//     let {limit} = req.query;
+    
+//     if(isNaN(limit)) return res.status(400).json({status:'error', message:'El argumento LIMIT es de tipo numerico'});
+
+//     next();
+// }
+
+// const limitInvalidMid = async (req, res, next) => {
+//     let products = await mongoProductManager.getProducts();
+//     let {limit} = req.query;
+    
+//     if(parseInt(limit) < 1 || parseInt(limit) > products.length){
+//         return res.status(400).send(`Error. LIMIT ${limit} no esta permitido. Por favor, ingrese un LIMIT entre 1 y ${products.length} inclusive`)
+//     }
+
+//     next();
+// }
 
 /*------------------------------*\
     #MIDDLEWARES GET '/:pid'
@@ -134,16 +594,74 @@ const emptyFieldsModifyMid = (req, res, next) => {
     next();
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*------------------------------*\
         #PRODUCTS ROUTES
 \*------------------------------*/
-
-router.get('/', noLimitMid, nanLimitMid, limitInvalidMid, async (req, res) => {
+// , noLimitMid, nanLimitMid, limitInvalidMid,
+router.get('/', noParamsMid, limitMid, pageMid, queryMid, sortMid, limitQueryMid, limitPageMid, limitSortMid, limitPageQueryMid, limitPageSortMid, pageQueryMid, pageSortMid, pageQuerySortMid, querySortMid, limitQuerySortMid, async (req, res) => {
     try {
-        // Desestructuracion del query param limit
-        let {limit} = req.query;
-        let limitedProducts = await mongoProductManager.getLimitedProducts(limit);
-        res.status(201).json({status: 'ok', MongoDBProducts:limitedProducts})    
+        let {limit, page, query, sort}  = req.query;
+        
+        if(isNaN(limit) || isNaN(page)) return res.status(400).json({status:'error', message:'Los parametros LIMIT y PAGE son de tipo numerico'});
+
+        if(!isNaN(query) && query < 0) return res.status(400).json({status:'error', message:'Cuando el parametro QUERY es de tipo Number, no se admiten stock negativos'});
+
+        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+            return res.status(400).json({status:'error', message:'El parametro SORT solo admite los valores asc o desc.'});
+        }
+        
+        let productsData = await mongoProductManager.getProductsPaginate(limit, page);
+
+        if(limit < 1 || limit > productsData.totalDocs){
+            return res.status(400).json({status:'error', message:`El parametro LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
+        }
+        
+        if(page < 1 || page > productsData.totalPages){
+            return res.status(400).json({status:'error', message:`El parametro PAGE debe ser mayor igual a 1 y no debe superar la cantidad total de paginas (${productsData.totalPages}) de la coleccion`});
+        }
+        
+        let filterProducts;
+        
+        if(isNaN(query)){
+            filterProducts = (productsData.docs).filter(prod => prod.category === query); // se filtra por categoria 
+        } else {
+            filterProducts = (productsData.docs).filter(prod => prod.stock >= query); // se filtra por disponibilidad (stock disponible)
+        }
+
+        let productsSorted = filterProducts.sort((prod1, prod2) => prod1.price - prod2.price);                  // ordenamiento por precio creciente por default
+        
+        if(sort === DESC) productsSorted = filterProducts.sort((prod1, prod2) => prod2.price - prod1.price);
+        
+        let products = formatResults(productsData, productsSorted);
+        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
     } catch (error) {
         res.status(500).json({error:'Unexpected error', detail:error.message})
     }

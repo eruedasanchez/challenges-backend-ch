@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 export const initChat = (serverSocketChat) => {
     serverSocketChat.on('connection', socket => {
-        console.log(`Se ha conectado un cliente con ID ${socket.id}`);
+        console.log(`Se ha conectado un cliente con ID ${socket.id} para chatear`);
         let usersList = [];
         
         socket.on('userEmail', async userEmail => {

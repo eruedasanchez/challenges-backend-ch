@@ -7,6 +7,10 @@ class MongoProductManager{
     addProduct(newProd){
         return productsModel.create(newProd);
     }
+
+    getProductsPaginate(lim, pag){
+        return productsModel.paginate({}, {limit:lim, lean:true, page:pag});
+    }
     
     getProducts(){
         return productsModel.find();
@@ -15,6 +19,21 @@ class MongoProductManager{
     getLimitedProducts(lim){
         return productsModel.find().limit(lim);
     }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     getProductById(id){
         return productsModel.findById(id);
