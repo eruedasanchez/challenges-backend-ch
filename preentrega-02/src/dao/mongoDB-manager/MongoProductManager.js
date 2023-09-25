@@ -19,21 +19,6 @@ class MongoProductManager{
     getLimitedProducts(lim){
         return productsModel.find().limit(lim);
     }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     getProductById(id){
         return productsModel.findById(id);

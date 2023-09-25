@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 export const initChat = (serverSocketChat) => {
     serverSocketChat.on('connection', socket => {
-        console.log(`Se ha conectado un cliente con ID ${socket.id} para chatear`);
+        console.log(`Se ha conectado un cliente con ID ${socket.id} al chat`);
         let usersList = [];
         
         socket.on('userEmail', async userEmail => {
@@ -40,7 +40,7 @@ export const initChat = (serverSocketChat) => {
 
         // La desconexion ocurre cuando un cliente cerra su ventana o navegador
         socket.on('disconnect',() => {
-            console.log(`se desconecto el cliente con id ${socket.id}`);
+            console.log(`se desconecto del chat el cliente con id ${socket.id}`);
             
             let idx = usersList.findIndex(user => user.id === socket.id);
             let user = usersList[idx];
