@@ -18,6 +18,10 @@ class MongoCartManager{
         return await cartsModel.findById(cid).populate('products.productId');
     }
 
+    async getCartByIdLean(cid){
+        return await cartsModel.findById(cid).populate('products.productId').lean();
+    }
+
     async getCartByIdWithoutPopulate(cid){
         return await cartsModel.findById(cid);
     }

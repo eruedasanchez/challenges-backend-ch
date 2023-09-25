@@ -28,7 +28,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 // app.use('/realtimeproducts', viewsRouter);
-app.use('/products', viewsRouter);
+// app.use('/products', viewsRouter);
+app.use('/', viewsRouter);
 app.use('/chat', chatRouter);
 
 app.get('/', (req,res) => {

@@ -140,11 +140,13 @@ router.post('/', async (req,res) => {
         
     }
 })
+
 router.get('/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) => {
     try {
         let cid = req.params.cid;
         let cartSelected = await mongoCartManager.getCartById(cid); 
-        res.status(200).json({status:'ok', MongoDBCart:cartSelected});                           
+        
+        res.status(201).json({status:'ok', MongoDBCart:cartSelected});                           
     } catch (error) {
         res.status(500).json({error:'Unexpected error', detail:error.message});
     }

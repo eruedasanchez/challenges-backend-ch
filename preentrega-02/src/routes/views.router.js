@@ -1,31 +1,52 @@
-// import fs from 'fs';
 import __dirname from '../utils.js';
-// import path from 'path';
 import express from 'express';
-// import {serverSocket} from '../app.js';
+import mongoose from 'mongoose';
 import MongoProductManager from '../dao/mongoDB-manager/MongoProductManager.js';
-// import ProductManager from '../dao/fs-manager/ProductManager.js';
+import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js';
 
 export const router = express.Router();
 
 const mongoProductManager = new MongoProductManager();
+const mongoCartManager = new MongoCartManager();
+
+/*------------------------------*\
+    #MIDDLEWARES GET '/:cid'
+\*------------------------------*/
+
+const invalidObjectCidMid = (req, res, next) => {
+    let cid = req.params.cid;
+    
+    if(!mongoose.Types.ObjectId.isValid(cid)) return res.status(400).json({status:'error', error:'El pid ingresado tiene un formato invalido'});
+
+    next();
+}
+
+const inexistsCidMid = async (req, res, next) => {
+    let carts = await mongoCartManager.getCarts();
+    let cid = req.params.cid;
+    
+    let cartCid = carts.filter(cart => cart._id.equals(new mongoose.Types.ObjectId(cid)));
+    
+    if(cartCid.length === 0){
+        return res.status(400).json({status:'error', message:`El carrito con CID ${cid} no existe`}); 
+    }
+
+    next();
+}
 
 /*------------------------------*\
         #VIEWS ROUTES
 \*------------------------------*/
 
-router.get('/', async (req,res) => {
-    // const products = await mongoProductManager.getProducts().lean();
-    let pag = req.query.pagina;
+router.get('/products', async (req,res) => {
+    let {limit, page} = req.query;
     
-    if(!pag) pag = 1;
+    if(!limit) limit = 10;
+    if(!page) page = 1;
 
-    const products = await mongoProductManager.getProductsPaginate(10, pag);
+    const products = await mongoProductManager.getProductsPaginate(limit, page);
 
     let {totalPages, hasPrevPage, hasNextPage, prevPage, nextPage} = products;
-
-
-    // console.log(products);
     
     res.setHeader('Content-Type','text/html');
     res.status(200).render('products', {
@@ -38,6 +59,22 @@ router.get('/', async (req,res) => {
         nextPage: nextPage 
     });
 });
+
+router.get('/carts/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) => {
+    try {
+        let cid = req.params.cid;
+        let cartSelected = await mongoCartManager.getCartByIdLean(cid); 
+        
+        res.setHeader('Content-Type','text/html');
+        res.status(200).render('cartid', {
+            header: 'MongoDB CartId',
+            cartId: cartSelected._id,
+            cartIdProducts: cartSelected.products,
+        });
+    } catch (error) {
+        res.status(500).json({error:'Unexpected error', detail:error.message});
+    }
+})
 
 // const route = path.join(__dirname, 'data', 'products.json');
 // const productManager = new ProductManager(route);

@@ -21,39 +21,28 @@
             </ol>
     </li>
     <br>
+    <button>Agregar al carrito</button>
+    <br>
+    <br>
     <br>
     {{/each}}
 </ul>
 <br>
 
-<a href="/products?pagina=1">Pag.1</a>
+<a href="/products?page=1">Pag.1</a>
 
 {{#if hasPrevPage}} 
-    <a href="/products?pagina={{prevPage}}">Prev.Pag</a>
+    <a href="/products?page={{prevPage}}">Prev.Pag</a>
     {{else}}
     <span>Prev.Pag</span>
 {{/if}}
 
 {{#if hasNextPage}} 
-    <a href="/products?pagina={{nextPage}}">Next.Pag</a>
+    <a href="/products?page={{nextPage}}">Next.Pag</a>
     {{else}}
     <span>Next.Pag</span>
 {{/if}}
 
 
-<a href="/products?pagina={{totalPages}}">Ult.Pag</a>
+<a href="/products?page={{totalPages}}">Ult.Pag</a>
 
-
-
-
-
-
-
-
-{{!-- <div>
-    <ul id="productsMongoDB"></ul>
-</div> 
-
-{{!-- Se carga al cliente que actua como frontend al websocket  --}}
-<script src="socket.io/socket.io.js"></script> 
-<script src="assets/js/client.js"></script> --}}
