@@ -44,6 +44,6 @@ try {
     console.log(error.message);
 }
 
-// Ultimo commit PreEntrega-02+RuedaSanchez
+// Ultimo commit PreEntrega-02+RuedaSanchez corrijo nombre del commit 
 
 
