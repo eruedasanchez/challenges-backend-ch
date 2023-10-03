@@ -7,8 +7,8 @@ This project was generated with the following dependencies:
 - [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2
 - [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4  
 - [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2
-- [Connect Mongo](https://github.com/socketio/socket.io): Version 5.0.0
-- [Express session](https://github.com/socketio/socket.io): Version 1.17.3 
+- [Connect Mongo](https://github.com/mongodb-js/connect-mongodb-session): Version 5.0.0
+- [Express session](https://github.com/expressjs/session): Version 1.17.3 
 
 ## Installation
 
