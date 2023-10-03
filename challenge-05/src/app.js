@@ -28,14 +28,13 @@ app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/chat', chatRouter);
 
-// inicializacion de la session
 app.use(session({
     secret: 'claveSecreta',
     resave: true,
     saveUninitialized: true,
     store: ConnectMongo.create({
         mongoUrl: 'mongodb+srv://ezequielruedasanchez:1I5FoZoRlSaz5TsX@cluster0.4vp9khz.mongodb.net/?retryWrites=true&w=majority&dbName=ecommerce',
-        ttl: 3600
+        ttl: 300
     })
 }))
 

@@ -34,47 +34,38 @@ const inexistsCidMid = async (req, res, next) => {
     next();
 }
 
+/*----------------------------------------------*\
+    #MIDDLEWARES GET '/', '/login', '/signup'
+\*----------------------------------------------*/
+
+// Se intenta logearse o registrarse pero ya se encuentra una sesión activa
+const activeSessionMid = (req, res, next) => {
+    if(req.session.users){
+        let {first_name, last_name, email, rol} = req.session.users;
+        return res.redirect(`/products?userFirstName=${first_name}&userLastName=${last_name}&userEmail=${email}&userRole=${rol}`);
+    } 
+
+    next();
+}
+
 /*------------------------------*\
         #VIEWS ROUTES
 \*------------------------------*/
 
-// middle para cuando queremos ingresar al peerfil
-const auth = (req, res, next) => {
-    if(req.session.user){
-        // ya se encuentra el usario con la sesion activa
-        next()
-    } else {
-        return res.redirect('/login');
-    }
-}
-
-// middle para cuando queremos logearnos pero ya estamos logeados (seesion activa)
-const authdos = (req, res, next) => {
-    if(req.session.user){
-        return res.redirect('/profile');
-    } else {
-        next();
-    }
-}
-
-router.get('/', (req,res) => {
+router.get('/', activeSessionMid, (req,res) => {
     res.status(200).render('login');
 })
 
-router.get('/signup', authdos, (req,res) => {
+router.get('/signup', activeSessionMid, (req,res) => {
     res.status(200).render('signUp');
 })
 
-// router.get('/login', authdos, (req,res) => {
-//     res.status(200).render('login');
-// })
-
-router.get('/profile', auth, (req,res) => {
-    res.status(200).render('profile');
+router.get('/login', activeSessionMid, (req,res) => {
+    res.status(200).render('login');
 })
 
 router.get('/products', async (req,res) => {
-    let {limit, page} = req.query;
+    let {limit, page, userFirstName, userLastName, userEmail, userAge, userRole} = req.query;
     
     if(!limit) limit = 10;
     if(!page) page = 1;
@@ -91,7 +82,12 @@ router.get('/products', async (req,res) => {
         hasPrevPage: hasPrevPage, 
         hasNextPage: hasNextPage , 
         prevPage: prevPage, 
-        nextPage: nextPage 
+        nextPage: nextPage,
+        userFirstName: userFirstName, 
+        userLastName: userLastName, 
+        userEmail: userEmail, 
+        userAge: userAge, 
+        userRole: userRole 
     });
 });
 

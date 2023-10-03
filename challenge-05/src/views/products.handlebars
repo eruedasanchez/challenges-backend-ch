@@ -1,4 +1,6 @@
-<h1>Home Page</h1>
+<h1>Bienvenido {{userFirstName}} {{userLastName}}</h1>
+<hr>
+<h3>Informacion del {{userRole}}: Email: {{userEmail}}, Rol: {{userRole}} </h3>
 <hr>
 <h3>Listado de productos almacenados en MongoDB Atlas</h3>
 <hr>
@@ -45,4 +47,6 @@
 
 
 <a href="/products?page={{totalPages}}">Ult.Pag</a>
-
+<hr>
+<br>
+<ul class="menu"><li> <a href="/api/sessions/logout">Logout</a></li></ul>

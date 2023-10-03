@@ -3,9 +3,9 @@ import { Router} from 'express';
 import { usersModel } from '../dao/models/users.model.js';
 export const router = Router();
 
-const ADMIN_EMAIL = 'adminCoder@coder.com';
-const ADMIN_PASS = 'adminCod3r123';
-const rol = { admin: 'admin', user: 'user'};
+const ADMIN_ROLE = 'admin';
+const USER_ROLE = 'usuario';
+const admin = {first_name:'adminCoder', last_name:'House', email: 'adminCoder@coder.com', password: 'adminCod3r123'};
 
 /*------------------------------*\
     #MIDDLEWARES POST '/signup'
@@ -25,7 +25,7 @@ const registeredEmailMid = async (req, res, next) => {
     let {email} = req.body;
     let registeredEmail = await usersModel.findOne({email});
 
-    if(registeredEmail) return res.status(400).json({status:'error', message:`El email ${email} ya està registrado`});
+    if(registeredEmail) return res.status(400).json({status:'error', message:`El email ${email} ya está registrado`});
     
     next();
 }
@@ -39,9 +39,6 @@ const emptyFieldsLoginMid = (req, res, next) => {
 
     next();
 }
-
-
-
 
 /*------------------------------*\
         #SESSIONS ROUTES
@@ -67,34 +64,52 @@ router.post('/signup', emptyFieldsSignUpMid, registeredEmailMid, async (req, res
 })
 
 router.post('/login', emptyFieldsLoginMid, async (req, res) => {
-    // Se recuperan los datos que ingresó el usuario en los inputs email y password
-    let {email, password} = req.body;
-    let passWithoutHash = password;
-    
-    // Se hashea la contraseña ingresada por el usuario
-    password = crypto.createHmac('sha256', 'palabraSecreta').update(password).digest('base64');
+    try {
+        // Se recuperan los datos que ingresó el usuario en los inputs email y password
+        let {email, password} = req.body;
+        let rol = USER_ROLE;
 
-    // ahora que ya esta hasheada la pass, busco al usuario en la db de users
-    let user = await usersModel.findOne({email, password});
+        if(email === admin.email && password === admin.password){
+            /**** Se logeo el admin ****/
+            rol = ADMIN_ROLE;
 
-    if(!user) return res.status(401).send('credenciales incorrectas');
-    
-    // El usuario esta registrado en la base de datos 'users'
+            req.session.users = {
+                first_name: admin.first_name,
+                last_name: admin.last_name,
+                email: admin.email,
+                rol: rol
+            }
 
-    let rol = rol.user;
-    if(user.email === ADMIN_EMAIL && passWithoutHash === ADMIN_PASS) rol = rol.admin;
-    
-    req.session.user = {
-        nombre: user.first_name,
-        email: user.email,
-        rol: rol
+            res.redirect(`/products?userFirstName=${admin.first_name}&userLastName=${admin.last_name}&userEmail=${admin.email}&userRole=${rol}`);
+            return;
+        }
+
+        /**** Se logeo un usuario ****/
+        
+        // Se hashea la contraseña ingresada por el usuario
+        password = crypto.createHmac('sha256', 'palabraSecreta').update(password).digest('base64');
+
+        // Se busca al usuario en la db de users que tenga la password hasheada
+        let user = await usersModel.findOne({email, password});
+
+        if(!user) return res.status(401).json({status:'error', message:'Credenciales incorrectas'});;
+        
+        // El usuario esta registrado en la base de datos 'users'
+        req.session.users = {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            rol: rol
+        }
+        
+        res.redirect(`/products?userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${rol}`);
+    } catch (error) {
+        res.status(500).json({error:'Unexpected error', detail:error.message});
     }
-
-    res.redirect('/profile');
 })
 
 router.get('/logout', (req, res) => {
-    req.session.destroy(e => console.log(e));
+    req.session.destroy();
 
     res.redirect('/login?message=logout correcto!');
 })
