@@ -1,4 +1,4 @@
-# Preentrega-02
+# Challenge-05. Login
 
 This project was generated with the following dependencies: 
 
@@ -6,7 +6,9 @@ This project was generated with the following dependencies:
 - [Express Handlebars](https://github.com/express-handlebars/express-handlebars): Version 7.1.2
 - [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2
 - [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4  
-- [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2 
+- [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2
+- [Connect Mongo](https://github.com/socketio/socket.io): Version 5.0.0
+- [Express session](https://github.com/socketio/socket.io): Version 1.17.3 
 
 ## Installation
 
@@ -36,10 +38,10 @@ Clone the repository in that folder:
 $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 ```
 
-Open preentrega-02 folder and install dependencies:
+Open challenge-05 folder and install dependencies:
 
 ```bash
-$ cd integrative-practice-01
+$ cd challenge-05
 $ npm install
 ```
 
@@ -52,7 +54,7 @@ $ npm run dev
 View the website at: http://localhost:8080/chat for chat application.
 <br>
 <br>
-Visit the website at: http://localhost:8080/products to view all the products with their respective pagination. 
+Visit the website at: http://localhost:8080/ to register as a user, log in and be redirected to the products view.
 <br>
 <br>
 Visit the website at: http://localhost:8080/carts/:cid to view the cart with the specific cid 
