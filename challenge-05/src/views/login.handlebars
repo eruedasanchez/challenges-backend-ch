@@ -1,0 +1,11 @@
+<h2>Login de usuarios:</h2>
+<hr>
+<form action="/api/sessions/login" method="post">
+    <input type="email" name="email" placeholder="Ingrese su email">
+    <input type="password" name="password" placeholder="Ingrese su contraseña">
+
+    <input type="submit" value="Login">
+    <a href="/signup">Registrarse</a>
+</form>
+<br>
+{{>menu}}

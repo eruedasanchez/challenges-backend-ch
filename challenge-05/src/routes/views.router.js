@@ -38,6 +38,41 @@ const inexistsCidMid = async (req, res, next) => {
         #VIEWS ROUTES
 \*------------------------------*/
 
+// middle para cuando queremos ingresar al peerfil
+const auth = (req, res, next) => {
+    if(req.session.user){
+        // ya se encuentra el usario con la sesion activa
+        next()
+    } else {
+        return res.redirect('/login');
+    }
+}
+
+// middle para cuando queremos logearnos pero ya estamos logeados (seesion activa)
+const authdos = (req, res, next) => {
+    if(req.session.user){
+        return res.redirect('/profile');
+    } else {
+        next();
+    }
+}
+
+router.get('/', (req,res) => {
+    res.status(200).render('login');
+})
+
+router.get('/signup', authdos, (req,res) => {
+    res.status(200).render('signUp');
+})
+
+// router.get('/login', authdos, (req,res) => {
+//     res.status(200).render('login');
+// })
+
+router.get('/profile', auth, (req,res) => {
+    res.status(200).render('profile');
+})
+
 router.get('/products', async (req,res) => {
     let {limit, page} = req.query;
     

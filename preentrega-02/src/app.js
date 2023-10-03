@@ -26,7 +26,6 @@ app.use('/api/carts', cartsRouter);
 app.use('/chat', chatRouter);
 app.use('/', viewsRouter);
 
-
 const serverExpress = app.listen(PORT, () => {
     console.log(`Server escuchando en puerto ${PORT}`);
 });
