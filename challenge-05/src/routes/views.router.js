@@ -57,11 +57,29 @@ router.get('/', activeSessionMid, (req,res) => {
 })
 
 router.get('/signup', activeSessionMid, (req,res) => {
-    res.status(200).render('signUp');
+    let errorDetail = '';
+    
+    if(req.query.error) errorDetail = req.query.error;
+    
+    res.status(200).render('signUp', {errorDetail});
 })
 
 router.get('/login', activeSessionMid, (req,res) => {
-    res.status(200).render('login');
+    let errorDetail = '', userEmail = '', logoutSuccess = '';
+
+    let {error, createdUser, message} = req.query;
+    
+    if(error) errorDetail = error;
+    
+    if(createdUser) userEmail = createdUser;
+
+    if(message) logoutSuccess = message;
+    
+    res.status(200).render('login', {
+        errorDetail,
+        userEmail, 
+        logoutSuccess
+    });
 })
 
 router.get('/products', async (req,res) => {

@@ -15,7 +15,7 @@ const emptyFieldsSignUpMid = (req, res, next) => {
     let {first_name, last_name, email, age, password} = req.body;
 
     if(!first_name || !last_name || !email || !age || !password){
-        return res.status(400).json({status:'error', message:'Todos los campos son obligatorios'});
+        return res.redirect('/signup?error=Complete todos los campos antes de continuar');
     }
 
     next();
@@ -25,18 +25,15 @@ const registeredEmailMid = async (req, res, next) => {
     let {email} = req.body;
     let registeredEmail = await usersModel.findOne({email});
 
-    if(registeredEmail) return res.status(400).json({status:'error', message:`El email ${email} ya está registrado`});
-    
+    if(registeredEmail) return res.redirect(`/signup?error=El email ${email} ya está registrado`);
     next();
 }
 
 const emptyFieldsLoginMid = (req, res, next) => {
     let {email, password} = req.body;
 
-    if( !email || !password){
-        return res.status(400).json({status:'error', message:'Complete ambos campos para ingresar'});
-    }
-
+    if( !email || !password) return res.redirect('/login?error=Faltan datos');
+    
     next();
 }
 
@@ -57,7 +54,7 @@ router.post('/signup', emptyFieldsSignUpMid, registeredEmailMid, async (req, res
         await usersModel.create({first_name, last_name, email, age, password});
 
         // Se redirecciona a la pagina de login con el email del usuario creado como parametro 
-        res.redirect(`/login?usuarioCreado=${email}`);
+        res.redirect(`/login?createdUser=${email}`);
     } catch (error) {
         res.status(500).json({error:'Unexpected error', detail:error.message});
     }
@@ -92,7 +89,7 @@ router.post('/login', emptyFieldsLoginMid, async (req, res) => {
         // Se busca al usuario en la db de users que tenga la password hasheada
         let user = await usersModel.findOne({email, password});
 
-        if(!user) return res.status(401).json({status:'error', message:'Credenciales incorrectas'});;
+        if(!user) return res.redirect('/login?error=Credenciales incorrectas'); 
         
         // El usuario esta registrado en la base de datos 'users'
         req.session.users = {
