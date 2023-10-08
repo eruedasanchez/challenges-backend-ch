@@ -30,13 +30,13 @@ const registeredEmailMid = async (req, res, next) => {
     next();
 }
 
-const emptyFieldsLoginMid = (req, res, next) => {
-    let {email, password} = req.body;
+// const emptyFieldsLoginMid = (req, res, next) => {
+//     let {email, password} = req.body;
 
-    if( !email || !password) return res.redirect('/login?error=Faltan datos');
+//     if( !email || !password) return res.redirect('/login?error=Faltan datos');
     
-    next();
-}
+//     next();
+// }
 
 /*------------------------------*\
         #SESSIONS ROUTES
@@ -73,46 +73,61 @@ router.post('/signup', passport.authenticate('registro', {failureRedirect:'error
     }
 })
 
-router.post('/login', emptyFieldsLoginMid, async (req, res) => {
+// emptyFieldsLoginMid,
+
+router.get('/errorLogin', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json({
+        error:'Error Login'
+    });
+}); 
+
+router.post('/login', passport.authenticate('login', {failureRedirect:'errorLogin'}), async (req, res) => {
     try {
         // Se recuperan los datos que ingresó el usuario en los inputs email y password
-        let {email, password} = req.body;
-        let rol = USER_ROLE;
+        // let {email, password} = req.body;
 
-        if(email === admin.email && password === admin.password){
-            /**** Se logeo el admin ****/
-            rol = ADMIN_ROLE;
-
-            req.session.users = {
-                first_name: admin.first_name,
-                last_name: admin.last_name,
-                email: admin.email,
-                rol: rol
-            }
-
-            res.redirect(`/products?userFirstName=${admin.first_name}&userLastName=${admin.last_name}&userEmail=${admin.email}&userRole=${rol}`);
-            return;
-        }
-
-        /**** Se logeo un usuario ****/
+        // if( !email || !password) return res.redirect('/login?error=Faltan datos');
         
-        // Se hashea la contraseña ingresada por el usuario
-        password = crypto.createHmac('sha256', 'palabraSecreta').update(password).digest('base64');
+        // let rol = USER_ROLE;
 
-        // Se busca al usuario en la db de users que tenga la password hasheada
-        let user = await usersModel.findOne({email, password});
+        // if(email === admin.email && password === admin.password){
+        //     /**** Se logeo el admin ****/
+        //     rol = ADMIN_ROLE;
 
-        if(!user) return res.redirect('/login?error=Credenciales incorrectas'); 
+        //     req.session.users = {
+        //         first_name: admin.first_name,
+        //         last_name: admin.last_name,
+        //         email: admin.email,
+        //         rol: rol
+        //     }
+
+        //     res.redirect(`/products?userFirstName=${admin.first_name}&userLastName=${admin.last_name}&userEmail=${admin.email}&userRole=${rol}`);
+        //     return;
+        // }
+
+        // /**** Se logeo un usuario ****/
+        
+        // // Se hashea la contraseña ingresada por el usuario
+        // password = crypto.createHmac('sha256', 'palabraSecreta').update(password).digest('base64');
+
+        // // Se busca al usuario en la db de users que tenga la password hasheada
+        // let user = await usersModel.findOne({email, password});
+
+        // if(!user) return res.redirect('/login?error=Credenciales incorrectas'); 
         
         // El usuario esta registrado en la base de datos 'users'
-        req.session.users = {
-            first_name: user.first_name,
-            last_name: user.last_name,
-            email: user.email,
-            rol: rol
-        }
+        console.log(req.user);
+
+        // req.session.users = req.user;
+        // req.session.users = {
+        //     first_name: user.first_name,
+        //     last_name: user.last_name,
+        //     email: user.email,
+        //     rol: rol
+        // }
         
-        res.redirect(`/products?userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${rol}`);
+        // res.redirect(`/products?userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${rol}`);
     } catch (error) {
         res.status(500).json({error:'Unexpected error', detail:error.message});
     }
