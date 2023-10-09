@@ -1,4 +1,4 @@
-# Challenge-05. Login
+# Challenge-06. Login
 
 This project was generated with the following dependencies: 
 
@@ -9,6 +9,10 @@ This project was generated with the following dependencies:
 - [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2
 - [Connect Mongo](https://github.com/mongodb-js/connect-mongodb-session): Version 5.0.0
 - [Express session](https://github.com/expressjs/session): Version 1.17.3 
+- [BCrypt](https://github.com/pyca/bcrypt): Version 5.1.1 
+- [Passport](https://github.com/jaredhanson/passport): Version 0.6.0
+- [Passport Local](https://github.com/jaredhanson/passport-local): Version 0.6.0
+- [Passport Github2](https://github.com/passport/todos-express-password): Version 0.6.0
 
 ## Installation
 
@@ -38,10 +42,10 @@ Clone the repository in that folder:
 $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 ```
 
-Open challenge-05 folder and install dependencies:
+Open challenge-06 folder and install dependencies:
 
 ```bash
-$ cd challenge-05
+$ cd challenge-06
 $ npm install
 ```
 
