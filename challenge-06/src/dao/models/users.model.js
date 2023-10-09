@@ -7,7 +7,12 @@ const usersSchema = new mongoose.Schema({
     email: {type: String, require: true, unique:true},
 	age: {type: Number, require: true},
 	password: {type: String, require: true},
-}, {strict: false}) 
+	github: {}
+})
+
+// github: {}
+
+// {strict: false}
 
 export const usersModel = mongoose.model(usersCollection, usersSchema);
 

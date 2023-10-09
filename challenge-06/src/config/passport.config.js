@@ -1,52 +1,39 @@
-// 1. configurar el passport.config incluyendo el serializer y el deserializer de usuario
-
 import passport from 'passport';
 import local from 'passport-local';
-
-// como tambien que realizar valodaciones importo lo siguiete
-import crypto from 'crypto';
+import github from 'passport-github2';
 import { usersModel } from '../dao/models/users.model.js';
-import { generaHash, validaHash } from '../utils.js';
+import { generateHash, validateHash } from '../utils.js';
 
-// 1. configurar el passport.config incluyendo el serializer y el deserializer de usuario
+const ADMIN_ROLE = 'admin';
+const USER_ROLE = 'usuario';
+const admin = {first_name:'adminCoder', last_name:'House', email: 'adminCoder@coder.com', password: 'adminCod3r123'};
 
-export const inicializaPassport = () => {
-    passport.use('registro', new local.Strategy(
+// 1. Configuracion de passport.config incluyendo el serializer y el deserializer de usuario
+
+export const initPassport = () => {
+    passport.use('signup', new local.Strategy(
         {
             usernameField:'email', passReqToCallback:true
-            // usernameField lo utilizo porque por defecto es userName pero nosotros usamos email como isername
-            // passReqToCallback pasamos la req a la func de callback de abajo
+            // Se utiliza usernameField porque por defecto se utiliza userName pero en nuestro caso usamos email como username
+            // Con passReqToCallback se pasa la req a la funcion de callback de abajo
         }, 
-        async (req, userName, password, done) => {
+        async (req, username, password, done) => {
             try {
-                // logica de registro (la buscamos en nuestro session router)
                 let {first_name, last_name, email, age, password} = req.body;
 
                 if(!first_name || !last_name || !email || !age || !password){
-                    done(null, false); // no se dio error (null) pero tampoco al usuario (false)
-
+                    return done(null, false); // No se produjo un error (null) pero tampoco hay un usuario (false)
                 }
 
-                let existe = await usersModel.findOne({email: email});
+                let emailRegistered = await usersModel.findOne({email: username});
 
-                if(existe){
-                    done(null, false);
-                }
+                if(emailRegistered) return done(null, false);
                 
-                // password = crypto.createHmac('sha256', 'palabraSecreta').update(password).digest('base64'); 
+                let user = await usersModel.create({ first_name, last_name, email, age, password:generateHash(password) }); 
                 
-                // Se registra al nuevo usuario
-                let usuario = await usersModel.create({
-                    first_name, 
-                    last_name, 
-                    email, 
-                    age, 
-                    password: generaHash(password)});
-
-                done(null, usuario); // aca se agrega la propiedad user a la request (req)
+                return done(null, user); // Si el usuario fue creado existosamente, se agrega la prop user a la request (req)
             } catch (error) {
-                // unico lugar donde done ejecuta con su primer argumento
-                done(error);
+                return done(error);
             }
         }
     ))
@@ -54,54 +41,84 @@ export const inicializaPassport = () => {
     passport.use('login', new local.Strategy(
         {
             usernameField: 'email'
-            // , passReqToCallback:true
-
         }, async (username, password, done) => {
             try {
+                let rol = USER_ROLE;
+
+                if(username === admin.email && password === admin.password){
+                    /**** Se logeo el admin ****/
+                    rol = ADMIN_ROLE;
+
+                    req.session.users = {
+                        first_name: admin.first_name,
+                        last_name: admin.last_name,
+                        email: admin.email,
+                        rol: rol
+                    }
+
+                    res.redirect(`/products?userFirstName=${admin.first_name}&userLastName=${admin.last_name}&userEmail=${admin.email}&userRole=${rol}`);
+                    return;
+                }
+
                 if(!username || !password) return done(null, false);
-                // return res.redirect('/login?error=Faltan datos');
-
+                
                 /**** Se logeo un usuario ****/
-        
-                // Se hashea la contraseña ingresada por el usuario
-                // password = crypto.createHmac('sha256', 'palabraSecreta').update(password).digest('base64');
-
-
-                // Se busca al usuario en la db de users que tenga la password hasheada
-                // let user = await usersModel.findOne({email:username, password:password});
-
+                
+                // Se busca al usuario en la db de users que tenga el email ingresado en username
                 let user = await usersModel.findOne({email:username});
                 
-
-                if(!user){
+                if(!user || !validateHash(user, password)){
+                    // No se encontro el usuario o la clave es invalida
                     return done(null, false);
-                } else {
-                    if(!validaHash(user, password)){
-                        return done(null, false);
-                    }
                 } 
-                // return res.redirect('/login?error=Credenciales incorrectas');
 
                 user = {
+                    first_name: user.first_name,
+                    last_name: user.last_name,
                     email: user.email,
-                    _id: user._id
+                    _id: user._id,
+                    rol: rol
                 };
 
-                return done(null, user); // devuelve el usuario
+                return done(null, user);
+            } catch (error) {
+                return done(error);
+            }
+        }
+    ))
+    
+    passport.use('github', new github.Strategy(
+        {
+            clientID: 'Iv1.f39cdb52aec8edcb',
+            clientSecret: '601b9221a2029df1b4a7a270c1cd8f21396888bc',
+            callbackURL: 'http://localhost:8080/api/sessions/callbackGithub'
+        },
+        async (token, tokenRefresh, profile, done) => {
+            try {
+                let user = await usersModel.findOne({email:profile._json.email}); // en profile._json.blog tengo mi mail 
+                
+                if(!user){
+                    user = await usersModel.create({
+                        first_name: profile._json.name,
+                        email: profile._json.email,
+                        github: profile
+                    })
+                }
+                return done(null, user);
             } catch (error) {
                 return done(error);
             }
         }
     ))
 
-    // configuracion de serializer y deserializer porque usamos sessions
+    // Configuracion serializer y deserializer (requerido porque se utilizan sessions) 
     passport.serializeUser((user, done) => {
-        done(null, user._id); // envio la prop _id para recuperar la info del usuario
+        return done(null, user._id); // Se envia la prop _id para recuperar la info del usuario
     })
 
     passport.deserializeUser(async (id, done) => {
-        let usuario = await usersModel.findById(id);
-        done(null, usuario); 
+        let user = await usersModel.findById(id);
+        return done(null, user); 
     })
+} // fin initPassport
 
-} // fin de inicializaPassport

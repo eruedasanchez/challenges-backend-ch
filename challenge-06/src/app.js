@@ -5,14 +5,16 @@ import handlebars from 'express-handlebars';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import ConnectMongo from 'connect-mongo';
+import passport from 'passport';
 import {Server} from 'socket.io';
 import {router as productsRouter} from './routes/products.router.js';
 import {router as cartsRouter} from './routes/carts.router.js';
 import {router as viewsRouter} from './routes/views.router.js';
 import { router as sessionsRouter } from './routes/sessions.router.js';
 import {initChat, router as chatRouter} from './routes/chat.router.js';
-import { inicializaPassport } from './config/passport.config.js';
-import passport from 'passport';
+// import { inicializaPassport } from './config/passport.config.js';
+import { initPassport } from './config/passport.config.js';
+
 
 const PORT = 8080;
 
@@ -40,14 +42,10 @@ app.use(session({
     })
 }))
 
-// 1. configurar el passport.config incluyendo el serializer y el deserializer de usuarios (resuelto en passport.config.js)
-
-// 2. cargar passport en nuestra aplicacion (en app.js)
-inicializaPassport();
+// 2. cargar passport en nuestra aplicacion (en app.js) ejemplo github y local
+initPassport();
 app.use(passport.initialize());
 app.use(passport.session()); // por esto, siempre se ejecuta passport despeus de la sesion (app.use(session(...)
-
-
 
 // 3. cargar el middleware de passport en sessions router
 
