@@ -12,9 +12,7 @@ import {router as cartsRouter} from './routes/carts.router.js';
 import {router as viewsRouter} from './routes/views.router.js';
 import { router as sessionsRouter } from './routes/sessions.router.js';
 import {initChat, router as chatRouter} from './routes/chat.router.js';
-// import { inicializaPassport } from './config/passport.config.js';
 import { initPassport } from './config/passport.config.js';
-
 
 const PORT = 8080;
 

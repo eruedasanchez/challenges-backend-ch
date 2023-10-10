@@ -42,7 +42,7 @@ Clone the repository in that folder:
 $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 ```
 
-Open challenge-06 folder and install dependencies:
+Open challenge-06 folder and install dependencies: 
 
 ```bash
 $ cd challenge-06

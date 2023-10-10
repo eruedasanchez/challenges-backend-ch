@@ -95,13 +95,14 @@ export const initPassport = () => {
         },
         async (token, tokenRefresh, profile, done) => {
             try {
+                // let rol = USER_ROLE;
                 let user = await usersModel.findOne({email:profile._json.email}); // en profile._json.blog tengo mi mail 
                 
                 if(!user){
                     user = await usersModel.create({
                         first_name: profile._json.name,
                         email: profile._json.email,
-                        github: profile
+                        rol: USER_ROLE
                     })
                 }
                 return done(null, user);

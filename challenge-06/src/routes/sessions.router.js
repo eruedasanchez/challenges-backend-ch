@@ -15,11 +15,12 @@ export const router = Router();
 router.get('/github', passport.authenticate('github',{}), (req, res) => {})
 
 router.get('/callbackGithub', passport.authenticate('github', {failureRedirect:'errorGithub'}), (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json({
-        message: 'Login OK',
-        user: req.user
-    });
+    try {
+        req.session.users = req.user;
+        res.redirect(`/products?userFirstName=${req.user.first_name}&userEmail=${req.user.email}&userRole=${req.user.rol}`);
+    } catch (error) {
+        res.status(500).json({error:'Unexpected error', detail:error.message});
+    }
 })
 
 router.get('/errorGithub', (req, res) => {
