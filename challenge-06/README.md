@@ -1,4 +1,4 @@
-# Challenge-06. Login
+# Challenge-06. Login Refactor
 
 This project was generated with the following dependencies: 
 
