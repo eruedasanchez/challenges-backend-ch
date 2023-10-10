@@ -89,9 +89,11 @@ export const initPassport = () => {
     
     passport.use('github', new github.Strategy(
         {
-            clientID: 'Iv1.f39cdb52aec8edcb',
-            clientSecret: '601b9221a2029df1b4a7a270c1cd8f21396888bc',
-            callbackURL: 'http://localhost:8080/api/sessions/callbackGithub'
+            // Descomentar los datos que se encuentran debajo
+            
+            // clientID: 'Iv1.f39cdb52aec8edcb',
+            // clientSecret: '601b9221a2029df1b4a7a270c1cd8f21396888bc',
+            // callbackURL: 'http://localhost:8080/api/sessions/callbackGithub'
         },
         async (token, tokenRefresh, profile, done) => {
             try {
