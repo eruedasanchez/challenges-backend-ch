@@ -8,7 +8,7 @@ const ADMIN_ROLE = 'admin';
 const USER_ROLE = 'usuario';
 const admin = {first_name:'adminCoder', last_name:'House', email: 'adminCoder@coder.com', password: 'adminCod3r123'};
 
-// 1. Configuracion de passport.config incluyendo el serializer y el deserializer de usuario
+// 1. Configuracion de passport.config incluyendo el serializer y el deserializer de usuario (estoy usando sesiones)
 
 export const initPassport = () => {
     passport.use('signup', new local.Strategy(
