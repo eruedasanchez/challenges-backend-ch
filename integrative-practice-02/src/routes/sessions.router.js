@@ -1,7 +1,8 @@
 import passport from 'passport';
-import { Router} from 'express';
-import { generateJWT} from '../utils.js';
 import jwt from 'jsonwebtoken';
+import { Router} from 'express';
+import { config } from '../config/config.js';
+
 export const router = Router();
 
 /*------------------------------*\
@@ -38,14 +39,9 @@ router.get('/errorGithub', (req, res) => {
 
 router.post('/signup', function(req, res, next) {
     passport.authenticate('signup', function(err, user, info, status) {
-        if (err){
-            // console.log("error", err);
-            return next(err);
-        }  
+        if (err) return next(err);
         
         if (!user) {
-            // console.log("infomsg", info.message);
-            // console.log("infoTstring", info); 
             return res.redirect(`/signup?error=${info.message ? info.message : info.toString()}`);
         }
         
@@ -56,101 +52,38 @@ router.post('/signup', function(req, res, next) {
     res.status(200).redirect(`/login?createdUser=Usuario:${req.user.first_name} registrado correctamente. Username:${req.user.email}`);
 });
 
-// router.get('/errorRegistro', (req, res) => {
-//     res.setHeader('Content-Type', 'application/json');
-//     res.status(200).json({
-//         error:'Error de registro'
-//     });
-// }); 
-
 /*-----------------*\
     #POST /LOGIN
 \*-----------------*/
 
 router.post('/login', function(req, res, next) {
     passport.authenticate('login', function(err, user, info, status) {
-        if (err) return next(err)
-
-        // if(username === admin.email && password === admin.password){
-        //     /**** Se logeo el admin ****/
-        //     let role = ADMIN_ROLE;
-
-        //     // req.session.users = {
-        //     //     first_name: admin.first_name,
-        //     //     last_name: admin.last_name,
-        //     //     email: admin.email,
-        //     //     rol: rol
-        //     // }
-
-        //     res.redirect(`/products?userFirstName=${admin.first_name}&userLastName=${admin.last_name}&userEmail=${admin.email}&userRole=${role}`);
-        //     return;
-        // }
+        if (err) return next(err);
         
-        if (!user) { 
-            return res.redirect(`/login?error=${info.message ? info.message : info.toString()}`)
-        }
+        if (!user) return res.redirect(`/login?error=${info.message ? info.message : info.toString()}`);
         
         req.user = user;
         return next(); // para poder ejecutar lo que quiera debajo
     })(req, res, next);
 }, (req, res) => {
+    let user = {
+        first_name: req.user.first_name,
+        last_name: req.user.last_name,
+        email: req.user.email,
+        role: req.user.role
+    };
 
-    // ANTES HABRIA QUE LIMPIAR DATOS DEL USER COMO por ejemplo, crear un obj con {nombre: req.user.nombre, rol: req.user.rol, etc}
-    // let token = generateJwt(user);
-
-        // Aplico la utilizacion de cookie parser
-        // res.cookie('coderCookie', token, {
-        //     maxAge: 1000 * 60 * 60, // 1hs de duracion
-        //     httpOnly: true // al crearse la cookie se tilda la opcion httpOnly pero al intentar ejecutar document.cookie, no me la muestra
-        // })
-
-        // return res.status(200).json({
-        //     usuarioLogueado: user,
-        //     token
-        // })
-
-        // Entonces, al ejecutar el post './login', obtengo ademas de la 
-        // info del usuario, el token generado por la funcion generateJwt
-        res.redirect(`/products?userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}`);
-        // res.status(200).redirect(`/perfil?mensaje= Usuario:${req.user.first_name} logeado correctamente. Rol:${req.user.role}`);
+    // Generacion de la cookie luego de logearme. Hay que generar el token
+    let token = jwt.sign({user}, config.SECRET, {expiresIn: '1h'});
+    
+    // Aplico la utilizacion de cookie parser. Se almacena el token en la cookie coderCookie
+    res.cookie('coderCookie', token, {
+        maxAge: 1000 * 60 * 60, // 1hs de duracion
+        httpOnly: true          // se tilda la opcion httpOnly, es decir, que al ejecutar document.cookie no las deja acceder 
+    })
+    
+    res.redirect(`/products?userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}`);
 });
-
-// Ahora vamos a suponer que nuestra pagina de perfil es la que tenemos que plantear de products (lo vamos a hacer en el views router)
-
-// version anterior 
-
-// router.post('/login', passport.authenticate('login', {failureRedirect:'errorLogin'}), async (req, res) => {
-//     try {
-//         req.session.users = req.user;
-
-        // let token = generateJwt(user);
-
-        // Aplico la utilizacion de cookie parser
-        // res.cookie('coderCookie', token, {
-        //     maxAge: 1000 * 60 * 60, // 1hs de duracion
-        //     httpOnly: true // al crearse la cookie se tilda la opcion httpOnly pero al intentar ejecutar document.cookie, no me la muestra
-        // })
-
-        // return res.status(200).json({
-        //     usuarioLogueado: user,
-        //     token
-        // })
-
-        // Entonces, al ejecutar el post './login', obtengo ademas de la 
-        // info del usuario, el token generado por la funcion generateJwt
-        
-//         res.redirect(`/products?userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.rol}`);
-//     } catch (error) {
-//         res.status(500).json({error:'Unexpected error', detail:error.message});
-//     }
-// })
-
-router.get('/errorLogin', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json({
-        error:'Error Login'
-    });
-}); 
 
 /*-------------------*\
     #POST /LOGOUT

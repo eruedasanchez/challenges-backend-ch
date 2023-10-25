@@ -14,10 +14,10 @@ import {router as viewsRouter} from './routes/views.router.js';
 import { router as sessionsRouter } from './routes/sessions.router.js';
 import {initChat, router as chatRouter} from './routes/chat.router.js';
 import { initPassport } from './config/passport.config.js';
-// import { config } from './config/config.js';
+import { config } from './config/config.js';
 
-const PORT = 8080;
-// const PORT = config.PORT;
+// const PORT = 8080;
+const PORT = config.PORT;
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-// inicializo cookie parser 
+// Inicializacion cookie parser para acceder a la gestion de cookies desde express 
 app.use(cookieParser());
 
 app.use('/api/products', productsRouter);
@@ -68,7 +68,7 @@ initChat(serverSocket);
 
 // Se establece la conexion con la base de datos de MongoDB Atlas
 try {
-    await mongoose.connect("mongodb+srv://ezequielruedasanchez:1I5FoZoRlSaz5TsX@cluster0.4vp9khz.mongodb.net/?retryWrites=true&w=majority&dbName=ecommerce");
+    await mongoose.connect(config.MONGO_URL, {dbName: config.DB_NAME});
     console.log('MongoDB Atlas Conectada');
 } catch (error) {
     console.log(error.message);
