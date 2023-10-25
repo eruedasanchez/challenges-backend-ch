@@ -14,16 +14,93 @@
     <div class="mensaje">{{logoutSuccess}}</div>
     {{/if}}
     
-    <input type="email" name="email" placeholder="Ingrese su email">
-    <input type="password" name="password" placeholder="Ingrese su contraseña">
+    <input id="email" type="email" name="email" placeholder="Ingrese su email">
+    <input id="password" type="password" name="password" placeholder="Ingrese su contraseña">
 
-    <input type="submit" value="Login">
+    <input id="btnSubmit" type="submit" value="Login">
 </form>
+<br>
+<div id="mensaje"></div>
 <br>
 <ul class="menu"><li><a href="/signup">Registrate</a></li></ul>
 <ul class="menu"><li><a href="/api/sessions/github">Ingresar con Github</a></li></ul>
 
+{{!-- Agregado para JWT --}}
+{{!-- <a href="/usuario" id="linkUsuario">Pagina Usuarios</a>  --}}
+
 {{!-- <h2>Login page</h2>
 <hr>
 
-<a href="/api/sessions/github">Entrar con Github</a> --}}
+{{!-- Supongamos que queremos ingresar con JWT. Entonces, tenemos que 
+de alguna manera poder recuperar el token --}}
+
+{{!-- Vamos el controlar el codigo HTML para ello --}}
+
+<script>
+    /*
+    let btnSubmit = document.getElementById('btnSubmit');
+    let inputEmail = document.getElementById('email') ;
+    let inputPassword = document.getElementById('password');
+    let divMensaje = document,getElementById('mensaje'); // selector para notificar mediante un mensaje que salio todo ok
+    let linkUsuario = document.getElementById('linkUsuario');
+
+    btnSubmit.addEventListener("click", async event => {
+        event.preventDefault();
+
+        if(inputEmail.value.trim().length === 0 || inputPassword.value.trim().length === 0){
+            alert('Complete los datos...!!!');
+            return;
+        }
+
+        let body = {
+            email: inputEmail.value.trim(),
+            password: inputPassword.value.trim(),
+        }
+
+        let resultado = await fetch('/api/sessions/login', {
+            method:'post',
+            headers:{ 'Content-Type':'application/json' },
+            body: JSON.stringify(body)
+        })
+
+        console.log(resultado); // obtengo la respuesta del fetch (tme quedo con el status)
+
+        if(resultado.status === 200){
+            let datos = await resultado.json(); 
+            console.log(datos); // en datos ya se encuentra la prop 'token'
+
+            localStorage.setItem('coderToken', datos.token); // se guarda en el local storage el token llamado 'coder Token' una vez que se loguea (queda en manos del frontend)
+            divMensaje.innerHTML = `Usuario logeado OK. ${datos.usuarioLogueado.nombre}`;
+
+        } else {
+            divMensaje.innerHTML = 'Error de login';
+
+        }
+    })// fin btnSubmit
+
+    linkUsuario.addEventListener("click", async event => {
+        event.preventDefault();
+
+        let resultado = await fetch('/usuario', {
+            method: 'get',
+            headers: {'Content-Type':'application/json', 'Authorization': 'Bearer' + localStorage.getItem('coderToken') }
+        });
+
+        let datos = await resultado.json();
+        console.log(resultado)
+        console.log(datos);
+
+        if(resultado.status === 200){
+            divMensaje.innerHTML = datos.mensaje // con solo clikear el link de pagina Usuarios me arroja bienvenido
+        } else {
+            divMensaje.innerHTML = datos.error
+        }
+
+    }) // fin fn linkUsuario
+*/
+
+</script>
+
+{{!-- Al utilzar cookie parser, no es ncesario usar el script, se deja a cargo del HTML --}}
+
+{{!-- con cookie parser, al logear al usuario se genera la cookie automaticamente --}}

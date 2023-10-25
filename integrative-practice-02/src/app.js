@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import ConnectMongo from 'connect-mongo';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 import {Server} from 'socket.io';
 import {router as productsRouter} from './routes/products.router.js';
 import {router as cartsRouter} from './routes/carts.router.js';
@@ -13,8 +14,10 @@ import {router as viewsRouter} from './routes/views.router.js';
 import { router as sessionsRouter } from './routes/sessions.router.js';
 import {initChat, router as chatRouter} from './routes/chat.router.js';
 import { initPassport } from './config/passport.config.js';
+// import { config } from './config/config.js';
 
 const PORT = 8080;
+// const PORT = config.PORT;
 
 const app = express();
 
@@ -26,6 +29,10 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, '/public')));
+
+// inicializo cookie parser 
+app.use(cookieParser());
+
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/chat', chatRouter);

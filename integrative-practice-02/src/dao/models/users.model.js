@@ -9,7 +9,8 @@ const usersSchema = new mongoose.Schema({
 	password: {type: String, require: true},
 	cart: { type: mongoose.Schema.Types.ObjectId, ref: 'carts'},
 	role: {type: String, default: 'user'}
-})
+}, {timestamps:true})
 
 export const usersModel = mongoose.model(usersCollection, usersSchema);
 
+// timestamps:true agrega la fecha de creacion y modificacion

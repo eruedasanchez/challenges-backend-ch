@@ -1,4 +1,4 @@
-import __dirname from '../utils.js';
+import __dirname, { validateJWT } from '../utils.js';
 import express from 'express';
 import mongoose from 'mongoose';
 import MongoProductManager from '../dao/mongoDB-manager/MongoProductManager.js';
@@ -57,7 +57,7 @@ router.get('/', activeSessionMid, (req,res) => {
 })
 
 router.get('/signup', activeSessionMid, (req,res) => {
-    let errorDetail = '';
+    let errorDetail = false;
     
     if(req.query.error) errorDetail = req.query.error;
     
@@ -65,7 +65,7 @@ router.get('/signup', activeSessionMid, (req,res) => {
 })
 
 router.get('/login', activeSessionMid, (req,res) => {
-    let errorDetail = '', userEmail = '', logoutSuccess = '';
+    let errorDetail = false, userEmail = false, logoutSuccess = false;
 
     let {error, createdUser, message} = req.query;
     
@@ -82,6 +82,20 @@ router.get('/login', activeSessionMid, (req,res) => {
     });
 })
 
+
+/**** Vamo a crear la ruta perfil pero solo es de ejemplo (en lugar de perfil iria products que es a donde que
+ * remos redirigir luego del logearnos) */
+
+// router.get('/perfil', passport.authenticate('jwt', {session:false}), async (req,res) => {
+
+// })
+
+// Colocamos aca al middle JWT (validateJWT)
+// Ahora vamos a colocar la estrategia de JWT+PASSPORT (CAMBIAMOS EL MIDLE validateJWT por la estrategia passport.authenticate('jwt', {session:false}))
+// Ultima modificacion: cambiamos el passport.authenticate por la funcion passportCall('jwt') para el control de mensajes internos (cambiamos que todos los mensajes no sean solo unauthorized)
+// passportCall('jwt')
+
+// Esto sucede siempre luego de tocar el boton de login (cuando ya me loguee)
 router.get('/products', async (req,res) => {
     let {limit, page, userFirstName, userLastName, userEmail, userAge, userRole} = req.query;
     
@@ -109,7 +123,18 @@ router.get('/products', async (req,res) => {
         // podria pensar en pasarle tambien para que se muestren los datos del usuario
         // req.session.users (ver linea 62 en sesions.router.js)  
     });
+
+    // como aca se muestra el perfil de usuario, podria colocar el token aca
 });
+
+// ejemplo:
+// app.get('/protected', function(req, res, next) {
+//     passport.authenticate('local', function(err, user, info, status) {
+//         if (err) { return next(err) }
+//         if (!user) { return res.redirect('/signin') }
+//         res.redirect('/account');
+//     })(req, res, next);
+// });
 
 router.get('/carts/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) => {
     try {
