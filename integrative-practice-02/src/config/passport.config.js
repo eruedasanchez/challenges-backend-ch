@@ -67,23 +67,6 @@ export const initPassport = () => {
             usernameField: 'email'
         }, async (username, password, done) => {
             try {
-                let rol = USER_ROLE;
-
-                if(username === admin.email && password === admin.password){
-                    /**** Se logeo el admin ****/
-                    rol = ADMIN_ROLE;
-
-                    req.session.users = {
-                        first_name: admin.first_name,
-                        last_name: admin.last_name,
-                        email: admin.email,
-                        rol: rol
-                    }
-
-                    res.redirect(`/products?userFirstName=${admin.first_name}&userLastName=${admin.last_name}&userEmail=${admin.email}&userRole=${rol}`);
-                    return;
-                }
-
                 if(!username || !password) return done(null, false);
                 
                 /**** Se logeo un usuario ****/
@@ -96,13 +79,13 @@ export const initPassport = () => {
                     return done(null, false, {message:'Credenciales incorrectas'});
                 } 
 
-                // user = {
-                //     first_name: user.first_name,
-                //     last_name: user.last_name,
-                //     email: user.email,
-                //     _id: user._id,
-                //     rol: rol
-                // };
+                user = {
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    email: user.email,
+                    _id: user._id,
+                    role: user.role
+                };
 
                 return done(null, user);
             } catch (error) {
@@ -170,13 +153,13 @@ export const initPassport = () => {
 
 
     // Configuracion serializer y deserializer (requerido porque se utilizan sessions) 
-    passport.serializeUser((user, done) => {
-        return done(null, user._id); // Se envia la prop _id para recuperar la info del usuario
-    })
+    // passport.serializeUser((user, done) => {
+    //     return done(null, user._id); // Se envia la prop _id para recuperar la info del usuario
+    // })
 
-    passport.deserializeUser(async (id, done) => {
-        let user = await usersModel.findById(id);
-        return done(null, user); 
-    })
+    // passport.deserializeUser(async (id, done) => {
+    //     let user = await usersModel.findById(id);
+    //     return done(null, user); 
+    // })
 } // fin initPassport
 
