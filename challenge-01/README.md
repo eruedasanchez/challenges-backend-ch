@@ -15,15 +15,15 @@ This project was generated with [Node JS](https://github.com/nodejs)
 * Code: Product identifier code
 * Stock: Number of available pieces
 
-3. The **ProductManager** class has an [addProduct]() method that allows adding products to the array of products defined in the constructor. 
+3. The **ProductManager** class has an `addProduct()` method that allows adding products to the array of products defined in the constructor. 
 
 * This method is responsible for validating that all fields are entered.
 * It also ensures that the **Code** field is not duplicated.
 * This method is responsible for creating an auto-incrementing **id** when adding a product to the cart.
 
-4. The **ProductManager** class has a [getProducts]() method that returns all the products created so far.
+4. The **ProductManager** class has a `getProducts` method that returns all the products created so far.
 
-5. The **ProductManager** class has a [getProductById]() method that allows obtaining information about the product that matches the **id** passed as a parameter. In case the passed **id** does not match any product's id, an error message **"Not found"** will be displayed in the console.
+5. The **ProductManager** class has a `getProductById(id)` method that allows obtaining information about the product that matches the **id** passed as a parameter. In case the passed **id** does not match any product's id, an error message **"Not found"** will be displayed in the console.
 
 ## Quick Start
 
