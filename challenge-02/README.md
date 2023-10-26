@@ -2,6 +2,16 @@
 
 This project was generated with [Node JS](https://github.com/nodejs)
 
+## Description
+
+1. Two more methods are added to the existing ones in **ProductManager** class as outlined in the previous challenge.
+
+* The `updateProduct(id, field, content)`  method allows updating the `field` with the `content` of the product with id `id`. In case the id passed as a parameter is not found in the array of products, an error is thrown.
+
+* The `deleteProduct(id)` method is responsible for removing from the array of products the one that matches the `id` passed as a parameter. Just like in the case of updating a product, an error is thrown when the id is not defined in the array of products.
+
+2. Additionally, file persistence in **Filesystem (FS)** is added. In this case, it is applied to the array of products, and for this purpose, a `path` is defined in the constructor of the **ProductManager** class to indicate the location where the array is to be stored as products are added, fields are updated, or products are deleted.
+
 ## Quick Start
 
 The quickest way to run the project is run the commands as shown below:
