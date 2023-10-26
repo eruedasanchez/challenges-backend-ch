@@ -16,7 +16,6 @@ import {initChat, router as chatRouter} from './routes/chat.router.js';
 import { initPassport } from './config/passport.config.js';
 import { config } from './config/config.js';
 
-// const PORT = 8080;
 const PORT = config.PORT;
 
 const app = express();
