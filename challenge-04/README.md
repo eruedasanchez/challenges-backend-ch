@@ -14,7 +14,7 @@ The project is configured to integrate the **Handlebars** template engine into t
 
 1. `home.handlebars` view contains all the products added so far.
 
-2. `realTimeProducts.handlebars` view resides at the `realtimeproducts` endpoint in the views router and contains the same list of products, except that it works with **websockets**. When working with websockets, each time a product is added or removed, the list on that view is automatically updated.
+2. `realTimeProducts.handlebars` view resides at the `/realtimeproducts` endpoint in the views router and contains the same list of products, except that it works with **websockets**. When working with websockets, each time a product is added or removed, the list on that view is automatically updated.
 
 ## Quick Start
 
