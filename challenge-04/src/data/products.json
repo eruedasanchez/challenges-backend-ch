@@ -43,5 +43,35 @@
 			"thumbnail-p18-2",
 			"thumbnail-p18-3"
 		]
+	},
+	{
+		"id": 19,
+		"title": "Producto diecinueve",
+		"description": "Este es un producto prueba diecinueve",
+		"code": "abc123p19",
+		"price": 2019,
+		"status": true,
+		"stock": 19,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p19-1",
+			"thumbnail-p19-2",
+			"thumbnail-p19-3"
+		]
+	},
+	{
+		"id": 20,
+		"title": "Producto veinte",
+		"description": "Este es un producto prueba veinte",
+		"code": "abc123p20",
+		"price": 2020,
+		"status": true,
+		"stock": 20,
+		"category": "muebles",
+		"thumbnails": [
+			"thumbnail-p20-1",
+			"thumbnail-p20-2",
+			"thumbnail-p20-3"
+		]
 	}
 ]
