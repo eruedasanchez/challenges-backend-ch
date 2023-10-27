@@ -13,6 +13,16 @@ This is a [Node JS](https://github.com/nodejs/node) module available through the
 
 Before installing, download and install Node.js. Node.js 0.10 or higher is required.
 
+## Description
+
+1. The **Mongo** and **Mongoose** persistence model is added to the project.
+
+2. A database named **ecommerce** is created within **Mongo Atlas** with the collections `carts`, `messages` and `products`. For each of these collections, their respective schemas are created.
+
+3. A new Handlebars view called `chat.handlebars` is implemented, which allows for the implementation of a chat where messages are stored in a collection called `messages`. Each message will have the format: 
+
+* `{user: user's email, message: user's message}`
+
 ## Quick Start
 
 The quickest way to run this project with express is run the commands to generate an application as shown below:
