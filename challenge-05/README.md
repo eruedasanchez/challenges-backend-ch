@@ -20,15 +20,15 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 1. The main server is adjusted to work with a **login** system.
 
-The `login.handlebars` and `signUp.handlebars` views are added to handle registration and login processes.
+2. The `login.handlebars` and `signUp.handlebars` views are added to handle registration and login processes.
 
-2. After completing the registration, the user is redirected directly to the product view.
+3. After completing the registration, the user is redirected directly to the product view.
 
-3. A welcome message with user data is added to the product view.
+4. A welcome message with user data is added to the product view.
 
-4. A role system is implemented, so if the user's email is `adminCoder@coder.com` and the password is `adminCod3r123`, they have the `admin` role, otherwise, the role is `user`.
+5. A role system is implemented, so if the user's email is `adminCoder@coder.com` and the password is `adminCod3r123`, they have the `admin` role, otherwise, the role is `user`.
 
-5. A **logout** button is implemented to destroy the session and redirect to the login view.
+6. A **logout** button is implemented to destroy the session and redirect to the login view.
 
 ## Quick Start
 
