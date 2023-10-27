@@ -34,6 +34,7 @@ Swal.fire({
     
     // El usuario recibe el historial de mensajes luego de conectarse al server
     socket.on('historialChat', chatHistory => {
+        console.log('Historial de chat recibido:', chatHistory);
         let txt = '';
         chatHistory.forEach(msg => {
             txt += `<p class="mensaje"><strong>${msg.user}</strong>:<i>${msg.message}</i></p><br>`;
@@ -55,6 +56,7 @@ Swal.fire({
 
     // Se muestra a todos los usuarios en el chat, el nuevo mensaje que fue enviado  
     socket.on('showMessage', message => {
+        console.log('Nuevo mensaje recibido:', message);
         let txt = '';
         txt += `<p class="mensaje"><strong>${message.user}</strong>:<i>${message.message}</i></p><br>`;
 
@@ -64,6 +66,7 @@ Swal.fire({
 
     // Todos los usuarios reciben la notificacion que un usuario se desconecto
     socket.on('disconnectedUserAlert', user => {
+        console.log('Usuario desconectado:', user);
         Swal.fire({
             text:`${user.userEmail} ha abandonado el chat`,
             toast:true,

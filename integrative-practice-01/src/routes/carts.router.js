@@ -12,7 +12,7 @@ const mongoCartManager = new MongoCartManager();
 const invalidObjectCidMid = (req, res, next) => {
     let cid = req.params.cid;
     
-    if(!mongoose.Types.ObjectId.isValid(cid)) return res.status(400).json({status:'error', error:'El pid ingresado tiene un formato invalido'});
+    if(!mongoose.Types.ObjectId.isValid(cid)) return res.status(400).json({status:'error', error:'El cartId ingresado tiene un formato invalido'});
 
     next();
 }
@@ -76,8 +76,7 @@ router.get('/:cid', invalidObjectCidMid, invalidCidMid, async (req, res) => {
 
 router.post('/:cid/product/:pid', invalidObjectCidMid, invalidCidMid, nanPidMid, negativePidMid, async (req,res) => {
     try {
-        let cid = req.params.cid;
-        let pid = parseInt(req.params.pid);
+        let cid = req.params.cid, pid = parseInt(req.params.pid);
         
         let cartSel = await mongoCartManager.addProduct(cid, pid);
         res.status(200).json({status: 'ok', cartSelected:cartSel});

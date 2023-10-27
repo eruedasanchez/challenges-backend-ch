@@ -34,8 +34,13 @@ export const initChat = (serverSocketChat) => {
 
         // Server recibe el nuevo mensaje enviado por el cliente
         socket.on('newMessage', message => {
-            mongoChatManager.addToChat(message);                           // se agrega el mensaje a MongoDB 
-            serverSocketChat.emit('showMessage', message);                // server el emite a todos (serverSocketChat) los cliente el mensaje
+            try {
+                console.log('Nuevo mensaje enviado al servidor:', message);
+                mongoChatManager.addToChat(message);                           // se agrega el mensaje a MongoDB 
+                serverSocketChat.emit('showMessage', message);                // server el emite a todos (serverSocketChat) los cliente el mensaje
+            } catch (error) {
+                console.error('Error al agregar el mensaje:', error);
+            }
         })
 
         // La desconexion ocurre cuando un cliente cerra su ventana o navegador
