@@ -150,6 +150,7 @@ const limitPageMid = async (req, res, next) => {
         }
 
         let productsData = await mongoProductManager.getProductsPaginate(limit, page);
+        console.log("productsData", productsData);
 
         if(limit < 1 || limit > productsData.totalDocs){
             return res.status(400).json({status:'error', message:`El parametro LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
@@ -532,7 +533,7 @@ router.get('/', noParamsMid, limitMid, pageMid, queryMid, sortMid, limitPageMid,
         }
         
         let productsData = await mongoProductManager.getProductsPaginate(limit, page);
-
+        
         if(limit < 1 || limit > productsData.totalDocs){
             return res.status(400).json({status:'error', message:`El parametro LIMIT debe ser mayor igual a 1 y no debe superar la cantidad de documentos (${productsData.totalDocs}) de la coleccion`});
         }

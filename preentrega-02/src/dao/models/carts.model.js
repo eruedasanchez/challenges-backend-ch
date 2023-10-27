@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const productIdQuantity = new mongoose.Schema({
     productId: { type: mongoose.Schema.Types.ObjectId, ref: 'products'}, 
-    quantity: Number
+    quantity: {type: Number}, 
 }, {strict: true});
 
 const cartsCollection = 'carts';                                            // 'carts' coresponde al nombre de la coleccion definida en Atlas

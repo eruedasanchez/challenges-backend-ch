@@ -51,7 +51,7 @@ const inexistsPidMid = async (req, res, next) => {
     let productPid = products.filter(product => product._id.equals(new mongoose.Types.ObjectId(pid)));
     
     if(productPid.length === 0){
-        return res.status(400).json({status:'error', message:`El carrito con CID ${cid} no existe`}); 
+        return res.status(400).json({status:'error', message:`El producto con PID ${pid} no existe`}); 
     }
     
     next();
@@ -152,7 +152,7 @@ router.get('/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) => {
     }
 })
 
-router.post('/:cid/product/:pid', invalidObjectCidMid, inexistsCidMid, invalidObjectPidMid, inexistsPidMid, invalidObjectProductIdMid, async (req,res) => {
+router.post('/:cid/product/:pid', invalidObjectCidMid, inexistsCidMid, invalidObjectPidMid, inexistsPidMid, async (req,res) => {
     try {
         let cid = req.params.cid;
         let pid = req.params.pid;
