@@ -13,8 +13,10 @@ class MongoChatManager{
     }
 
     async addToChat(msg){
-        let newMessage = new messagesModel(msg);
-        await newMessage.save();
+        await messagesModel.create({
+            user: msg.user,
+            message: msg.message
+        });
     }
 }
 

@@ -14,10 +14,12 @@ router.get('/', (req, res) => {
     res.status(200).render('chat', { header: 'Inicio | Chat' });
 });
 
+let usersList = [];
+
 export const initChat = (serverSocketChat) => {
     serverSocketChat.on('connection', socket => {
         console.log(`Se ha conectado un cliente con ID ${socket.id} al chat`);
-        let usersList = [];
+        // let usersList = [];
         
         socket.on('userEmail', async userEmail => {
             // Se guardan a los usuarios que se van conectando en un arreglo para saber cuando alguno se retire, quien es  
@@ -40,12 +42,10 @@ export const initChat = (serverSocketChat) => {
 
         // La desconexion ocurre cuando un cliente cerra su ventana o navegador
         socket.on('disconnect',() => {
-            console.log(`se desconecto del chat el cliente con id ${socket.id}`);
-            
             let idx = usersList.findIndex(user => user.id === socket.id);
             let user = usersList[idx];
             serverSocketChat.emit('disconnectedUserAlert', user);          // se notifica a todos los usuarios que se retiro un usuario
-            usersList.splice(idx, 1);
+            usersList = usersList.filter(u => u !== user);
         })
     })
 }
