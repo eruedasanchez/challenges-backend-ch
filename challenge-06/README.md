@@ -20,6 +20,16 @@ This is a [Node JS](https://github.com/nodejs/node) module available through the
 
 Before installing, download and install Node.js. Node.js 0.10 or higher is required.
 
+## Description
+
+Based on the login challenge you previously described, here's a refactored version with the requested modifications:
+
+1. Password hashing is added using **bcrypt**.
+
+2. The implementation of **Passport** is included for both registration and login.
+
+3. **GitHub authentication** is implemented for the login view.
+
 ## Quick Start
 
 The quickest way to run this project with express is run the commands to generate an application as shown below:
