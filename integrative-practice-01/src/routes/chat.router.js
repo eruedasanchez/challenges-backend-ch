@@ -14,10 +14,12 @@ router.get('/', (req, res) => {
     res.status(200).render('chat', { header: 'Inicio | Chat' });
 });
 
+let usersList = [];
+
 export const initChat = (serverSocketChat) => {
     serverSocketChat.on('connection', socket => {
-        console.log(`Se ha conectado un cliente con ID ${socket.id}`);
-        let usersList = [];
+        console.log(`Se ha conectado un cliente con ID ${socket.id} al chat`);
+        // let usersList = [];
         
         socket.on('userEmail', async userEmail => {
             // Se guardan a los usuarios que se van conectando en un arreglo para saber cuando alguno se retire, quien es  
@@ -34,23 +36,16 @@ export const initChat = (serverSocketChat) => {
 
         // Server recibe el nuevo mensaje enviado por el cliente
         socket.on('newMessage', message => {
-            try {
-                console.log('Nuevo mensaje enviado al servidor:', message);
-                mongoChatManager.addToChat(message);                           // se agrega el mensaje a MongoDB 
-                serverSocketChat.emit('showMessage', message);                // server el emite a todos (serverSocketChat) los cliente el mensaje
-            } catch (error) {
-                console.error('Error al agregar el mensaje:', error);
-            }
+            mongoChatManager.addToChat(message);                           // se agrega el mensaje a MongoDB 
+            serverSocketChat.emit('showMessage', message);                // server el emite a todos (serverSocketChat) los cliente el mensaje
         })
 
         // La desconexion ocurre cuando un cliente cerra su ventana o navegador
         socket.on('disconnect',() => {
-            console.log(`se desconecto el cliente con id ${socket.id}`);
-            
             let idx = usersList.findIndex(user => user.id === socket.id);
             let user = usersList[idx];
             serverSocketChat.emit('disconnectedUserAlert', user);          // se notifica a todos los usuarios que se retiro un usuario
-            usersList.splice(idx, 1);
+            usersList = usersList.filter(u => u !== user);
         })
     })
 }
