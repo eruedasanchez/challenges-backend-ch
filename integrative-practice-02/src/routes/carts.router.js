@@ -211,3 +211,9 @@ router.delete('/:cid', invalidObjectCidMid, inexistsCidMid, async (req,res) => {
         res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 })
+
+// Endpoint agregar productos al carrito
+
+router.post('/add-to-cart', function(req, res, next) {
+    // a completar o lo sacamos ??
+})

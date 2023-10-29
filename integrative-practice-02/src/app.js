@@ -53,8 +53,8 @@ app.use(passport.session()); // por esto, siempre se ejecuta passport despues de
 
 // 3. cargar el middleware de passport en sessions router
 
-app.use('/', viewsRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/', viewsRouter);
 
 const serverExpress = app.listen(PORT, () => {
     console.log(`Server escuchando en puerto ${PORT}`);

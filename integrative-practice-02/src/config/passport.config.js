@@ -5,9 +5,11 @@ import passportJWT from 'passport-jwt';
 import { usersModel } from '../dao/models/users.model.js';
 import { generateHash, validateHash } from '../utils.js';
 import { config } from './config.js';
+import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js'; 
 
 const ADMIN_ROLE = 'admin', USER_ROLE = 'user';
 const admin = {first_name:'adminCoder', last_name:'House', email: 'adminCoder@coder.com', age: 25, password: 'adminCod3r123'};
+const mongoCartManager = new MongoCartManager();
 
 // Extraccion y validacion de token
 const searchToken = req => {
@@ -40,14 +42,19 @@ export const initPassport = () => {
 
                 if(emailRegistered) return done(null, false, {message:`El email ${username} ya se encuentra registrado en el sistema`});
                 
-                let user = await usersModel.create({ 
-                    first_name, 
-                    last_name, 
-                    email, 
-                    age, 
-                    password:generateHash(password),
-                    role: (email === admin.email && password === admin.password) ? ADMIN_ROLE : USER_ROLE    
-                }); 
+                // Creacion de un carrito vacío y asignacion al campo cart el ObjectId id_
+                const newCart = await mongoCartManager.createCart();
+                const cartId = newCart._id;
+                
+                let user = await usersModel.create({
+                    first_name,
+                    last_name,
+                    email,
+                    age,
+                    password: generateHash(password),
+                    role: (email === admin.email && password === admin.password) ? ADMIN_ROLE : USER_ROLE,
+                    cart: cartId 
+                });
                 
                 return done(null, user); // Si el usuario fue creado existosamente, se agrega la prop user a la request (req)
             } catch (error) {
@@ -78,7 +85,8 @@ export const initPassport = () => {
                     last_name: user.last_name,
                     email: user.email,
                     _id: user._id,
-                    role: user.role
+                    role: user.role,
+                    cart: user.cart
                 };
 
                 return done(null, user);

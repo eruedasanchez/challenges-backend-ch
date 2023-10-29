@@ -84,7 +84,7 @@ router.get('/login', activeSessionMid, (req,res) => {
 })
 
 router.get('/products', passport.authenticate('current', {session:false}), async (req,res) => {
-    let {limit, page, userFirstName, userLastName, userEmail, userAge, userRole} = req.query;
+    let {limit, page, userFirstName, userLastName, userEmail, userAge, userRole, cartId} = req.query;
     
     if(!limit) limit = 10;
     if(!page) page = 1;
@@ -106,7 +106,8 @@ router.get('/products', passport.authenticate('current', {session:false}), async
         userLastName: userLastName, 
         userEmail: userEmail, 
         userAge: userAge, 
-        userRole: userRole
+        userRole: userRole,
+        cartId: cartId
     });
 });
 
@@ -125,5 +126,10 @@ router.get('/carts/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) 
         res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 })
+
+router.get('/realtimeproducts', (req, res) => {
+    res.setHeader('Content-Type','text/html');
+    res.status(200).render('realTimeProducts');
+});
 
 

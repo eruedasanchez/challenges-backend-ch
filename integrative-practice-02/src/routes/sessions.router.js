@@ -2,8 +2,10 @@ import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import { Router} from 'express';
 import { config } from '../config/config.js';
+import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js';
 
 export const router = Router();
+const mongoCartManager = new MongoCartManager();
 
 /*------------------------------*\
         #SESSIONS ROUTES
@@ -38,7 +40,7 @@ router.get('/errorGithub', (req, res) => {
 \*-----------------*/
 
 router.post('/signup', function(req, res, next) {
-    passport.authenticate('signup', function(err, user, info, status) {
+    passport.authenticate('signup', async function(err, user, info, status) {
         if (err) return next(err);
         
         if (!user) {
@@ -70,7 +72,8 @@ router.post('/login', function(req, res, next) {
         first_name: req.user.first_name,
         last_name: req.user.last_name,
         email: req.user.email,
-        role: req.user.role
+        role: req.user.role,
+        cart: req.user.cart
     };
 
     // Generacion de la cookie luego de logearme. Hay que generar el token
@@ -82,7 +85,7 @@ router.post('/login', function(req, res, next) {
         httpOnly: true          // se tilda la opcion httpOnly, es decir, que al ejecutar document.cookie no las deja acceder 
     })
     
-    res.redirect(`/products?userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}`);
+    res.redirect(`/products?userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}`);
 });
 
 /*-------------------*\

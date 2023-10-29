@@ -23,7 +23,9 @@
             </ol>
     </li>
     <br>
-    <button>Agregar al carrito</button>
+    <form action="/api/carts/{{cartId}}/product/{{this._id}}" method="post">
+        <button type="submit">Agregar al carrito</button>
+    </form>
     <br>
     <br>
     <br>
