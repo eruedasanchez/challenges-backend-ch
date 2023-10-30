@@ -152,7 +152,8 @@ router.get('/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) => {
     }
 })
 
-router.post('/:cid/product/:pid', invalidObjectCidMid, inexistsCidMid, invalidObjectPidMid, inexistsPidMid, invalidObjectProductIdMid, async (req,res) => {
+// invalidObjectProductIdMid
+router.post('/:cid/product/:pid', invalidObjectCidMid, inexistsCidMid, invalidObjectPidMid, inexistsPidMid, async (req,res) => {
     try {
         let cid = req.params.cid;
         let pid = req.params.pid;
@@ -214,6 +215,6 @@ router.delete('/:cid', invalidObjectCidMid, inexistsCidMid, async (req,res) => {
 
 // Endpoint agregar productos al carrito
 
-router.post('/add-to-cart', function(req, res, next) {
-    // a completar o lo sacamos ??
-})
+// router.post('/add-to-cart', function(req, res, next) {
+//     // a completar o lo sacamos ??
+// })
