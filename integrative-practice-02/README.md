@@ -1,4 +1,4 @@
-# Challenge-06. Login Refactor
+# Integrative Practice 02
 
 This project was generated with the following dependencies: 
 
@@ -13,12 +13,38 @@ This project was generated with the following dependencies:
 - [Passport](https://github.com/jaredhanson/passport): Version 0.6.0
 - [Passport Local](https://github.com/jaredhanson/passport-local): Version 0.6.0
 - [Passport Github2](https://github.com/passport/todos-express-password): Version 0.6.0
+- [Cookie Parser](https://github.com/expressjs/cookie-parser): Version 1.4.6
+- [Dotenv](https://github.com/motdotla/dotenv): Version 16.3.1
+- [Jsonwebtoken](https://github.com/auth0/node-jsonwebtoken): Version 9.0.2
+- [Passport Jwt](https://github.com/mikenicholson/passport-jwt): Version 4.0.1
 
 ## Installation
 
 This is a [Node JS](https://github.com/nodejs/node) module available through the npm registry.
 
 Before installing, download and install Node.js. Node.js 0.10 or higher is required.
+
+## Description
+
+1. The project continues to be worked on, configuring new elements and including the following aspects.
+
+2. A **User Model** is created, which will have the following fields:
+
+* first_name: String
+* last_name: String
+* email: String (unique)
+* age: Number
+* password: String (Hash)
+* cart: Id with reference to Carts
+* role: String (default: 'user')
+
+When a user decides to register, a unique **ObjectId** is assigned to the user's cart field, referencing the `Carts` collection. Then, once the user logs in, they are redirected to the Products view, which stores data in the Products collection. Every time the user clicks `Add to Cart` button, the product is added to the cart assigned to them at the time of registration.
+
+3. **Passport** strategies are developed to work with this user model.
+
+4. The user **login** system is modified to work with **JWT** (JSON Web Token).
+
+5. A `current` strategy is developed to extract the cookie containing the token to obtain the user associated with that token. If the token is present, the associated user is returned. Otherwise, a passport error is returned, and a cookie extractor is used.
 
 ## Quick Start
 
