@@ -1,4 +1,4 @@
-# Challenge-07. Server restructuring
+# Challenge-07. Server Restructuring
 
 This project was generated with the following dependencies: 
 
