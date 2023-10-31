@@ -2,10 +2,7 @@ import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import { Router} from 'express';
 import { config } from '../config/config.js';
-import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js';
-
 export const router = Router();
-const mongoCartManager = new MongoCartManager();
 
 /*------------------------------*\
         #SESSIONS ROUTES

@@ -1,39 +1,11 @@
 import __dirname from '../utils.js';
 import express from 'express';
-import mongoose from 'mongoose';
 import passport from 'passport';
-import MongoProductManager from '../dao/mongoDB-manager/MongoProductManager.js';
-import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js';
+import { cartsService } from '../services/carts.service.js';
+import { productsService } from '../services/products.service.js';
+import { invalidObjectCidMid, inexistsCidMid } from '../controllers/cartsController.js';
 
 export const router = express.Router();
-
-const mongoProductManager = new MongoProductManager();
-const mongoCartManager = new MongoCartManager();
-
-/*------------------------------*\
-    #MIDDLEWARES GET '/:cid'
-\*------------------------------*/
-
-const invalidObjectCidMid = (req, res, next) => {
-    let cid = req.params.cid;
-    
-    if(!mongoose.Types.ObjectId.isValid(cid)) return res.status(400).json({status:'error', error:'El pid ingresado tiene un formato invalido'});
-
-    next();
-}
-
-const inexistsCidMid = async (req, res, next) => {
-    let carts = await mongoCartManager.getCarts();
-    let cid = req.params.cid;
-    
-    let cartCid = carts.filter(cart => cart._id.equals(new mongoose.Types.ObjectId(cid)));
-    
-    if(cartCid.length === 0){
-        return res.status(400).json({status:'error', message:`El carrito con CID ${cid} no existe`}); 
-    }
-
-    next();
-}
 
 /*----------------------------------------------*\
     #MIDDLEWARES GET '/', '/login', '/signup'
@@ -89,7 +61,7 @@ router.get('/products', passport.authenticate('current', {session:false}), async
     if(!limit) limit = 10;
     if(!page) page = 1;
 
-    const products = await mongoProductManager.getProductsPaginate(limit, page);
+    const products = await productsService.getProductsPaginate(limit, page);
 
     let {totalPages, hasPrevPage, hasNextPage, prevPage, nextPage} = products;
     
@@ -114,7 +86,7 @@ router.get('/products', passport.authenticate('current', {session:false}), async
 router.get('/carts/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) => {
     try {
         let cid = req.params.cid;
-        let cartSelected = await mongoCartManager.getCartByIdLean(cid); 
+        let cartSelected = await cartsService.getCartByIdLean(cid); 
         
         res.setHeader('Content-Type','text/html');
         res.status(200).render('cartid', {
