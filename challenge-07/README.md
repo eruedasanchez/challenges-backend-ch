@@ -1,4 +1,4 @@
-# Integrative Practice 02
+# Challenge-07. Server restructuring
 
 This project was generated with the following dependencies: 
 
@@ -26,25 +26,13 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-1. The project continues to be worked on, configuring new elements and including the following aspects.
+1. The necessary changes are made so that the project is now based on a **layered model**. 
 
-2. A **User Model** is created, which will have the following fields:
+2. The layered model is applied to the products, carts, and messages models.
 
-* first_name: String
-* last_name: String
-* email: String (unique)
-* age: Number
-* password: String (Hash)
-* cart: Id with reference to Carts
-* role: String (default: 'user')
+3. ach model has its respective **schema**, a `MongoDAO.js` file, a **service layer** that uses the previous file, a **controllers layer** that contains the logic and functions, and a **routing layer** to which the controllers layer connects to handle the various endpoints of the model. 
 
-When a user decides to register, a unique **ObjectId** is assigned to the user's cart field, referencing the `Carts` collection. Then, once the user logs in, they are redirected to the Products view, which stores data in the Products collection. Every time the user clicks `Add to Cart` button, the product is added to the cart assigned to them at the time of registration.
-
-3. **Passport** strategies are developed to work with this user model.
-
-4. The user **login** system is modified to work with **JWT** (JSON Web Token).
-
-5. A `current` strategy is developed to extract the cookie containing the token to obtain the user associated with that token. If the token is present, the associated user is returned. Otherwise, a passport error is returned, and a cookie extractor is used.
+4. In addition, all the important and sensitive parts of the project are moved to `.sample.env` file in order to read them as environment variables in `config.js` file.
 
 ## Quick Start
 
