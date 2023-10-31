@@ -1,25 +1,21 @@
 import express from 'express';
-import MongoChatManager from '../dao/mongoDB-manager/MongoChatManager.js';
+import { messagesService } from '../services/messages.service.js';
+import messagesController from '../controllers/messagesController.js';
 import { serverSocket } from '../app.js';
+
 export const router = express.Router();
 
-const mongoChatManager = new MongoChatManager();
+/*----------------*\
+    #CHAT ROUTES
+\*----------------*/
 
-/*------------------------------*\
-        #CHAT ROUTES
-\*------------------------------*/
-
-router.get('/', (req, res) => {
-    res.setHeader('Content-Type','text/html');
-    res.status(200).render('chat', { header: 'Inicio | Chat' });
-});
+router.get('/', messagesController.renderChat);
 
 let usersList = [];
 
-export const initChat = (serverSocketChat) => {
+export const initChat = serverSocketChat => {
     serverSocketChat.on('connection', socket => {
         console.log(`Se ha conectado un cliente con ID ${socket.id} al chat`);
-        // let usersList = [];
         
         socket.on('userEmail', async userEmail => {
             // Se guardan a los usuarios que se van conectando en un arreglo para saber cuando alguno se retire, quien es  
@@ -28,7 +24,7 @@ export const initChat = (serverSocketChat) => {
                 userEmail: userEmail
             })
             
-            let chatHistory = await mongoChatManager.getChat();
+            let chatHistory = await messagesService.getChat();
             socket.emit('historialChat', chatHistory);                       // server envia el historial de mensajes al nuevo usuario
             
             socket.broadcast.emit('newUserConnectedAlert', userEmail);      // server notifica/emite a todos los usuarios menos al ultimo que se sumo (broadcast.emit), que se sumo un nuevo usuario
@@ -36,7 +32,7 @@ export const initChat = (serverSocketChat) => {
 
         // Server recibe el nuevo mensaje enviado por el cliente
         socket.on('newMessage', message => {
-            mongoChatManager.addToChat(message);                           // se agrega el mensaje a MongoDB 
+            messagesService.addToChat(message);
             serverSocketChat.emit('showMessage', message);                // server el emite a todos (serverSocketChat) los cliente el mensaje
         })
 
