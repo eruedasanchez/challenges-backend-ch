@@ -3,7 +3,7 @@ import __dirname from '../utils.js';
 
 dotenv.config({
     override:true, 
-    path:__dirname + '/.env'
+    path:__dirname + '/.env.sample'
 })
 
 export const config = {
