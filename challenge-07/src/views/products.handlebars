@@ -32,23 +32,23 @@
 </ul>
 <br>
 
-<a href="/products?page=1">Pag.1</a>
+<a href="/products?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}&page=1">Pag.1</a>
 
 {{#if hasPrevPage}} 
-    <a href="/products?page={{prevPage}}">Prev.Pag</a>
+    <a href="/products?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}&page={{prevPage}}">Prev.Pag</a>
     {{else}}
     <span>Prev.Pag</span>
 {{/if}}
 
 {{#if hasNextPage}} 
-    <a href="/products?page={{nextPage}}">Next.Pag</a>
+    <a href="/products?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}&page={{nextPage}}">Next.Pag</a>
     {{else}}
     <span>Next.Pag</span>
 {{/if}}
 
 
-<a href="/products?page={{totalPages}}">Ult.Pag</a>
-<hr>
+<a href="/products?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}&page={{totalPages}}">Ult.Pag</a>
+<hr>  
 <br>
 <ul class="menu"><li> <a href="/api/sessions/logout">Logout</a></li></ul>
 

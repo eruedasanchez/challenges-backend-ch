@@ -24,9 +24,8 @@ export class CartsMongoDAO{
                 query = query.populate('products.productId');
             } else if (operation === ops.LEAN) query = query.lean();
         }
-
+        
         return await query.exec();
-
     }
     
     async add(cid, pid){
