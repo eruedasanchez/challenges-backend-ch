@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 import { cartsModel } from "./models/carts.model.js"; 
 
+export const ops = {
+    POPULATE:'populate', 
+    LEAN: 'lean'
+};
+
 export class CartsMongoDAO{
     constructor(){}
     
@@ -10,17 +15,18 @@ export class CartsMongoDAO{
         let newCart = { products: [] };
         return await cartsModel.create(newCart); 
     }
+    
+    async get(filter = {}, ...operations) {
+        let query = cartsModel.find(filter);
+        
+        for (const operation of operations) {
+            if (operation === ops.POPULATE){
+                query = query.populate('products.productId');
+            } else if (operation === ops.LEAN) query = query.lean();
+        }
 
-    async getPopulate(filter = {}){
-        return await cartsModel.find(filter).populate('products.productId');
-    }
-    
-    async getLean(filter = {}){
-        return await cartsModel.find(filter).populate('products.productId').lean();
-    }
-    
-    async get(filter = {}){
-        return await cartsModel.find(filter);
+        return await query.exec();
+
     }
     
     async add(cid, pid){
@@ -59,8 +65,8 @@ export class CartsMongoDAO{
         let quantityValue = Object.values(field)[0];
         productsSelected[idxPid][quantityProp] = quantityValue;
         
-        await cartSelected.save();
-        return cartSelected;
+        await cartSelected[0].save();
+        return cartSelected[0];
     }
     
     async delete(cid, pid){
