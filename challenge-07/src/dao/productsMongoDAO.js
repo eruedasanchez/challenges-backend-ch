@@ -5,12 +5,12 @@ export class ProductsMongoDAO{
 
     /**** Metodos ****/
     
-    async add(newProd){
-        return await productsModel.create(newProd);
-    }
-    
     async get(filter = {}){
         return await productsModel.find(filter);
+    }
+    
+    async add(newProd){
+        return await productsModel.create(newProd);
     }
     
     async paginate(lim, pag){
