@@ -3,7 +3,8 @@ import express from 'express';
 import passport from 'passport';
 import { cartsService } from '../services/carts.service.js';
 import { productsService } from '../services/products.service.js';
-import { invalidObjectCidMid, inexistsCidMid } from '../controllers/cartsController.js';
+// import { invalidObjectCidMid } from '../controllers/cartsController.js'; // inexistsCidMid
+import { invalidObjectCidMid } from '../dao/cartsMongoDAO.js';
 
 export const router = express.Router();
 
@@ -82,7 +83,8 @@ router.get('/products', passport.authenticate('current', {session:false}), async
     });
 });
 
-router.get('/carts/:cid', invalidObjectCidMid, inexistsCidMid, async (req, res) => {
+// inexistsCidMid
+router.get('/carts/:cid', invalidObjectCidMid, async (req, res) => {
     try {
         let cid = req.params.cid;
         let cartSelected = await cartsService.getCartByIdLean(cid); 

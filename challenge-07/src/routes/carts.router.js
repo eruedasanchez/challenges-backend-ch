@@ -1,9 +1,9 @@
 import express from 'express';
 import cartsController from '../controllers/cartsController.js';
-import { invalidObjectCidMid, inexistsCidMid } from '../controllers/cartsController.js';
-import { invalidObjectPidMid, inexistsPidMid } from '../controllers/cartsController.js';
-import { emptyFieldProductsMid, invalidObjectProductIdMid, negativeQuantityMid } from '../controllers/cartsController.js';
-import { inexistsPidInProductCartMid, quantityNegMid } from '../controllers/cartsController.js';
+// import { inexistsCidMid } from '../controllers/cartsController.js'; //invalidObjectCidMid
+// import { invalidObjectPidMid } from '../controllers/cartsController.js'; // , inexistsPidMid
+// import { emptyFieldProductsMid, invalidObjectProductIdMid, negativeQuantityMid } from '../controllers/cartsController.js';
+// import { inexistsPidInProductCartMid, quantityNegMid } from '../controllers/cartsController.js';
 
 export const router = express.Router();
 
@@ -11,17 +11,24 @@ export const router = express.Router();
     #CART ROUTES
 \*-----------------*/
 
-router.post('/', cartsController.postCart);
+router.post('/', cartsController.postCart); // ok
 
-router.get('/:cid', invalidObjectCidMid, inexistsCidMid, cartsController.getCartById);
+router.get('/:cid', cartsController.getCartById); // ok
 
-router.post('/:cid/product/:pid', invalidObjectCidMid, inexistsCidMid, invalidObjectPidMid, inexistsPidMid, cartsController.postProductInCart);
+router.post('/:cid/product/:pid', cartsController.postProductInCart); // ok
 
-router.put('/:cid', invalidObjectCidMid, inexistsCidMid, emptyFieldProductsMid, invalidObjectProductIdMid, negativeQuantityMid, cartsController.putCart);
+// , invalidObjectCidMid y , emptyFieldProductsMid y, invalidObjectProductIdMid y, negativeQuantityMid y
+router.put('/:cid', cartsController.putCart); // ok
 
-router.put('/:cid/product/:pid', invalidObjectCidMid, inexistsCidMid, invalidObjectPidMid, inexistsPidInProductCartMid, quantityNegMid, cartsController.putProdQuantityInCart);
+// , invalidObjectCidMid ym yfs , invalidObjectPidMid ym yfs, inexistsPidInProductCartMid ym yfs, quantityNegMid ym yfs
+router.put('/:cid/product/:pid', cartsController.putProdQuantityInCart); // ok
 
-router.delete('/:cid/product/:pid', invalidObjectCidMid, inexistsCidMid, invalidObjectPidMid, inexistsPidInProductCartMid, cartsController.deleteProductInCart);
+// , invalidObjectCidMid ym yfs, invalidObjectPidMid ym yfs, inexistsPidInProductCartMid ym yfs
+router.delete('/:cid/product/:pid', cartsController.deleteProductInCart); // ok
 
-router.delete('/:cid', invalidObjectCidMid, inexistsCidMid, cartsController.cleanCart);
+// invalidObjectCidMid ym yfs,
+router.delete('/:cid', cartsController.cleanCart); // ok
+
+
+
 

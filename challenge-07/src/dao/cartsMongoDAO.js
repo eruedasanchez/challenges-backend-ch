@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 import { cartsModel } from "./models/carts.model.js"; 
 
+export const invalidObjectCidMid = cid => {
+    if(!mongoose.Types.ObjectId.isValid(cid)){
+        throw new Error('El CID ingresado tiene un formato invalido');
+    }
+}
+
+const invalidObjectPidMid = pid => {
+    if(!mongoose.Types.ObjectId.isValid(pid)){
+        throw new Error('El PID ingresado tiene un formato invalido');
+    }
+}
+
 export const ops = {
     POPULATE:'populate', 
     LEAN: 'lean'
@@ -17,6 +29,8 @@ export class CartsMongoDAO{
     }
     
     async get(filter = {}, ...operations) {
+        invalidObjectCidMid(filter["_id"]);
+        
         let query = cartsModel.find(filter);
         
         for (const operation of operations) {
@@ -29,6 +43,8 @@ export class CartsMongoDAO{
     }
     
     async add(cid, pid){
+        invalidObjectPidMid(pid);
+        
         let cartSelected = await this.get({_id:cid});
         let productsSelected = cartSelected[0].products;
         let idxPid = productsSelected.findIndex(prod => prod.productId.equals(new mongoose.Types.ObjectId(pid)));
@@ -52,13 +68,32 @@ export class CartsMongoDAO{
     }
 
     async update(cid, prods){
+        invalidObjectCidMid(cid);
+
+        let productos = prods.products;
+        
+        for(const prod of productos){
+            if(!mongoose.Types.ObjectId.isValid(prod.productId)){
+                // invalidObjectProductIdMid
+                throw new Error('Todos los productId ingresados deben ser de tipo ObjectId');
+            } 
+        }
+        
         return await cartsModel.updateOne({_id: cid}, prods);
     }
 
     async updateCant(cid, pid, field){
+        invalidObjectCidMid(cid);
+        invalidObjectPidMid(pid);
+
         let cartSelected = await this.get({_id:cid});
         let productsSelected = cartSelected[0].products;
         let idxPid = productsSelected.findIndex(prod => prod.productId.equals(new mongoose.Types.ObjectId(pid)));
+
+        if(idxPid === -1){
+            // inexistsPidInProductCartMid
+            throw new Error(`El producto con PID ${pid} no existe en el carrito con CID ${cid}.`);
+        }
         
         let quantityProp = Object.keys(field)[0]; 
         let quantityValue = Object.values(field)[0];
@@ -69,9 +104,17 @@ export class CartsMongoDAO{
     }
     
     async delete(cid, pid){
+        invalidObjectCidMid(cid);
+        invalidObjectPidMid(pid);
+
         let cartSelected = await this.get({_id:cid});
         let productsSelected = cartSelected[0].products;
         let idxPid = productsSelected.findIndex(prod => prod.productId.equals(new mongoose.Types.ObjectId(pid)));
+        
+        if(idxPid === -1){
+            // inexistsPidInProductCartMid
+            throw new Error(`El producto con PID ${pid} no existe en el carrito con CID ${cid}.`);
+        }
         
         let updatedProducts = productsSelected.filter(prod => prod !== productsSelected[idxPid]);
         
@@ -79,6 +122,8 @@ export class CartsMongoDAO{
     }
     
     async deleteAll(cid){
+        invalidObjectCidMid(cid);
+        
         return await cartsModel.updateOne({_id: cid}, {$set:{products:[]}});
     }
 }
