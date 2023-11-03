@@ -1,9 +1,9 @@
 import express from 'express';
 import productsController from '../controllers/productsController.js'; 
 import { noParamsMid, limitMid, pageMid, queryMid, sortMid, limitPageMid, limitQueryMid, limitSortMid, pageQueryMid, pageSortMid, querySortMid, limitPageQueryMid, limitPageSortMid, limitQuerySortMid, pageQuerySortMid } from '../controllers/productsController.js';
-import { invalidObjectIdMid, invalidPidMid } from '../controllers/productsController.js';
-import { emptyFieldMid, priceStockNegMid, sameCodeMid, sameDescriptionMid, sameTitleMid, emptyFieldsModifyMid } from '../controllers/productsController.js'; 
-
+// import { invalidPidMid } from '../controllers/productsController.js'; // invalidObjectIdMid,
+import { emptyFieldMid, priceStockNegMid, sameCodeMid, sameDescriptionMid, sameTitleMid } from '../controllers/productsController.js'; 
+// , emptyFieldsModifyMid
 export const router = express.Router();
 
 /*------------------------------*\
@@ -12,12 +12,13 @@ export const router = express.Router();
 
 router.get('/', noParamsMid, limitMid, pageMid, queryMid, sortMid, limitPageMid, limitQueryMid, limitSortMid, pageQueryMid, pageSortMid, querySortMid, limitPageQueryMid, limitPageSortMid, limitQuerySortMid, pageQuerySortMid, productsController.getProducts);
 
-router.get('/:pid', invalidObjectIdMid, invalidPidMid, productsController.getProductById);
+// invalidObjectIdMid, invalidPidMid
+router.get('/:pid', productsController.getProductById);
 
-router.post('/', emptyFieldMid, sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.postProduct);
+// emptyFieldMid, sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid
+router.post('/', emptyFieldMid, productsController.postProduct);
 
-router.put('/:pid', invalidObjectIdMid, invalidPidMid, emptyFieldsModifyMid, sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.putProduct);
+// emptyFieldsModifyMid, invalidObjectIdMid, invalidPidMid
+router.put('/:pid', sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.putProduct);
 
-router.delete('/:pid', invalidObjectIdMid, invalidPidMid, productsController.deleteProduct);
-
-router.delete('/:pid', invalidObjectIdMid, invalidPidMid, productsController.deleteProduct);
+router.delete('/:pid', productsController.deleteProduct);

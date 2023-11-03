@@ -1,62 +1,17 @@
 [
 	{
-		"id": 1,
-		"title": "Producto uno",
-		"description": "Este es un producto prueba uno",
-		"code": "abc123p1",
-		"price": 200,
+		"_id": 1,
+		"title": "Producto dos",
+		"description": "Este es un producto prueba dos",
+		"code": "abc123p2",
+		"price": 2,
 		"status": true,
-		"stock": 12,
+		"stock": 102,
 		"category": "muebles",
 		"thumbnails": [
-			"thumbnail-p1-1",
-			"thumbnail-p1-2",
-			"thumbnail-p1-3"
-		]
-	},
-	{
-		"id": 5,
-		"title": "Producto cinco",
-		"description": "Este es un producto prueba cinco",
-		"code": "abc123p5",
-		"price": 2334,
-		"status": true,
-		"stock": 30,
-		"category": "roperos",
-		"thumbnails": [
-			"thumbnail-p5-1",
-			"thumbnail-p5-2",
-			"thumbnail-p5-3"
-		]
-	},
-	{
-		"id": 19,
-		"title": "Producto diecinueve",
-		"description": "Este es un producto prueba diecinueve",
-		"code": "abc123p19",
-		"price": 200,
-		"status": true,
-		"stock": 12,
-		"category": "muebles",
-		"thumbnails": [
-			"thumbnail-p19-1",
-			"thumbnail-p19-2",
-			"thumbnail-p19-3"
-		]
-	},
-	{
-		"id": 20,
-		"title": "Producto veinte modificado",
-		"description": "Este es un producto prueba veinte modificado",
-		"code": "abc123p20",
-		"price": 280,
-		"status": true,
-		"stock": 12,
-		"category": "muebles",
-		"thumbnails": [
-			"thumbnail-p20-1",
-			"thumbnail-p20-2",
-			"thumbnail-p20-3"
+			"thumbnail-p2-1",
+			"thumbnail-p2-2",
+			"thumbnail-p2-3"
 		]
 	}
 ]

@@ -1,4 +1,5 @@
-import { ProductsMongoDAO as DAO} from "../dao/productsMongoDAO.js";
+import { ProductsFsDAO as DAO } from "../dao/productsFsDAO.js";
+// import { ProductsMongoDAO as DAO} from "../dao/productsMongoDAO.js";
 
 class ProductsService {
     constructor(dao){
@@ -28,19 +29,19 @@ class ProductsService {
     async updateProduct(id, fields){
         return await this.dao.update(id, fields);
     }
-    
+
     async findByTitle(ttl){
-        return await this.dao.findBy({title:{$eq:ttl}});
+        return await this.dao.findBy({title:ttl});
     }
     
     async findByDescription(des){
-        return await this.dao.findBy({description:{$eq:des}});
+        return await this.dao.findBy({description:des});
     }
     
     async findByCode(cod){
-        return await this.dao.findBy({code:{$eq:cod}});
+        return await this.dao.findBy({code:cod});
     }
-
+    
     async deleteProduct(id){
         return await this.dao.delete(id);
     }

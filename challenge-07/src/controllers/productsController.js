@@ -414,34 +414,9 @@ export const pageQuerySortMid = async (req, res, next) => {
     next();
 }
 
-/*------------------------------*\
-    #MIDDLEWARES GET '/:pid'
-\*------------------------------*/
-
-export const invalidObjectIdMid = (req, res, next) => {
-    let pid = req.params.pid;
-    
-    if(!mongoose.Types.ObjectId.isValid(pid)) return res.status(400).json({error:'El pid ingresado tiene un formato invalido'});
-
-    next();
-}
-
-export const invalidPidMid = async (req, res, next) => {
-    let products = await productsService.getProducts();
-    let pid = req.params.pid;
-    
-    let prodId = products.filter(product => product._id.equals(new mongoose.Types.ObjectId(pid)));
-    
-    if(prodId.length === 0){
-        return res.status(400).json({status:'error', message:`El producto con ID ${pid} no existe`}); // Caso en el que se cumple http://localhost:8080/api/products/34123123
-    }
-
-    next();
-}
-
-/*------------------------------*\
-        #MIDDLEWARES POST '/'
-\*------------------------------*/
+/*------------------------*\
+    #MIDDLEWARES POST '/'
+\*------------------------*/
 
 export const emptyFieldMid = (req, res, next) => {
     let {title, description, code, price, status, stock, category, thumbnails} = req.body;
@@ -456,8 +431,9 @@ export const emptyFieldMid = (req, res, next) => {
 export const sameTitleMid = async (req, res, next) => {
     let {title} = req.body;
     
-    const productWithSameTitle = await productsService.findByTitle(title); 
+    const productWithSameTitle = await productsService.findByTitle(title);
     if(productWithSameTitle){
+        console.log("estoy entrando aca");
         return res.status(400).json({status: 'error', error:'No se permiten agregar productos distintos que tengan el mismo titulo'});
     }
 
@@ -578,6 +554,12 @@ async function putProduct(req,res){
     try {
         let pid = req.params.pid;
         let fields = req.body;
+
+        for(const value of Object.values(fields)){
+            if(!value){
+                return res.status(400).json({status: 'error', error:'Todos los campos que desea modificar tienen que estar completos.'});
+            }
+        }
 
         let updatedProds = await productsService.updateProduct(pid, fields);
     
