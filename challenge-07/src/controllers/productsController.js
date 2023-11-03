@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import { productsService } from '../services/products.service.js';
 
 const ASC = "asc";
@@ -418,16 +417,6 @@ export const pageQuerySortMid = async (req, res, next) => {
     #MIDDLEWARES POST '/'
 \*------------------------*/
 
-export const emptyFieldMid = (req, res, next) => {
-    let {title, description, code, price, status, stock, category, thumbnails} = req.body;
-
-    if(!title || !description || !code || !price || !status || !stock || !category){
-        return res.status(400).json({status: 'error', error:'Los campos title, description, code, price, status, stock y category son obligatorios. Ademas, el campo status se debe setear por defecto en true.'});
-    }
-
-    next();
-}
-
 export const sameTitleMid = async (req, res, next) => {
     let {title} = req.body;
     
@@ -540,6 +529,13 @@ async function getProductById(req, res) {
 async function postProduct(req,res){
     try {
         let newProd = req.body;
+
+        for(const value of Object.values(newProd)){
+            if(!value){
+                return res.status(400).json({status: 'error', error:'Todos los campos del nuevo producto tienen que estar completos.'});
+            }
+        }
+
         let productAdded = await productsService.addProduct(newProd); 
 
         res.status(201).json({status: 'ok', newProduct:productAdded})

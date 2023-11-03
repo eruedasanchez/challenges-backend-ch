@@ -1,5 +1,5 @@
-import { ProductsFsDAO as DAO } from "../dao/productsFsDAO.js";
-// import { ProductsMongoDAO as DAO} from "../dao/productsMongoDAO.js";
+// import { ProductsFsDAO as DAO } from "../dao/productsFsDAO.js";
+import { ProductsMongoDAO as DAO} from "../dao/productsMongoDAO.js";
 
 class ProductsService {
     constructor(dao){
