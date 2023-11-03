@@ -1,9 +1,5 @@
 import express from 'express';
 import cartsController from '../controllers/cartsController.js';
-// import { inexistsCidMid } from '../controllers/cartsController.js'; //invalidObjectCidMid
-// import { invalidObjectPidMid } from '../controllers/cartsController.js'; // , inexistsPidMid
-// import { emptyFieldProductsMid, invalidObjectProductIdMid, negativeQuantityMid } from '../controllers/cartsController.js';
-// import { inexistsPidInProductCartMid, quantityNegMid } from '../controllers/cartsController.js';
 
 export const router = express.Router();
 
@@ -11,24 +7,17 @@ export const router = express.Router();
     #CART ROUTES
 \*-----------------*/
 
-router.post('/', cartsController.postCart); // ok
+router.post('/', cartsController.postCart); 
 
-router.get('/:cid', cartsController.getCartById); // ok
+router.get('/:cid', cartsController.getCartById); 
 
-router.post('/:cid/product/:pid', cartsController.postProductInCart); // ok
+router.post('/:cid/product/:pid', cartsController.postProductInCart); 
 
-// , invalidObjectCidMid y , emptyFieldProductsMid y, invalidObjectProductIdMid y, negativeQuantityMid y
-router.put('/:cid', cartsController.putCart); // ok
+router.put('/:cid', cartsController.putCart); 
 
-// , invalidObjectCidMid ym yfs , invalidObjectPidMid ym yfs, inexistsPidInProductCartMid ym yfs, quantityNegMid ym yfs
-router.put('/:cid/product/:pid', cartsController.putProdQuantityInCart); // ok
+router.put('/:cid/product/:pid', cartsController.putProdQuantityInCart); 
 
-// , invalidObjectCidMid ym yfs, invalidObjectPidMid ym yfs, inexistsPidInProductCartMid ym yfs
-router.delete('/:cid/product/:pid', cartsController.deleteProductInCart); // ok
+router.delete('/:cid/product/:pid', cartsController.deleteProductInCart); 
 
-// invalidObjectCidMid ym yfs,
-router.delete('/:cid', cartsController.cleanCart); // ok
-
-
-
+router.delete('/:cid', cartsController.cleanCart); 
 

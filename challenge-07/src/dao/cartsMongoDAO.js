@@ -1,15 +1,9 @@
 import mongoose from "mongoose";
 import { cartsModel } from "./models/carts.model.js"; 
 
-export const invalidObjectCidMid = cid => {
-    if(!mongoose.Types.ObjectId.isValid(cid)){
-        throw new Error('El CID ingresado tiene un formato invalido');
-    }
-}
-
-const invalidObjectPidMid = pid => {
-    if(!mongoose.Types.ObjectId.isValid(pid)){
-        throw new Error('El PID ingresado tiene un formato invalido');
+export const invalidObjectIdMid = id => {
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        throw new Error(`El ${id} ingresado tiene un formato invalido`);
     }
 }
 
@@ -29,7 +23,7 @@ export class CartsMongoDAO{
     }
     
     async get(filter = {}, ...operations) {
-        invalidObjectCidMid(filter["_id"]);
+        invalidObjectIdMid(filter["_id"]);
         
         let query = cartsModel.find(filter);
         
@@ -43,7 +37,7 @@ export class CartsMongoDAO{
     }
     
     async add(cid, pid){
-        invalidObjectPidMid(pid);
+        invalidObjectIdMid(pid);
         
         let cartSelected = await this.get({_id:cid});
         let productsSelected = cartSelected[0].products;
@@ -68,8 +62,8 @@ export class CartsMongoDAO{
     }
 
     async update(cid, prods){
-        invalidObjectCidMid(cid);
-
+        invalidObjectIdMid(cid);
+        
         let productos = prods.products;
         
         for(const prod of productos){
@@ -83,9 +77,9 @@ export class CartsMongoDAO{
     }
 
     async updateCant(cid, pid, field){
-        invalidObjectCidMid(cid);
-        invalidObjectPidMid(pid);
-
+        invalidObjectIdMid(cid);
+        invalidObjectIdMid(pid);
+        
         let cartSelected = await this.get({_id:cid});
         let productsSelected = cartSelected[0].products;
         let idxPid = productsSelected.findIndex(prod => prod.productId.equals(new mongoose.Types.ObjectId(pid)));
@@ -104,9 +98,9 @@ export class CartsMongoDAO{
     }
     
     async delete(cid, pid){
-        invalidObjectCidMid(cid);
-        invalidObjectPidMid(pid);
-
+        invalidObjectIdMid(cid);
+        invalidObjectIdMid(pid);
+        
         let cartSelected = await this.get({_id:cid});
         let productsSelected = cartSelected[0].products;
         let idxPid = productsSelected.findIndex(prod => prod.productId.equals(new mongoose.Types.ObjectId(pid)));
@@ -122,8 +116,7 @@ export class CartsMongoDAO{
     }
     
     async deleteAll(cid){
-        invalidObjectCidMid(cid);
-        
+        invalidObjectIdMid(cid);
         return await cartsModel.updateOne({_id: cid}, {$set:{products:[]}});
     }
 }

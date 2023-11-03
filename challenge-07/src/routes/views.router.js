@@ -3,8 +3,7 @@ import express from 'express';
 import passport from 'passport';
 import { cartsService } from '../services/carts.service.js';
 import { productsService } from '../services/products.service.js';
-// import { invalidObjectCidMid } from '../controllers/cartsController.js'; // inexistsCidMid
-import { invalidObjectCidMid } from '../dao/cartsMongoDAO.js';
+import { invalidObjectIdMid } from '../dao/cartsMongoDAO.js'; // inexistsCidMid
 
 export const router = express.Router();
 
@@ -22,9 +21,9 @@ const activeSessionMid = (req, res, next) => {
     next();
 }
 
-/*------------------------------*\
-        #VIEWS ROUTES
-\*------------------------------*/
+/*-----------------*\
+    #VIEWS ROUTES
+\*-----------------*/
 
 router.get('/', activeSessionMid, (req,res) => {
     res.status(200).render('login');
@@ -84,9 +83,11 @@ router.get('/products', passport.authenticate('current', {session:false}), async
 });
 
 // inexistsCidMid
-router.get('/carts/:cid', invalidObjectCidMid, async (req, res) => {
+router.get('/carts/:cid', async (req, res) => {
     try {
         let cid = req.params.cid;
+        invalidObjectIdMid(cid);
+        
         let cartSelected = await cartsService.getCartByIdLean(cid); 
         
         res.setHeader('Content-Type','text/html');
@@ -104,5 +105,4 @@ router.get('/realtimeproducts', (req, res) => {
     res.setHeader('Content-Type','text/html');
     res.status(200).render('realTimeProducts');
 });
-
 
