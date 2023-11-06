@@ -1,5 +1,4 @@
-// import { CartsFsDAO as DAO } from "../dao/cartsFsDAO.js";
-import {CartsMongoDAO as DAO} from "../dao/cartsMongoDAO.js";
+import { cartsDAO as DAO } from "../dao/factory.js";
 import { ops } from "../dao/cartsMongoDAO.js";
 
 class CartsService{

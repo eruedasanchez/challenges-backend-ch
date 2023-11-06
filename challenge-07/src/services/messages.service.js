@@ -1,4 +1,4 @@
-import { MessagesMongoDAO as DAO } from "../dao/messagesMongoDAO.js";
+import { messagesDAO as DAO } from "../dao/factory.js";
 
 class MessagesService{
     constructor(dao){
