@@ -1,6 +1,6 @@
-# Challenge-03
+# Challenge-03. Server with Express
 
-This project was generated with [Express JS](https://github.com/expressjs/express)
+This project was generated with [Express JS](https://github.com/expressjs/express).
 
 ## Installation
 
