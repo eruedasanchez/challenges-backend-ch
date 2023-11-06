@@ -1,6 +1,6 @@
-# Challenge-01
+# Challenge-01. Classes with ECMAScript and Advanced ECMAScript
 
-This project was generated with [Node JS](https://github.com/nodejs)
+This project was generated with [Node JS](https://github.com/nodejs).
 
 ## Description
 
