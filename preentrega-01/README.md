@@ -1,4 +1,4 @@
-# Preentrega-01
+# Preentrega-01. Server based on Node.JS and Express
 
 This project was generated with [Express JS](https://github.com/expressjs/express)
 
