@@ -1,6 +1,6 @@
-# Challenge-02
+# Challenge-02. File Management
 
-This project was generated with [Node JS](https://github.com/nodejs)
+This project was generated with [Node JS](https://github.com/nodejs).
 
 ## Description
 
