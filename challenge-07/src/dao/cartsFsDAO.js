@@ -4,24 +4,13 @@ import __dirname from '../utils.js';
 const path = __dirname + '/data/carts.json';
 const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-
-const invalidCidMid = cid => {
-    if(letters.includes(cid)){
-        throw new Error('El CID ingresado tiene un formato invalido');
+const invalidIdMid = id => {
+    if(letters.includes(id)){
+        throw new Error(`El ${id} ingresado tiene un formato invalido`);
     } 
 
-    if(parseInt(cid) < 1){
-        throw new Error("Solo se admiten CID's mayores o iguales a 1");
-    }
-}
-
-const invalidPidMid = pid => {
-    if(letters.includes(pid)){
-        throw new Error('El PID ingresado tiene un formato invalido');
-    } 
-
-    if(parseInt(pid) < 1){
-        throw new Error("Solo se admiten PID's mayores o iguales a 1");
+    if(parseInt(id) < 1){
+        throw new Error(`Solo se admiten ${id}'s mayores o iguales a 1`);
     }
 }
 
@@ -41,8 +30,8 @@ export class CartsFsDAO{
     /**** Metodos ****/
 
     get(filter = {}, ...operations){
-        invalidCidMid(filter["_id"]);
-
+        invalidIdMid(filter["_id"]);
+        
         let carts = [];
 
         if(fs.existsSync(path)) carts = JSON.parse(fs.readFileSync(path, 'utf-8'));
@@ -68,7 +57,7 @@ export class CartsFsDAO{
     }
 
     add(cid, pid){
-        invalidPidMid(pid);
+        invalidIdMid(pid);
 
 		let carts = this.get();
         
@@ -97,12 +86,12 @@ export class CartsFsDAO{
 	}
     
     update(cid, prods){
-        invalidCidMid(cid);
+        invalidIdMid(cid);
         
         let productos = prods.products;
         
         for(const prod of productos){
-            invalidPidMid(prod.productId); 
+            invalidIdMid(prod.productId);
         }
         
         let carts = this.get();
@@ -116,9 +105,9 @@ export class CartsFsDAO{
 	}
 
     updateCant(cid, pid, field){
-        invalidCidMid(cid);
-        invalidPidMid(pid);
-
+        invalidIdMid(cid);
+        invalidIdMid(pid);
+        
         let carts = this.get();
         
         let idxCart = carts.findIndex(cart => cart._id === parseInt(cid));
@@ -140,9 +129,9 @@ export class CartsFsDAO{
     }
     
     delete(cid, pid){
-        invalidCidMid(cid);
-        invalidPidMid(pid);
-
+        invalidIdMid(cid);
+        invalidIdMid(pid);
+        
         let carts = this.get();
         
         let idxCart = carts.findIndex(cart => cart._id === parseInt(cid));
@@ -163,8 +152,8 @@ export class CartsFsDAO{
     }
 
     deleteAll(cid){
-        invalidCidMid(cid);
-
+        invalidIdMid(cid);
+        
         let carts = this.get();
         
         let idxCart = carts.findIndex(cart => cart._id === parseInt(cid));
