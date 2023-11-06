@@ -1,6 +1,6 @@
-# Challenge-04
+# Challenge-04. Websockets
 
-This project was generated with [Express JS](https://github.com/expressjs/express)
+This project was generated with [Express JS](https://github.com/expressjs/express).
 
 ## Installation
 
