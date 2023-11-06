@@ -1,4 +1,4 @@
-# Preentrega-02
+# Preentrega-02. Professionalizing DB
 
 This project was generated with the following dependencies: 
 
