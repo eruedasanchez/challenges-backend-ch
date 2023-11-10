@@ -17,6 +17,8 @@ import { initPassport } from './config/passport.config.js';
 import { config } from './config/config.js';
 
 const PORT = config.PORT;
+const PERSISTENCE = config.PERSISTENCE;
+console.log(`Persistencia en ${PERSISTENCE} iniciada`);
 
 const app = express();
 

@@ -7,7 +7,6 @@ messagesDAO = messagesDAO.MessagesMongoDAO;
 
 switch (config.PERSISTENCE) {
     case "FS":
-        console.log("Persistencia en Archivos (FS) iniciada");
         productsDAO = await import('./productsFsDAO.js');
         cartsDAO = await import('./cartsFsDAO.js');
         productsDAO = productsDAO.ProductsFsDAO;
@@ -15,7 +14,6 @@ switch (config.PERSISTENCE) {
         break;
 
     case "MONGODB":
-        console.log("Persistencia en MongoDB iniciada");
         productsDAO = await import('./productsMongoDAO.js');
         cartsDAO = await import('./cartsMongoDAO.js');
         productsDAO = productsDAO.ProductsMongoDAO;

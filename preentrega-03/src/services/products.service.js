@@ -23,6 +23,8 @@ class ProductsService {
     
     async addProduct(newProd){
         return await this.dao.add(newProd);
+        // aca se podria agregar un DTO new
+        // return await this.dao.add(new ProductsPostDTO(NEWPROD));  yahi quedaria formateado
     }
     
     async updateProduct(id, fields){
