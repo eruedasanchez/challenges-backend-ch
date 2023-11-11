@@ -80,15 +80,16 @@ export const initPassport = () => {
                     return done(null, false, {message:'Credenciales incorrectas'});
                 } 
 
-                user = {
-                    first_name: user.first_name,
-                    last_name: user.last_name,
-                    email: user.email,
-                    _id: user._id,
-                    role: user.role,
-                    cart: user.cart
-                };
+                // user = {
+                //     first_name: user.first_name,
+                //     last_name: user.last_name,
+                //     email: user.email,
+                //     _id: user._id,
+                //     role: user.role,
+                //     cart: user.cart
+                // };
 
+                // aca tendria que pasar solo el user para despues aplicar el DTO (user a secas esta bien pasado asi)
                 return done(null, user);
             } catch (error) {
                 return done(error);

@@ -51,7 +51,7 @@ app.use(session({
 // 2. cargar passport en nuestra aplicacion (en app.js) ejemplo github y local
 initPassport();
 app.use(passport.initialize());
-app.use(passport.session()); // por esto, siempre se ejecuta passport despues de la sesion (app.use(session(...)
+// app.use(passport.session()); // por esto, siempre se ejecuta passport despues de la sesion (app.use(session(...)
 
 // 3. cargar el middleware de passport en sessions router
 

@@ -2,6 +2,7 @@ import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import { Router} from 'express';
 import { config } from '../config/config.js';
+import { DtoUsers } from '../DTO/dtousers.js';
 export const router = Router();
 
 /*------------------------------*\
@@ -65,13 +66,16 @@ router.post('/login', function(req, res, next) {
         return next(); // para poder ejecutar lo que quiera debajo
     })(req, res, next);
 }, (req, res) => {
-    let user = {
-        first_name: req.user.first_name,
-        last_name: req.user.last_name,
-        email: req.user.email,
-        role: req.user.role,
-        cart: req.user.cart
-    };
+    // let user = {
+    //     first_name: req.user.first_name,
+    //     last_name: req.user.last_name,
+    //     email: req.user.email,
+    //     age: req.user.age,
+    //     password: req.user.password,
+    //     role: req.user.role,
+    //     cart: req.user.cart
+    // };
+    let user = req.user;
 
     // Generacion de la cookie luego de logearme. Hay que generar el token
     let token = jwt.sign({user}, config.SECRET, {expiresIn: '1h'});
@@ -86,11 +90,29 @@ router.post('/login', function(req, res, next) {
 });
 
 /*-------------------*\
-    #POST /LOGOUT
+    #GET /LOGOUT
 \*-------------------*/
 
 router.get('/logout', (req, res) => {
-    req.session.destroy();
+    try {
+        res.clearCookie('coderCookie');
+        return res.redirect('/login?message=logout correcto!');
+    } catch (error) {
+        return res.status(500).json({error:'Unexpected error', detail:error.message});
+    }
+})
 
-    res.redirect('/login?message=logout correcto!');
+/*-------------------*\
+    #GET /CURRENT
+\*-------------------*/
+
+router.get('/current', passport.authenticate('current', {session:false}), (req, res) => {
+    try {
+        let userLoggedIn = req.user;
+        userLoggedIn = new DtoUsers(userLoggedIn);
+        
+        return res.status(200).json({status:'ok', infoUserLoggedIn:userLoggedIn});                      
+    } catch (error) {
+        return res.status(500).json({error:'Unexpected error', detail:error.message});
+    }
 })
