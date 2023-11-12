@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import { productsModel } from "./models/products.model.js";
 
-const invalidObjectIdMid = id => {
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        throw new Error('El pid ingresado tiene un formato invalido');
-    }
-}
+// const invalidObjectIdMid = id => {
+//     if(!mongoose.Types.ObjectId.isValid(id)){
+//         throw new Error('El pid ingresado tiene un formato invalido');
+//     }
+// }
 
 export class ProductsMongoDAO{
     constructor(){}
@@ -13,7 +13,10 @@ export class ProductsMongoDAO{
     /**** Metodos ****/
     
     async get(filter = {}){
-        invalidObjectIdMid(filter["_id"]);
+        // invalidObjectIdMid(filter["_id"]);
+        // if(!mongoose.Types.ObjectId.isValid(id)){
+        //     throw new Error('El pid ingresado tiene un formato invalido');
+        // }
         
         return await productsModel.find(filter);
     }
@@ -31,7 +34,11 @@ export class ProductsMongoDAO{
     }
     
     async update(id, fields){
-        invalidObjectIdMid(id);
+        // invalidObjectIdMid(id);
+
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            throw new Error('El pid ingresado tiene un formato invalido');
+        }
         
         let products = await this.get();
         let prodId = products.filter(product => product._id.equals(new mongoose.Types.ObjectId(id)));

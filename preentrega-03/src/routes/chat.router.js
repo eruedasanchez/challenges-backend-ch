@@ -1,6 +1,8 @@
 import express from 'express';
+import passport from 'passport';
 import { messagesService } from '../services/messages.service.js';
 import messagesController from '../controllers/messagesController.js';
+import { authorization } from './sessions.router.js';
 import { serverSocket } from '../app.js';
 
 export const router = express.Router();
@@ -9,7 +11,7 @@ export const router = express.Router();
     #CHAT ROUTES
 \*----------------*/
 
-router.get('/', messagesController.renderChat);
+router.get('/', passport.authenticate('current', {session:false}), authorization('user'), messagesController.renderChat);
 
 let usersList = [];
 

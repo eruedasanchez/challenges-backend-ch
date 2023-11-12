@@ -6,6 +6,20 @@ import { DtoUsers } from '../DTO/dtousers.js';
 export const router = Router();
 
 /*------------------------------*\
+    #AUTHORIZATION MIDDLEWARE
+\*------------------------------*/
+
+export const authorization = role => {
+    return async(req, res, next) => {
+        if(!req.user) return res.status(401).send({status:'error', message:'Unauthorized'});
+    
+        if(req.user.role != role) return res.status(403).send({status:'error', message:'No permissions'});
+        
+        next();
+    }
+}
+
+/*------------------------------*\
         #SESSIONS ROUTES
 \*------------------------------*/
 
@@ -66,15 +80,6 @@ router.post('/login', function(req, res, next) {
         return next(); // para poder ejecutar lo que quiera debajo
     })(req, res, next);
 }, (req, res) => {
-    // let user = {
-    //     first_name: req.user.first_name,
-    //     last_name: req.user.last_name,
-    //     email: req.user.email,
-    //     age: req.user.age,
-    //     password: req.user.password,
-    //     role: req.user.role,
-    //     cart: req.user.cart
-    // };
     let user = req.user;
 
     // Generacion de la cookie luego de logearme. Hay que generar el token
@@ -106,7 +111,7 @@ router.get('/logout', (req, res) => {
     #GET /CURRENT
 \*-------------------*/
 
-router.get('/current', passport.authenticate('current', {session:false}), (req, res) => {
+router.get('/current', passport.authenticate('current', {session:false}), authorization('user'), (req, res) => {
     try {
         let userLoggedIn = req.user;
         userLoggedIn = new DtoUsers(userLoggedIn);

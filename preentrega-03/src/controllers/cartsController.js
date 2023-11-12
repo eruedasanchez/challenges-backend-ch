@@ -1,4 +1,10 @@
 import { cartsService } from "../services/carts.service.js";
+import { ticketsService } from "../services/tickets.service.js";
+import { v4 as uuidv4 } from 'uuid';
+
+// const myUuid = uuidv4();
+// console.log(myUuid);
+// En
 
 /*---------------------*\
     #CARTS CONTROLLER
@@ -19,6 +25,50 @@ async function getCartById(req, res) {
         let cartSelected = await cartsService.getCartById(cid); 
         
         return res.status(201).json({status:'ok', MongoDBCart:cartSelected});                           
+    } catch (error) {
+        return res.status(500).json({error:'Unexpected error', detail:error.message});
+    }
+}
+
+async function confirmPurchase(req, res) {
+    try {
+        let { cid } = req.params;
+        let {userEmail}  = req.query;
+        
+        // Proceso de compra
+        let productsWithoutStock = [];
+        let cartAmount = 0;
+        let cartSelected = await cartsService.getCartById(cid);
+        let productsSelected = cartSelected[0].products;
+
+        productsSelected.forEach(product => {
+            if(product.productId.stock >= product.quantity){
+                // hay stock (se puede comprar)
+                let cartUpdt = cartsService.deleteProduct(cid, product.productId._id); // lo borro al producto del carrito
+                product.productId.stock = product.productId.stock - product.quantity;
+                cartAmount += product.productId.price;  
+            } else {
+                productsWithoutStock.push(product.productId._id);
+            }
+            // console.log("carrito acutalizado", product.productId.stock);
+        })
+
+        // Generacion del ticket
+        let ticket = {
+            code: uuidv4().toString().split('-').join(''),
+            purchase_datetime: new Date(),
+            amount: cartAmount,
+            purchaser: userEmail
+        }
+
+        let purchaseTicket = await ticketsService.generateTicket(ticket);
+        
+        return res.status(201).json({
+            status: productsWithoutStock.length > 0 ? 'incomplete' : 'success',
+            purchaseTicket: purchaseTicket,
+            idsProductsWithoutStock: productsWithoutStock
+        });       
+        // return res.status(201).json({status:'ok'});                             
     } catch (error) {
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
@@ -104,7 +154,8 @@ async function cleanCart(req, res) {
 
 export default {
     postCart, 
-    getCartById, 
+    getCartById,
+    confirmPurchase, 
     postProductInCart, 
     putCart, 
     putProdQuantityInCart, 

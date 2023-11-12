@@ -24,7 +24,7 @@
         </li>
         <form action="/api/carts/{{../cartId}}/product/{{this._id}}" method="post">
             <button type="submit">Agregar al carrito</button>
-        </form> 
+        </form>
     <br>
     <br>
     <br>
@@ -48,6 +48,11 @@
 
 
 <a href="/products?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}&page={{totalPages}}">Ult.Pag</a>
+<hr>  
+<br>
+<form action="/api/carts/{{cartId}}/purchase?userEmail={{userEmail}}" method="post">
+    <button type="submit">Comprar</button>
+</form>
 <hr>  
 <br>
 <ul class="menu"><li> <a href="/api/sessions/logout">Logout</a></li></ul>
