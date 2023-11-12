@@ -1,5 +1,7 @@
 import express from 'express';
-import productsController from '../controllers/productsController.js'; 
+import passport from 'passport';
+import productsController from '../controllers/productsController.js';
+import { authorization } from './sessions.router.js'; 
 import { noParamsMid, limitMid, pageMid, queryMid, sortMid, limitPageMid, limitQueryMid, limitSortMid, pageQueryMid, pageSortMid, querySortMid, limitPageQueryMid, limitPageSortMid, limitQuerySortMid, pageQuerySortMid } from '../controllers/productsController.js';
 import { priceStockNegMid, sameCodeMid, sameDescriptionMid, sameTitleMid } from '../controllers/productsController.js'; 
 export const router = express.Router();
@@ -12,8 +14,8 @@ router.get('/', noParamsMid, limitMid, pageMid, queryMid, sortMid, limitPageMid,
 
 router.get('/:pid', productsController.getProductById); 
 
-router.post('/', sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.postProduct); 
+router.post('/', passport.authenticate('current', {session:false}), authorization('admin'), sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.postProduct); 
 
-router.put('/:pid', sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.putProduct); 
+router.put('/:pid', passport.authenticate('current', {session:false}), authorization('admin'), sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.putProduct); 
 
-router.delete('/:pid', productsController.deleteProduct); 
+router.delete('/:pid', passport.authenticate('current', {session:false}), authorization('admin'), productsController.deleteProduct); 

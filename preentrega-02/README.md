@@ -16,7 +16,6 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-
 1. **Mongo** is kept as the primary persistence system.
 
 2. **Product** queries are professionalized with filters, pagination, and sorting.
