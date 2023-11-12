@@ -1,10 +1,7 @@
 import { cartsService } from "../services/carts.service.js";
+import { productsService } from "../services/products.service.js";
 import { ticketsService } from "../services/tickets.service.js";
 import { v4 as uuidv4 } from 'uuid';
-
-// const myUuid = uuidv4();
-// console.log(myUuid);
-// En
 
 /*---------------------*\
     #CARTS CONTROLLER
@@ -32,28 +29,28 @@ async function getCartById(req, res) {
 
 async function confirmPurchase(req, res) {
     try {
-        let { cid } = req.params;
-        let {userEmail}  = req.query;
-        
-        // Proceso de compra
-        let productsWithoutStock = [];
-        let cartAmount = 0;
+        let { cid } = req.params, {userEmail}  = req.query;
+        let cartUpdt, updateProd, updatedStock, productsWithoutStock = [], cartAmount = 0;
+
+        // Purchasing process
         let cartSelected = await cartsService.getCartById(cid);
         let productsSelected = cartSelected[0].products;
 
-        productsSelected.forEach(product => {
+        for(const product of productsSelected){
             if(product.productId.stock >= product.quantity){
-                // hay stock (se puede comprar)
-                let cartUpdt = cartsService.deleteProduct(cid, product.productId._id); // lo borro al producto del carrito
-                product.productId.stock = product.productId.stock - product.quantity;
-                cartAmount += product.productId.price;  
+                // hay suficiente stock del producto 
+                cartUpdt = await cartsService.deleteProduct(cid, product.productId._id); // se elimina al producto del carrito
+                
+                updatedStock = { stock: product.productId.stock - product.quantity };
+                updateProd = await productsService.updateProduct(product.productId._id, updatedStock); // se actualiza el stock del producto
+                
+                cartAmount += product.productId.price * product.quantity;  
             } else {
-                productsWithoutStock.push(product.productId._id);
+                productsWithoutStock.push(product.productId._id); // se agregan los id's de los productos que no se pudieron comprar
             }
-            // console.log("carrito acutalizado", product.productId.stock);
-        })
-
-        // Generacion del ticket
+        }
+        
+        // Ticket generation process
         let ticket = {
             code: uuidv4().toString().split('-').join(''),
             purchase_datetime: new Date(),
@@ -68,7 +65,6 @@ async function confirmPurchase(req, res) {
             purchaseTicket: purchaseTicket,
             idsProductsWithoutStock: productsWithoutStock
         });       
-        // return res.status(201).json({status:'ok'});                             
     } catch (error) {
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
