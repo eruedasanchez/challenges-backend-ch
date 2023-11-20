@@ -4,8 +4,50 @@ import passport from 'passport';
 import { cartsService } from '../services/carts.service.js';
 import { productsService } from '../services/products.service.js';
 import { invalidObjectIdMid } from '../dao/cartsMongoDAO.js'; // inexistsCidMid
+import { fakerES_MX as faker } from '@faker-js/faker';
 
 export const router = express.Router();
+
+/*----------------------*\
+    #MOCKING FUNCTIONS
+\*----------------------*/
+
+const generateThumbnailsArr = idx => {
+    let thumbnail, thumbnails = [];
+
+    for(let i=0; i < 3; i++){
+        thumbnail = `thumbnail-p${idx+1}-${i+1}`;
+        thumbnails.push(thumbnail);
+    }
+    
+    return thumbnails;
+}
+
+const generateMockProduct = idx => {
+    let _id = faker.string.alphanumeric({length: 24});
+    let title = faker.commerce.productName();
+    let description = faker.commerce.productDescription();
+    let code = faker.string.alphanumeric({length: 8});
+    let price = faker.commerce.price({min: 100, max: 10000, dec: 0, symbol: '$' });
+    let stock = faker.number.int({ min: 0, max: 100});
+    let status = stock > 0 ? true : false;
+    let category = faker.commerce.product();
+    let thumbnails = generateThumbnailsArr(idx);
+
+    let mockProduct = {
+        _id,
+        title,
+        description,
+        code,
+        price,
+        status,
+        stock, 
+        category,
+        thumbnails
+    };
+
+    return mockProduct;
+}
 
 /*----------------------------------------------*\
     #MIDDLEWARES GET '/', '/login', '/signup'
@@ -104,5 +146,20 @@ router.get('/carts/:cid', async (req, res) => {
 router.get('/realtimeproducts', (req, res) => {
     res.setHeader('Content-Type','text/html');
     res.status(200).render('realTimeProducts');
+});
+
+router.get('/mockingproducts', async (req,res) => {
+    let product, mockingProducts = [];
+
+    for(let mp = 0; mp < 100; mp++){
+        product = generateMockProduct(mp);
+        mockingProducts.push(product); 
+    }
+    
+    res.setHeader('Content-Type','text/html');
+    res.status(200).render('mockingProducts', {
+        header: 'Mocking Products',
+        mockingProducts: mockingProducts,
+    });
 });
 
