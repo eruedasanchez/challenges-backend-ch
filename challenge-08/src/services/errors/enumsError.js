@@ -1,0 +1,9 @@
+export const errorTypes = {
+    INVALID_ARGS_ERR: 400, 
+    DATA_ERR: 400, 
+    AUTHENTICATION_ERR: 401,
+    AUTHORIZATION_ERR: 403,
+    NOT_FOUND_ERR: 404
+}
+
+

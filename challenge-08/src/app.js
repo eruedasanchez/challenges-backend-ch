@@ -15,6 +15,7 @@ import { router as sessionsRouter } from './routes/sessions.router.js';
 import {initChat, router as chatRouter} from './routes/chat.router.js';
 import { initPassport } from './config/passport.config.js';
 import { config } from './config/config.js';
+import { errorHandler } from './services/errors/errorsHandler.js';
 
 const PORT = config.PORT;
 const PERSISTENCE = config.PERSISTENCE;
@@ -57,6 +58,9 @@ app.use(passport.initialize());
 
 app.use('/api/sessions', sessionsRouter);
 app.use('/', viewsRouter);
+
+// Middlewares de Errores
+app.use(errorHandler);
 
 const serverExpress = app.listen(PORT, () => {
     console.log(`Server escuchando en puerto ${PORT}`);
