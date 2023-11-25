@@ -3,7 +3,7 @@ import { config } from './config/config.js';
 
 const customLevels = {
     personalizeLevels: { fatal:0, error:1, warning:2, info:3, http:4, debug:5 },
-    personalizeColors: { fatal:"bold white redBG", error:"red", warning:"yellow", info:"blue", http:"grey", debug:"green" } 
+    personalizeColors: { fatal:"bold cyan redBG", error:"bold white magentaBG", warning:"bold white yellowBG", info:"bold white blueBG", http:"bold white cyanBG", debug:"bold white greenBG" } 
 }
 
 export const logger = winston.createLogger({
