@@ -1,4 +1,4 @@
-# Challenge-08. Mocking and Error Handling
+# Challenge-09. Logger implementation
 
 This project was generated with the following dependencies: 
 
@@ -20,6 +20,7 @@ This project was generated with the following dependencies:
 - [Passport Local](https://github.com/jaredhanson/passport-local): Version 0.6.0
 - [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2
 - [Uuid](https://github.com/uuidjs/uuid): Version 9.0.1
+- [Winston](https://github.com/winstonjs/winston): Version 3.11.0
 
 ## Installation
 
@@ -29,11 +30,13 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-1. A **Mocking Module** and **Error Handler** will be applied to the current server.
+1. A system of levels is defined with the following parity from low to high: **debug, http, info, warning, error, fatal**.
 
-2. A Mocking module is generated so that the server can generate and deliver 100 products with the same format that a Mongo request would deliver. This only happens on `/mockingproducts` endpoint.
+2. A development and production logger is implemented. The development logger logs from the debug level only through the console. The production logger logs only from info level.
 
-3. In addition, an **error customizer** is generated for the most common errors when creating or adding a product to the cart
+3. The logger sends in a file transport starting with the error level in a `errors.log` file. In addition, the usual `console.log` is modified so that all of them are shown starting with **winston**.
+
+4. Finally, an endpoint `/loggerTest` is created to test all the logs
 
 ## Quick Start
 
@@ -82,7 +85,10 @@ View the website at: http://localhost:8080/chat for chat application.
 Visit the website at: http://localhost:8080/ to register as a user, log in and be redirected to the products view.
 <br>
 <br>
-Visit the website at: http://localhost:8080/carts/:cid to view the cart with the specific cid 
+Visit the website at: http://localhost:8080/carts/:cid to view the cart with the specific cid
+<br>
+<br>
+Visit the website at: http://localhost:8080/loggerTest to test all the logs
 <br>
 <br>
 Perform the flow by [Postman](https://www.postman.com/) for Products, Carts and Messages collections
