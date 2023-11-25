@@ -1,0 +1,5 @@
+PORT = 
+SECRET = 
+MONGO_URL = 
+DB_NAME =  
+PERSISTENCE = 
