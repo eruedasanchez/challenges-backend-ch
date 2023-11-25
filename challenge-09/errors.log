@@ -1,0 +1,154 @@
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2023-11-25T17:19:51.550Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2023-11-25T17:19:51.556Z"}
+{"level":"warning","message":"Prueba log - nivel warning","timestamp":"2023-11-25T17:19:51.557Z"}
+{"level":"info","message":"Prueba log - nivel info","timestamp":"2023-11-25T17:19:51.557Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2023-11-25T17:25:34.252Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2023-11-25T17:25:34.255Z"}
+{"level":"warning","message":"Prueba log - nivel warning","timestamp":"2023-11-25T17:25:34.256Z"}
+{"level":"info","message":"Prueba log - nivel info","timestamp":"2023-11-25T17:25:34.256Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2023-11-25T17:27:16.020Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2023-11-25T17:27:16.024Z"}
+{"level":"warning","message":"Prueba log - nivel warning","timestamp":"2023-11-25T17:27:16.024Z"}
+{"level":"info","message":"Prueba log - nivel info","timestamp":"2023-11-25T17:27:16.025Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2023-11-25T17:28:53.730Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2023-11-25T17:28:53.734Z"}
+{"level":"warning","message":"Prueba log - nivel warning","timestamp":"2023-11-25T17:28:53.735Z"}
+{"level":"info","message":"Prueba log - nivel info","timestamp":"2023-11-25T17:28:53.735Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2023-11-25T17:29:07.009Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2023-11-25T17:29:07.013Z"}
+{"level":"warning","message":"Prueba log - nivel warning","timestamp":"2023-11-25T17:29:07.013Z"}
+{"level":"info","message":"Prueba log - nivel info","timestamp":"2023-11-25T17:29:07.014Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2023-11-25T19:32:46.647Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2023-11-25T19:32:46.679Z"}
+{"level":"warning","message":"Prueba log - nivel warning","timestamp":"2023-11-25T19:32:46.683Z"}
+{"level":"info","message":"Prueba log - nivel info","timestamp":"2023-11-25T19:32:46.683Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2023-11-25T19:33:20.175Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2023-11-25T19:33:20.183Z"}
+{"level":"warning","message":"Prueba log - nivel warning","timestamp":"2023-11-25T19:33:20.187Z"}
+{"level":"info","message":"Prueba log - nivel info","timestamp":"2023-11-25T19:33:20.191Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: format is not defined","timestamp":"2023-11-25T20:02:18.440Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: format is not defined","timestamp":"2023-11-25T20:02:44.572Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:16:36.602Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:17:14.330Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:17:28.213Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:18:17.634Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:18:19.522Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:18:23.965Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:18:25.822Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:18:43.569Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:18:45.493Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:20:14.829Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:20:21.751Z"}
+{"level":"fatal","message":"Error al conectarse con MongoDB Atlas. Detalle: confi is not defined","timestamp":"2023-11-25T20:20:36.059Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:20:36.061Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:20:46.179Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:20:48.098Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:21:08.787Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:21:10.632Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:28:01.759Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:28:01.798Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:28:03.794Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:28:14.185Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:28:14.207Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:28:16.053Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:28:27.061Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:28:27.104Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:28:29.111Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:31:02.031Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:31:02.053Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:31:04.057Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:31:13.510Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:31:13.540Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:31:15.586Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:31:50.389Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:31:50.423Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:31:52.339Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:34:41.373Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:34:41.413Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:34:43.913Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:34:51.480Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:34:51.527Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:34:53.478Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:37:19.346Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:37:19.385Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:37:21.456Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:37:37.520Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:37:37.560Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:37:39.445Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:37:45.447Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:37:45.642Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:37:47.884Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:38:31.856Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:38:31.881Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:38:34.710Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:38:45.010Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:38:45.092Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:38:47.189Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:38:53.126Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:38:53.170Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:38:55.051Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:39:07.328Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:39:07.381Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:39:09.327Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:39:21.435Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:39:21.484Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:39:23.438Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:39:42.666Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:39:42.744Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:39:44.695Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:39:49.535Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:39:49.579Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:39:51.417Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:40:06.998Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:40:07.039Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:40:08.988Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:40:15.308Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:40:15.361Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:40:17.285Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:41:47.886Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:41:48.755Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:41:51.778Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:43:08.279Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:43:08.316Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:43:10.319Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:44:42.051Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:44:42.085Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:44:44.053Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:45:24.814Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:45:24.863Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:45:26.741Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:49:22.298Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:49:22.371Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:49:24.330Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:51:32.615Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:51:32.707Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:51:35.120Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:54:47.573Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:54:47.617Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:54:50.577Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:54:50.615Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:54:52.538Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:56:20.711Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:56:20.922Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:56:24.225Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:57:02.271Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:57:02.298Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:57:04.154Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:57:56.552Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:57:56.593Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:57:58.494Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T20:58:28.173Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T20:58:28.340Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T20:58:30.344Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T21:00:48.815Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T21:00:48.866Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T21:00:50.824Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T21:04:18.841Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T21:04:18.921Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T21:04:21.273Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T21:05:17.054Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T21:05:17.209Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T21:05:19.285Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-11-25T21:05:23.694Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-11-25T21:05:23.804Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-11-25T21:05:26.084Z"}

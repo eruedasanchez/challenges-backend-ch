@@ -51,16 +51,19 @@ const formatResults = (productsData, prodsRes)  => {
 
 // 1. No se pasa ningun param --> Retorna los primeros 10 productos de la pagina 1 
 export const noParamsMid = async (req, res, next) => {
-    let {limit, page, query, sort}  = req.query;
+    try {
+        let {limit, page, query, sort}  = req.query;
     
-    if(!limit && !page && !query && !sort){
-        let productsData = await productsService.getProductsPaginate(10, 1);
-        let products = formatResults(productsData, productsData.docs);
-        
-        return res.status(201).json({MongoDBProducts:products});  
+        if(!limit && !page && !query && !sort){
+            let productsData = await productsService.getProductsPaginate(10, 1);
+            let products = formatResults(productsData, productsData.docs);
+            
+            return res.status(201).json({MongoDBProducts:products});  
+        }
+    } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
+        next(error);
     }
-    
-    next();
 }
 
 // 2. Solo se pasa por param limit --> Retorna los primeros "limit" productos de la pagina 1 
@@ -83,7 +86,9 @@ export const limitMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProductsLimited:products});  
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
+
     }
 }
 
@@ -107,6 +112,7 @@ export const pageMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProductsRequestedPage:products});  
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -128,6 +134,7 @@ export const queryMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProductsRequested:products});  
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error)
     }
 }
@@ -149,6 +156,7 @@ export const sortMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsSortedAscPrice:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
         
     }
@@ -178,32 +186,36 @@ export const limitPageMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsLimitPage:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
 
 // 7. Combinacion limit y query --> Filtra los productos de la pagina 1 segun la categoria indicada en query y retorna los primeros "limit" productos 
 export const limitQueryMid = async (req, res, next) => {
-    let {limit, page, query, sort}  = req.query;
+    try {
+        let {limit, page, query, sort}  = req.query;
     
-    if(limit && !page && query && !sort){
-        if(isNaN(limit)) throw CustomError.CustomError("Error de datos", "LIMIT inválido", errorTypes.DATA_ERR, noNumberError('LIMIT')); 
-        
-        if(!isNaN(query) && query < 0) throw CustomError.CustomError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
-        
-        let productsData = await productsService.getProductsPaginate(limit, 1);
+        if(limit && !page && query && !sort){
+            if(isNaN(limit)) throw CustomError.CustomError("Error de datos", "LIMIT inválido", errorTypes.DATA_ERR, noNumberError('LIMIT')); 
+            
+            if(!isNaN(query) && query < 0) throw CustomError.CustomError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+            
+            let productsData = await productsService.getProductsPaginate(limit, 1);
 
-        if(limit < 1 || limit > productsData.totalDocs){
-            throw CustomError.CustomError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+            if(limit < 1 || limit > productsData.totalDocs){
+                throw CustomError.CustomError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+            }
+
+            let filteredProducts = filterByCategory(productsData.docs, query);
+            let products = formatResults(productsData, filteredProducts);
+            
+            return res.status(201).json({MongoDBProductsRequested:products}); 
         }
-
-        let filteredProducts = filterByCategory(productsData.docs, query);
-        let products = formatResults(productsData, filteredProducts);
-        
-        return res.status(201).json({MongoDBProductsRequested:products}); 
+    } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
+        next();
     }
-    
-    next();
 }
 
 // 8. Combinacion limit y sort --> Limita los primeros "limit" productos de la pagina 1 y los ordena segun el criterio "sort" pasado por param
@@ -232,6 +244,7 @@ export const limitSortMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsSortedAscPrice:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -259,6 +272,7 @@ export const pageQueryMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsLimitPage:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
         
     }
@@ -290,6 +304,7 @@ export const pageSortMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsSortedAscPrice:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -315,6 +330,7 @@ export const querySortMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsSortedAscPrice:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -345,6 +361,7 @@ export const limitPageQueryMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsLimitPage:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -379,6 +396,7 @@ export const limitPageSortMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsSortedAscPrice:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -412,6 +430,7 @@ export const limitQuerySortMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsSortedAscPrice:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -444,6 +463,7 @@ export const pageQuerySortMid = async (req, res, next) => {
             return res.status(201).json({MongoDBProdsSortedAscPrice:products});
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -461,6 +481,7 @@ export const sameTitleMid = async (req, res, next) => {
             CustomError.CustomError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('titulo', title));
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -474,6 +495,7 @@ export const sameDescriptionMid = async (req, res, next) => {
             CustomError.CustomError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('descripcion', description));
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }    
 }
@@ -487,6 +509,7 @@ export const sameCodeMid = async (req, res, next) => {
             CustomError.CustomError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('codigo', code));
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -499,6 +522,7 @@ export const priceStockNegMid = (req, res, next) => {
             CustomError.CustomError("Datos invalidos", "Price y stock inválidos", errorTypes.INVALID_ARGS_ERR, priceStockNegativeError());
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -517,6 +541,7 @@ export const emptyFieldsModifyMid = (req, res, next) => {
             }
         }
     } catch (error) {
+        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -552,6 +577,7 @@ async function getProducts(req, res, next) {
             
         return res.status(201).json({MongoDBProdsSortedAscPrice:products});
     } catch (error) {
+        req.logger.fatal(`Error al obtener los productos. Detalle: ${error.message}`);
         next(error); 
     }
 }
@@ -563,6 +589,7 @@ async function getProductById(req, res, next) {
         
         return res.status(200).json({status:'ok', MongoDBProduct:productSelected});                          
     } catch (error) {
+        req.logger.fatal(`Error al obtener un producto determinado. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -581,6 +608,7 @@ async function postProduct(req, res, next){
 
         return res.status(201).json({status: 'ok', newProduct:productAdded})
     } catch (error) {
+        req.logger.fatal(`Error al publicar un producto. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -598,6 +626,7 @@ async function putProduct(req, res, next){
         
         return res.status(200).json({status: 'ok', updatedProducts: updatedProds});
     } catch (error) {
+        req.logger.fatal(`Error al modificar un producto. Detalle: ${error.message}`);
         next(error);
     }
 }
@@ -609,6 +638,7 @@ async function deleteProduct(req,res, next){
     
         return res.status(200).json({status: 'ok', deletedProduct: delProduct});
     } catch (error) {
+        req.logger.fatal(`Error al eliminar un producto. Detalle: ${error.message}`);
         next(error);
     }
 }

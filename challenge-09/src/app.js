@@ -16,15 +16,17 @@ import {initChat, router as chatRouter} from './routes/chat.router.js';
 import { initPassport } from './config/passport.config.js';
 import { config } from './config/config.js';
 import { errorHandler } from './services/errors/errorsHandler.js';
+import { middLog, logger } from './utilsWinston.js';
 
 const PORT = config.PORT;
 const PERSISTENCE = config.PERSISTENCE;
-console.log(`Persistencia en ${PERSISTENCE} iniciada`);
+logger.info(`Persistencia en ${PERSISTENCE} iniciada`);
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(middLog);
 
 app.engine('handlebars', handlebars.engine()); 
 app.set('views', __dirname + '/views');
@@ -63,7 +65,7 @@ app.use('/', viewsRouter);
 app.use(errorHandler);
 
 const serverExpress = app.listen(PORT, () => {
-    console.log(`Server escuchando en puerto ${PORT}`);
+    logger.info(`Server escuchando en puerto ${PORT}`);
 });
 
 // serverSocket para el servidor de socket.io
@@ -74,9 +76,9 @@ initChat(serverSocket);
 // Se establece la conexion con la base de datos de MongoDB Atlas
 try {
     await mongoose.connect(config.MONGO_URL, {dbName: config.DB_NAME});
-    console.log('MongoDB Atlas Conectada');
+    logger.info('MongoDB Atlas Conectada');
 } catch (error) {
-    console.log(error.message);
+    logger.fatal(`Error al conectarse con MongoDB Atlas. Detalle: ${error.message}`);
 }
 
 // Ultimo commit Challenge-08+RuedaSanchez 

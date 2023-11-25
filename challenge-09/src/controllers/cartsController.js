@@ -12,7 +12,8 @@ async function postCart(req, res) {
         let cartAdded = await cartsService.createCart();
         return res.status(200).json({status: 'ok', newCart:cartAdded})
     } catch (error) {
-        return res.status(500).json({error:'Error inesperado', detalle:error.message})
+        req.logger.fatal(`Error al crear un carrito. Detalle: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detalle:error.message})
     }
 }
 
@@ -23,6 +24,7 @@ async function getCartById(req, res) {
         
         return res.status(201).json({status:'ok', MongoDBCart:cartSelected});                           
     } catch (error) {
+        req.logger.fatal(`Error al obtener un carrito determinado. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }
@@ -66,6 +68,7 @@ async function confirmPurchase(req, res) {
             idsProductsWithoutStock: productsWithoutStock
         });       
     } catch (error) {
+        req.logger.fatal(`Error al confirmar la compra. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }
@@ -78,6 +81,7 @@ async function postProductInCart(req,res) {
         let cartSel = await cartsService.addProduct(cid, pid);
         return res.status(200).json({status: 'ok', cartSelected:cartSel});
     } catch (error) {
+        req.logger.fatal(`Error al publicar un producto en un carrito determinado. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }
@@ -103,6 +107,7 @@ async function putCart(req,res) {
         let updatedProds = await cartsService.updateProducts(cid, inputProducts);
         return res.status(200).json({status: 'ok', updatedProducts: updatedProds}); 
     } catch (error) {
+        req.logger.fatal(`Error al modificar un carrito determinado. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }
@@ -121,6 +126,7 @@ async function putProdQuantityInCart(req,res) {
         let cartUpdt = await cartsService.updateQuantity(cid, pid, field);
         return res.status(200).json({status: 'ok', quantityUpdated:cartUpdt});    
     } catch (error) {
+        req.logger.fatal(`Error al modificar un producto en un carrito determinado. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }
@@ -133,6 +139,7 @@ async function deleteProductInCart(req,res) {
         let cartUpdt = await cartsService.deleteProduct(cid, pid);
         return res.status(200).json({status: 'ok', cartUpdated:cartUpdt});     
     } catch (error) {
+        req.logger.fatal(`Error al eliminar un producto en un carrito determinado. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }
@@ -144,6 +151,7 @@ async function cleanCart(req, res) {
         let productsDel = await cartsService.deleteAllProducts(cid);
         return res.status(200).json({status: 'ok', cleanProducts:productsDel});  
     } catch (error) {
+        req.logger.fatal(`Error al eliminar todos los productos en un carrito determinado. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }

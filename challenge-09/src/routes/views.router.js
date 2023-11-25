@@ -139,6 +139,7 @@ router.get('/carts/:cid', async (req, res) => {
             cartIdProducts: cartSelected.products,
         });
     } catch (error) {
+        req.logger.fatal(`Error al obtener un carrito determinado. Detalle: ${error.message}`);
         res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 })
@@ -161,5 +162,17 @@ router.get('/mockingproducts', async (req,res) => {
         header: 'Mocking Products',
         mockingProducts: mockingProducts,
     });
+});
+
+router.get('/loggerTest', (req, res) => {
+    req.logger.log("fatal", "Prueba log - nivel fatal");
+    req.logger.log("error", "Prueba log - nivel error");
+    req.logger.log("warning", "Prueba log - nivel warning");
+    req.logger.log("info", "Prueba log - nivel info");
+    req.logger.log("http", "Prueba log - nivel http");
+    req.logger.log("debug", "Prueba log - nivel debug");
+
+    res.setHeader('Content-Type','text/html');
+    res.status(200).render('loggerTest');
 });
 
