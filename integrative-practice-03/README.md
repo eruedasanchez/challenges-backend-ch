@@ -1,4 +1,4 @@
-# Challenge-09. Logger implementation
+# Integrative Practice 03
 
 This project was generated with the following dependencies: 
 
