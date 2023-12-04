@@ -1,4 +1,4 @@
-# Integrative Practice 03
+# Integrative Practice 03. Mailing & Optimization 
 
 This project was generated with the following dependencies: 
 
@@ -14,6 +14,7 @@ This project was generated with the following dependencies:
 - [Jsonwebtoken](https://github.com/auth0/node-jsonwebtoken): Version 9.0.2
 - [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2
 - [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4  
+- [Nodemailer](https://github.com/nodemailer/nodemailer): Version 6.9.7  
 - [Passport](https://github.com/jaredhanson/passport): Version 0.6.0
 - [Passport Github2](https://github.com/passport/todos-express-password): Version 0.6.0
 - [Passport Jwt](https://github.com/mikenicholson/passport-jwt): Version 4.0.1
@@ -30,13 +31,13 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-1. A system of levels is defined with the following parity from low to high: **debug, http, info, warning, error, fatal**.
+1. A password recovery system is created, which sends a button via email that redirects to a page to reset the password.
 
-2. A development and production logger is implemented. The development logger logs from the debug level only through the console. The production logger logs only from info level.
+- The link in the email must expire after 1 hour of being sent.
 
-3. The logger sends in a file transport starting with the error level in a `errors.log` file. In addition, the usual `console.log` is modified so that all of them are shown starting with **winston**.
+- If you try to reset the password with the same user password, you are prevented or told that you cannot enter the same password
 
-4. Finally, an endpoint `/loggerTest` is created to test all the logs
+- If the link has expired, you will be redirected to a view that allows you to generate the restoration email again, which will have a new duration of 1 hour.
 
 ## Quick Start
 
@@ -63,7 +64,7 @@ $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 Open preentrega-03 folder and install dependencies: 
 
 ```bash
-$ cd preentrega-03
+$ cd integrative-practice-03
 $ npm install
 ```
 
