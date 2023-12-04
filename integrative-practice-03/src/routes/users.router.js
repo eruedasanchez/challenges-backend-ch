@@ -52,8 +52,7 @@ router.post('/resetPassword', async (req, res, next) => {
     }
 
     // El email ingresado se encuentra registrado en la DB
-    let jwtoken = jwt.sign({user}, config.SECRET, {expiresIn: '3m'}); 
-    // let jwtoken = jwt.sign({user}, config.SECRET, {expiresIn: '1h'}); // Generación del JWT para cumplir el paso de expiración
+    let jwtoken = jwt.sign({user}, config.SECRET, {expiresIn: '1h'}); 
     await sendEmail(jwtoken, user.email);
     
     return res.redirect(`/resetPassword?successResetRequest=Solicitud de reestablecimiento exitosa. Enviamos un mail a ${requestedEmail} para que continue con el proceso de reestablecemiento`);
