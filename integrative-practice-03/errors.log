@@ -12,3 +12,13 @@
 {"level":"fatal","message":"Error al modificar el rol del usuario. Detalle: No posee los permisos para cambiar el rol de uid ingresado","timestamp":"2023-12-04T15:24:30.019Z"}
 {"level":"fatal","message":"Error al modificar el rol del usuario. Detalle: No posee los permisos para cambiar el rol de uid ingresado","timestamp":"2023-12-04T15:33:32.869Z"}
 {"level":"error","message":"Error al ingresar al middleware de invalidUserId. Detail: El uid ingresado tiene un formato invalido","timestamp":"2023-12-04T15:34:59.764Z"}
+{"level":"fatal","message":"Error al publicar un producto. Detalle: E11000 duplicate key error collection: ecommerce.products index: title_1 dup key: { title: \"Producto uno\" }","timestamp":"2023-12-04T19:10:13.260Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: CustomError.CustomError is not a constructor","timestamp":"2023-12-04T19:26:39.246Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: undefined","timestamp":"2023-12-04T19:27:58.101Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: undefined","timestamp":"2023-12-04T19:28:53.343Z"}
+{"level":"error","message":"Error al obtener los productos. Detail: Price y stock inválidos","timestamp":"2023-12-04T19:51:53.760Z"}
+{"level":"error","message":"Error al obtener los productos. Detail: Los campos price y stock deben ser positivos","timestamp":"2023-12-04T19:55:10.153Z"}
+{"level":"error","message":"Error al obtener los productos. Detail: Los campos price y stock deben ser positivos","timestamp":"2023-12-04T19:56:43.177Z"}
+{"level":"error","message":"Datos invalidos. Detail: Los campos price y stock deben ser positivos","timestamp":"2023-12-04T20:02:40.666Z"}
+{"level":"fatal","message":"Error al publicar un producto. Detalle: Cannot read properties of undefined (reading 'role')","timestamp":"2023-12-04T20:11:21.459Z"}
+{"level":"fatal","message":"ValidationError. Detail: products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\"","timestamp":"2023-12-04T22:55:07.196Z"}

@@ -3,17 +3,18 @@ import jwt from 'jsonwebtoken';
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { DtoUsers } from '../DTO/dtousers.js';
+import { userRole } from '../utils.js';
 export const router = Router();
 
 /*------------------------------*\
     #AUTHORIZATION MIDDLEWARE
 \*------------------------------*/
 
-export const authorization = role => {
+export const authorization = roles => {
     return async(req, res, next) => {
         if(!req.user) return res.status(401).send({status:'error', message:'Unauthorized'});
     
-        if(req.user.role != role) return res.status(403).send({status:'error', message:'No permissions'});
+        if(!roles.includes(req.user.role)) return res.status(403).send({status:'error', message:'No permissions'});
         
         next();
     }
@@ -111,7 +112,7 @@ router.get('/logout', (req, res) => {
     #GET /CURRENT
 \*-------------------*/
 
-router.get('/current', passport.authenticate('current', {session:false}), authorization('user'), (req, res) => {
+router.get('/current', passport.authenticate('current', {session:false}), authorization([userRole.USER, userRole.PREMIUM]), (req, res) => {
     try {
         let userLoggedIn = req.user;
         userLoggedIn = new DtoUsers(userLoggedIn);

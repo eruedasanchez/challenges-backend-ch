@@ -2,7 +2,7 @@ import { CustomError } from '../services/errors/customError.js';
 import { errorTypes } from '../services/errors/enumsError.js';
 import { generateProductErrorInfo, invalidSortError, negativeQueryError, noNumberError, noNumberLimitPageError, overflowError, priceStockNegativeError, sameFieldError} from '../services/errors/infoProductsErrors.js';
 import { productsService } from '../services/products.service.js';
-import { sorting } from '../utils.js';
+import { sorting, userRole } from '../utils.js';
 
 const ASC = sorting.ASC, DESC = sorting.DESC;
 
@@ -478,11 +478,12 @@ export const sameTitleMid = async (req, res, next) => {
     
         const productWithSameTitle = await productsService.findByTitle(title);
         if(productWithSameTitle){
-            CustomError.CustomError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('titulo', title));
+            throw CustomError.createError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('titulo', title));
         }
+        next();
     } catch (error) {
-        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
-        next(error);
+        req.logger.error(`${error.name}. Detail: ${error.message}`);
+        return res.status(500).json({error:error.description, detail:error.message});
     }
 }
 
@@ -492,11 +493,12 @@ export const sameDescriptionMid = async (req, res, next) => {
         const productWithSameDescription = await productsService.findByDescription(description); 
         
         if(productWithSameDescription){
-            CustomError.CustomError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('descripcion', description));
+            throw CustomError.createError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('descripcion', description));
         }
+        next();
     } catch (error) {
-        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
-        next(error);
+        req.logger.error(`${error.name}. Detail: ${error.message}`);
+        return res.status(500).json({error:error.description, detail:error.message});
     }    
 }
 
@@ -506,24 +508,27 @@ export const sameCodeMid = async (req, res, next) => {
     
         const productWithSameCode = await productsService.findByCode(code);
         if(productWithSameCode){
-            CustomError.CustomError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('codigo', code));
+            CustomError.createError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('codigo', code));
         }
+        next();
     } catch (error) {
-        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
-        next(error);
+        req.logger.error(`${error.name}. Detail: ${error.message}`);
+        return res.status(500).json({error:error.description, detail:error.message});
     }
 }
 
 export const priceStockNegMid = (req, res, next) => {
     try {
         let {price, stock} = req.body;
-
+        
         if(price <= 0 || stock <= 0){
-            CustomError.CustomError("Datos invalidos", "Price y stock inválidos", errorTypes.INVALID_ARGS_ERR, priceStockNegativeError());
+            throw CustomError.createError("Datos invalidos", "Price y stock inválidos", errorTypes.INVALID_ARGS_ERR, priceStockNegativeError());
         }
+
+        next();
     } catch (error) {
-        req.logger.error(`Error al obtener los productos. Detalle: ${error.message}`);
-        next(error);
+        req.logger.error(`${error.name}. Detail: ${error.message}`);
+        return res.status(500).json({error:error.description, detail:error.message});
     }
 }
 
@@ -550,97 +555,118 @@ export const emptyFieldsModifyMid = (req, res, next) => {
     #PRODUCTS CONTROLLER
 \*------------------------------*/
 
-async function getProducts(req, res, next) {
-    try {
-        let {limit, page, query, sort}  = req.query;
+// async function getProducts(req, res, next) {
+//     try {
+//         let {limit, page, query, sort}  = req.query;
             
-        if(!isNaN(query) && query < 0) throw CustomError.CustomError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+//         if(!isNaN(query) && query < 0) throw CustomError.CustomError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
 
-        if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-            throw CustomError.CustomError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
-        }
+//         if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
+//             throw CustomError.CustomError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+//         }
             
-        // let productsData = await mongoProductManager.getProductsPaginate(limit, page);
-        let productsData = await productsService.getProductsPaginate(limit, page);
+//         // let productsData = await mongoProductManager.getProductsPaginate(limit, page);
+//         let productsData = await productsService.getProductsPaginate(limit, page);
             
-        if(limit < 1 || limit > productsData.totalDocs){
-            throw CustomError.CustomError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
-        }
+//         if(limit < 1 || limit > productsData.totalDocs){
+//             throw CustomError.CustomError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+//         }
             
-        if(page < 1 || page > productsData.totalPages){
-            throw CustomError.CustomError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
-        }
+//         if(page < 1 || page > productsData.totalPages){
+//             throw CustomError.CustomError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+//         }
             
-        let filteredProducts = filterByCategory(productsData.docs, query);
-        let productsSorted = sortProducts(filteredProducts, sort);
-        let products = formatResults(productsData, productsSorted);
+//         let filteredProducts = filterByCategory(productsData.docs, query);
+//         let productsSorted = sortProducts(filteredProducts, sort);
+//         let products = formatResults(productsData, productsSorted);
             
-        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
-    } catch (error) {
-        req.logger.fatal(`Error al obtener los productos. Detalle: ${error.message}`);
-        next(error); 
-    }
-}
+//         return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+//     } catch (error) {
+//         req.logger.fatal(`Error al obtener los productos. Detalle: ${error.message}`);
+//         next(error); 
+//     }
+// }
 
-async function getProductById(req, res, next) {
-    try {
-        let pid = req.params.pid;
-        let productSelected = await productsService.getProductById(pid);
+// async function getProductById(req, res, next) {
+//     try {
+//         let pid = req.params.pid;
+//         let productSelected = await productsService.getProductById(pid);
         
-        return res.status(200).json({status:'ok', MongoDBProduct:productSelected});                          
-    } catch (error) {
-        req.logger.fatal(`Error al obtener un producto determinado. Detalle: ${error.message}`);
-        next(error);
-    }
-}
+//         return res.status(200).json({status:'ok', MongoDBProduct:productSelected});                          
+//     } catch (error) {
+//         req.logger.fatal(`Error al obtener un producto determinado. Detalle: ${error.message}`);
+//         next(error);
+//     }
+// }
 
-async function postProduct(req, res, next){
+async function postProduct(req, res){
     try {
+        let owner;
         let newProd = req.body;
+        let userLoggedIn = req.user;
+
+        console.log("usuario logeado", userLoggedIn);
+        console.log("veo el rol", req.user.role); 
+
+        // Verifica que la autorización haya pasado correctamente.
+        console.log('Authorization passed');
 
         for(const value of Object.values(newProd)){
             if(!value){
-                throw CustomError.CustomError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(newProd));
+                throw CustomError.createError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(newProd));
             }
         }
 
-        let productAdded = await productsService.addProduct(newProd); 
-
-        return res.status(201).json({status: 'ok', newProduct:productAdded})
-    } catch (error) {
-        req.logger.fatal(`Error al publicar un producto. Detalle: ${error.message}`);
-        next(error);
-    }
-}
-
-async function putProduct(req, res, next){
-    try {
-        let pid = req.params.pid;
-        let fields = req.body;
-
-        for(const value of Object.values(fields)){
-            if(!value) CustomError.CustomError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(fields));
+        if(req.user.role === userRole.PREMIUM){
+            console.log("entrando al if de un usuario premium");
+            owner = req.user.email;
+        } else {
+            owner = userRole.ADMIN;
         }
 
-        let updatedProds = await productsService.updateProduct(pid, fields);
+        let newProdFinal = {...newProd, owner:owner};
         
-        return res.status(200).json({status: 'ok', updatedProducts: updatedProds});
+        let productAdded = await productsService.addProduct(newProdFinal); 
+        console.log("asignalo prop owner al usuario", newProdFinal);
+
+        return res.status(201).json({status: 'ok', newProduct:productAdded});
     } catch (error) {
-        req.logger.fatal(`Error al modificar un producto. Detalle: ${error.message}`);
-        next(error);
+        req.logger.fatal(`${error.name}. Detail: ${error.message}`);
+        return res.status(500).json({error:error.description, detalle:error.message});
+        
     }
 }
 
-async function deleteProduct(req,res, next){
-    try {
-        let pid = req.params.pid;
-        let delProduct = await productsService.deleteProduct(pid);
+// async function putProduct(req, res, next){
+//     try {
+//         let pid = req.params.pid;
+//         let fields = req.body;
+
+//         for(const value of Object.values(fields)){
+//             if(!value) CustomError.CustomError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(fields));
+//         }
+
+//         let updatedProds = await productsService.updateProduct(pid, fields);
+        
+//         return res.status(200).json({status: 'ok', updatedProducts: updatedProds});
+//     } catch (error) {
+//         req.logger.fatal(`Error al modificar un producto. Detalle: ${error.message}`);
+//         next(error);
+//     }
+// }
+
+// async function deleteProduct(req,res, next){
+//     try {
+//         let pid = req.params.pid;
+//         let delProduct = await productsService.deleteProduct(pid);
     
-        return res.status(200).json({status: 'ok', deletedProduct: delProduct});
-    } catch (error) {
-        req.logger.fatal(`Error al eliminar un producto. Detalle: ${error.message}`);
-        next(error);
-    }
-}
+//         return res.status(200).json({status: 'ok', deletedProduct: delProduct});
+//     } catch (error) {
+//         req.logger.fatal(`Error al eliminar un producto. Detalle: ${error.message}`);
+//         next(error);
+//     }
+// }
 
-export default {getProducts, getProductById, postProduct, putProduct, deleteProduct};
+// export default {getProducts, getProductById, postProduct, putProduct, deleteProduct};
+
+export default {postProduct};

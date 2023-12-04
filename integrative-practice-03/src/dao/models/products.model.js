@@ -10,7 +10,8 @@ const productsSchema = new mongoose.Schema({
 	status: {type: Boolean, require: true},
 	stock: {type: Number, require: true},
 	category: {type: String, require: true},
-	thumbnails: {type: [String], require: true}  
+	thumbnails: {type: [String], require: true},
+	owner: { type: String, default: 'admin'},  
 }, {strict: true}) 
 
 productsSchema.plugin(mongoosePaginate);
