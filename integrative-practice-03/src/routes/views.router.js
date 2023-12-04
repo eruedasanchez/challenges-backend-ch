@@ -1,10 +1,12 @@
 import __dirname from '../utils.js';
 import express from 'express';
 import passport from 'passport';
+import jwt from 'jsonwebtoken'
 import { cartsService } from '../services/carts.service.js';
 import { productsService } from '../services/products.service.js';
 import { invalidObjectIdMid } from '../dao/cartsMongoDAO.js'; // inexistsCidMid
 import { fakerES_MX as faker } from '@faker-js/faker';
+import { config } from '../config/config.js';
 
 export const router = express.Router();
 
@@ -49,9 +51,9 @@ const generateMockProduct = idx => {
     return mockProduct;
 }
 
-/*----------------------------------------------*\
-    #MIDDLEWARES GET '/', '/login', '/signup'
-\*----------------------------------------------*/
+/*------------------------------------------------------------------*\
+    #MIDDLEWARES GET '/', '/login', '/signup', /confirmNewPassword
+\*------------------------------------------------------------------*/
 
 // Se intenta logearse o registrarse pero ya se encuentra una sesión activa
 const activeSessionMid = (req, res, next) => {
@@ -61,6 +63,18 @@ const activeSessionMid = (req, res, next) => {
     } 
 
     next();
+}
+
+const auth = async (req, res, next) => {
+    let token = req.query.token;
+    try {
+        let infoUser = jwt.verify(token, config.SECRET); // Se obtiene la info del usuario
+        req.user = infoUser.user;
+        next();
+    } catch (error) {
+        // Token expirado
+        return res.redirect('/resetPassword?expiredToken=El link se encuentra vencido. Por favor, envíe nuevamente la solicitud');
+    }
 }
 
 /*-----------------*\
@@ -79,21 +93,54 @@ router.get('/signup', activeSessionMid, (req,res) => {
     res.status(200).render('signUp', {errorDetail});
 })
 
-router.get('/login', activeSessionMid, (req,res) => {
-    let errorDetail = false, userEmail = false, logoutSuccess = false;
+router.get('/resetPassword', (req,res) => {
+    let emptyFieldEmail = false, unregisteredClient = false, successResetPassRequest = false, tokenExpired = false, equalPassword = false ;
+    
+    let {error, unregisteredEmail, successResetRequest, expiredToken, samePassword} = req.query;
+    
+    if(error) emptyFieldEmail = error;
 
-    let {error, createdUser, message} = req.query;
+    if(unregisteredEmail) unregisteredClient = unregisteredEmail;
+
+    if(successResetRequest) successResetPassRequest = successResetRequest;
+
+    if(expiredToken) tokenExpired = expiredToken;
+
+    if(samePassword) equalPassword = samePassword;
+    
+    res.status(200).render('resetPassword', {
+        emptyFieldEmail,
+        unregisteredClient,
+        successResetPassRequest,
+        tokenExpired,
+        equalPassword
+    });
+})
+
+router.get('/confirmNewPassword', auth, (req,res) => {
+    let userEmail = req.user.email;
+    
+    res.status(200).render('confirmNewPassword', { userEmail });
+})
+
+router.get('/login', activeSessionMid, (req,res) => {
+    let errorDetail = false, userEmail = false, logoutSuccess = false, newPasswordSuccess = false;
+
+    let {error, createdUser, message, successNewPassword} = req.query;
     
     if(error) errorDetail = error;
     
     if(createdUser) userEmail = createdUser;
 
     if(message) logoutSuccess = message;
+
+    if(successNewPassword) newPasswordSuccess = successNewPassword;
     
     res.status(200).render('login', {
         errorDetail,
         userEmail, 
-        logoutSuccess
+        logoutSuccess,
+        newPasswordSuccess
     });
 })
 

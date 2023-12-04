@@ -13,6 +13,10 @@
     {{#if logoutSuccess}}
     <div class="mensaje">{{logoutSuccess}}</div>
     {{/if}}
+
+    {{#if newPasswordSuccess}}
+    <div class="mensaje">{{newPasswordSuccess}}</div>
+    {{/if}}
     
     <input type="email" name="email" placeholder="Ingrese su email">
     <input type="password" name="password" placeholder="Ingrese su contraseña">
@@ -24,6 +28,7 @@
 <br>
 <ul class="menu"><li><a href="/signup">Registrate</a></li></ul>
 <ul class="menu"><li><a href="/api/sessions/github">Ingresar con Github</a></li></ul>
+<ul class="menu"><li><a href="/resetPassword">Reestablecer contraseña</a></li></ul>
 
 {{!-- Al utilzar cookie parser, no es ncesario usar el script, se deja a cargo del HTML --}}
 

@@ -127,6 +127,34 @@ export const initPassport = () => {
             }
         }
     ))
+
+    // passport.use('reset', new local.Strategy(
+    //     {
+    //         usernameField: 'email'
+    //     }, async (username, password, done) => {
+    //         try {
+    //             if(!username){
+    //                 console.log("estoy entrando en el if de !username")
+    //                 return done(null, false, {message:'El email ingresado no se encuentra registrado como cliente'});
+    //             } 
+                
+    //             /**** El potencial usuario intenta reestablecer su contraseña ****/
+                
+    //             // Se busca al usuario en la db de users que tenga el email ingresado en el input
+    //             let user = await usersModel.findOne({email:username});
+                
+    //             if(!user){
+    //                 console.log("estoy entrando en el if !user");
+    //                 // No se encontro el usuario o la clave es invalida
+    //                 return done(null, false, {message:'El email ingresado no se encuentra registrado como cliente'});
+    //             } 
+                
+    //             return done(null, user);
+    //         } catch (error) {
+    //             return done(error);
+    //         }
+    //     }
+    // ))
     
     // Configuracion serializer y deserializer (requerido porque se utilizan sessions) 
     

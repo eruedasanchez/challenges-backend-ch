@@ -21,6 +21,10 @@ export const config = {
     SECRET: process.env.SECRET,
     MONGO_URL: process.env.MONGO_URL,
     DB_NAME: process.env.DB_NAME,
+    NODEMAILER_SERVICE: process.env.NODEMAILER_SERVICE,
+    NODEMAILER_PORT: process.env.NODEMAILER_PORT,
+    TRANSPORT_USER: process.env.TRANSPORT_USER,
+    TRANSPORT_PASS: process.env.TRANSPORT_PASS,
     PERSISTENCE: process.env.PERSISTENCE,
     MODE: process.env.MODE || 'development'
 }
