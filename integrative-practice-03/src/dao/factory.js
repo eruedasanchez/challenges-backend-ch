@@ -1,10 +1,8 @@
 import { config } from '../config/config.js';
 
-let productsDAO;
-let cartsDAO;
+let productsDAO, cartsDAO, ticketsDAO;
 let messagesDAO = await import('./messagesMongoDAO.js');
 messagesDAO = messagesDAO.MessagesMongoDAO;
-let ticketsDAO;
 
 switch (config.PERSISTENCE) {
     case "FS":

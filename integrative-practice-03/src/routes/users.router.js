@@ -1,10 +1,15 @@
+import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';
-import { generateHash, validateHash } from '../utils.js';
+import { generateHash, validateHash, userRole } from '../utils.js';
 export const router = Router();
+
+/*------------------------------------*\
+    #FUNCTIONS RESET PASSWORD
+\*------------------------------------*/
 
 const transporter = nodemailer.createTransport({
     service: config.NODEMAILER_SERVICE,
@@ -31,6 +36,42 @@ const sendEmail = async (jwtoken, to)  => {
     });
 }
 
+/*------------------------------------*\
+    #MIDDLEWARES PUT '/premium/:uid'
+\*------------------------------------*/
+
+// 1. Formato invalido del UserId 
+const invalidUserIdMid = async (req, res, next) => {
+    try {
+        let userId = req.params.uid;
+
+        if(!mongoose.Types.ObjectId.isValid(userId)){
+            throw new Error('El uid ingresado tiene un formato invalido');
+        }
+        next();
+    } catch (error) {
+        req.logger.error(`Error al ingresar al middleware de invalidUserId. Detail: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detail:error.message});
+    }
+}
+
+// 2. Usuario inexistente en la DB 
+const nonExistentUserIdMid = async (req, res, next) => {
+    try {
+        let userId = req.params.uid;
+
+        let user = await usersModel.findOne({_id:userId});
+        
+        if(!user){
+            throw new Error('El uid ingresado no corresponde a un usuario registrado');
+        }
+        next();
+    } catch (error) {
+        req.logger.error(`Error al ingresar al middleware de nonExistentUserId. Detail: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detail:error.message});
+    }
+}
+
 /*------------------------*\
     #POST /RESETPASSWORD
 \*------------------------*/
@@ -45,6 +86,8 @@ router.post('/resetPassword', async (req, res, next) => {
     
     // Se busca al usuario en la DB que coincida con el email ingresado 
     let user = await usersModel.findOne({email:requestedEmail});
+    console.log("user", user);
+    console.log("typo user", typeof user);
             
     if(!user){
         // El email ingresado no corresponde a un usuario registrado
@@ -57,6 +100,10 @@ router.post('/resetPassword', async (req, res, next) => {
     
     return res.redirect(`/resetPassword?successResetRequest=Solicitud de reestablecimiento exitosa. Enviamos un mail a ${requestedEmail} para que continue con el proceso de reestablecemiento`);
 });
+
+/*--------------------------*\
+    #POST /CONFIRMPASSWORD
+\*--------------------------*/
 
 router.post('/confirmPassword', async (req, res) => {
     try {
@@ -77,6 +124,31 @@ router.post('/confirmPassword', async (req, res) => {
     } catch (error) {
         console.error("Error al guardar la contraseña:", error);
         return res.redirect('/confirmNewPassword?error=Error al reestablecer la contraseña');
+    }
+});
+
+/*----------------------*\
+    #PUT /PREMIUM/:UID
+\*----------------------*/
+
+router.put('/premium/:uid', invalidUserIdMid, nonExistentUserIdMid, async (req, res) => {
+    try {
+        let userId = req.params.uid;
+
+        let user = await usersModel.findOne({_id:userId});
+
+        if(user.role === userRole.ADMIN){
+            throw new Error('No posee los permisos para cambiar el rol de uid ingresado');
+        }
+        
+        // Luego de pasar por el middleware de admin, solo puede tener el rol 'user' o 'premium'
+        user.role === userRole.PREMIUM ? user.role = userRole.USER : user.role = userRole.PREMIUM;
+        
+        await user.save();
+        return res.status(200).json({status: 'ok', updatedRoleUser: user});
+    } catch (error) {
+        req.logger.fatal(`Error al modificar el rol del usuario. Detalle: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detalle:error.message});
     }
 });
 

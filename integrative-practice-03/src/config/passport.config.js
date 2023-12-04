@@ -5,10 +5,9 @@ import passportJWT from 'passport-jwt';
 import { usersModel } from '../dao/models/users.model.js';
 import { generateHash, validateHash } from '../utils.js';
 import { config } from './config.js';
-import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js'; 
+import MongoCartManager from '../dao/mongoDB-manager/MongoCartManager.js';
+import { userRole, adminInfo } from '../utils.js';
 
-const ADMIN_ROLE = 'admin', USER_ROLE = 'user';
-const admin = {first_name:'adminCoder', last_name:'House', email: 'adminCoder@coder.com', age: 25, password: 'adminCod3r123'};
 const mongoCartManager = new MongoCartManager();
 
 // Extraccion y validacion de token
@@ -52,7 +51,7 @@ export const initPassport = () => {
                     email,
                     age,
                     password: generateHash(password),
-                    role: (email === admin.email && password === admin.password) ? ADMIN_ROLE : USER_ROLE,
+                    role: (email === adminInfo.EMAIL && password === adminInfo.PASSWORD) ? userRole.ADMIN : userRole.USER,
                     cart: cartId 
                 });
                 
@@ -97,14 +96,14 @@ export const initPassport = () => {
         },
         async (token, tokenRefresh, profile, done) => {
             try {
-                let rol = USER_ROLE;
+                let rol = userRole.USER;
                 let user = await usersModel.findOne({email:profile._json.email});  
                 
                 if(!user){
                     user = await usersModel.create({
                         first_name: profile._json.name,
                         email: profile._json.email,
-                        rol: USER_ROLE   //corregir el rol para que se muestre (ahora esta undefined)
+                        rol: userRole.USER   //corregir el rol para que se muestre (ahora esta undefined)
                     })
                 }
                 return done(null, user);
@@ -127,43 +126,4 @@ export const initPassport = () => {
             }
         }
     ))
-
-    // passport.use('reset', new local.Strategy(
-    //     {
-    //         usernameField: 'email'
-    //     }, async (username, password, done) => {
-    //         try {
-    //             if(!username){
-    //                 console.log("estoy entrando en el if de !username")
-    //                 return done(null, false, {message:'El email ingresado no se encuentra registrado como cliente'});
-    //             } 
-                
-    //             /**** El potencial usuario intenta reestablecer su contraseña ****/
-                
-    //             // Se busca al usuario en la db de users que tenga el email ingresado en el input
-    //             let user = await usersModel.findOne({email:username});
-                
-    //             if(!user){
-    //                 console.log("estoy entrando en el if !user");
-    //                 // No se encontro el usuario o la clave es invalida
-    //                 return done(null, false, {message:'El email ingresado no se encuentra registrado como cliente'});
-    //             } 
-                
-    //             return done(null, user);
-    //         } catch (error) {
-    //             return done(error);
-    //         }
-    //     }
-    // ))
-    
-    // Configuracion serializer y deserializer (requerido porque se utilizan sessions) 
-    
-    // passport.serializeUser((user, done) => {
-    //     return done(null, user._id); // Se envia la prop _id para recuperar la info del usuario
-    // })
-
-    // passport.deserializeUser(async (id, done) => {
-    //     let user = await usersModel.findById(id);
-    //     return done(null, user); 
-    // })
 } 

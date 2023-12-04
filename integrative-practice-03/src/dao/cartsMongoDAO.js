@@ -1,16 +1,12 @@
 import mongoose from "mongoose";
-import { cartsModel } from "./models/carts.model.js"; 
+import { cartsModel } from "./models/carts.model.js";
+import { ops } from "../utils.js"; 
 
 export const invalidObjectIdMid = id => {
     if(!mongoose.Types.ObjectId.isValid(id)){
         throw new Error(`El ${id} ingresado tiene un formato invalido`);
     }
 }
-
-export const ops = {
-    POPULATE:'populate', 
-    LEAN: 'lean'
-};
 
 export class CartsMongoDAO{
     constructor(){}

@@ -2,9 +2,9 @@ import { CustomError } from '../services/errors/customError.js';
 import { errorTypes } from '../services/errors/enumsError.js';
 import { generateProductErrorInfo, invalidSortError, negativeQueryError, noNumberError, noNumberLimitPageError, overflowError, priceStockNegativeError, sameFieldError} from '../services/errors/infoProductsErrors.js';
 import { productsService } from '../services/products.service.js';
+import { sorting } from '../utils.js';
 
-const ASC = "asc";
-const DESC = "desc";
+const ASC = sorting.ASC, DESC = sorting.DESC;
 
 /*------------------------------*\
     #MIDDLEWARES FUNCTIONS
