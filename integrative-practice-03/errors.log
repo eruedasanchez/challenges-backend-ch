@@ -631,3 +631,9 @@
 {"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-12-04T01:00:21.724Z"}
 {"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-12-04T01:00:21.829Z"}
 {"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-12-04T01:00:23.971Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-12-04T01:06:24.773Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-12-04T01:06:24.841Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-12-04T01:06:27.112Z"}
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-12-04T01:06:51.189Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-12-04T01:06:51.280Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-12-04T01:06:53.307Z"}
