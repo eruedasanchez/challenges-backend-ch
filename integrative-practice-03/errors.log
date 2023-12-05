@@ -34,3 +34,5 @@
 {"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T01:10:46.652Z"}
 {"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T01:13:59.548Z"}
 {"level":"fatal","message":"Error al eliminar un producto. Detalle: invalidObjectIdMid is not defined","timestamp":"2023-12-05T01:16:36.937Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: userRole is not defined","timestamp":"2023-12-05T01:56:22.573Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No puede agregar a su carrito un producto que le pertenece","timestamp":"2023-12-05T01:58:07.026Z"}

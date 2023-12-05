@@ -2,6 +2,7 @@ import { cartsService } from "../services/carts.service.js";
 import { productsService } from "../services/products.service.js";
 import { ticketsService } from "../services/tickets.service.js";
 import { v4 as uuidv4 } from 'uuid';
+import { userRole } from "../utils.js";
 
 /*---------------------*\
     #CARTS CONTROLLER
@@ -75,13 +76,19 @@ async function confirmPurchase(req, res) {
 
 async function postProductInCart(req,res) {
     try {
-        let cid = req.params.cid;
-        let pid = req.params.pid;
+        let {cid, pid} = req.params, infoUserLoggedIn = req.user;
         
+        let productSelected = await productsService.getProductById(pid);
+        
+        if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email === productSelected[0].owner){
+            throw new Error('No puede agregar a su carrito un producto que le pertenece');
+        }
+        
+        // Usuario no premium o un usuario premium agrega producto que no le pertenece
         let cartSel = await cartsService.addProduct(cid, pid);
         return res.status(200).json({status: 'ok', cartSelected:cartSel});
     } catch (error) {
-        req.logger.fatal(`Error al publicar un producto en un carrito determinado. Detalle: ${error.message}`);
+        req.logger.fatal(`Error al agregar un producto al carrito. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected error', detail:error.message});
     }
 }
