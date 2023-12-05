@@ -641,36 +641,47 @@ async function postProduct(req, res){
     }
 }
 
-// async function putProduct(req, res, next){
-//     try {
-//         let pid = req.params.pid;
-//         let fields = req.body;
-
-//         for(const value of Object.values(fields)){
-//             if(!value) CustomError.CustomError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(fields));
-//         }
-
-//         let updatedProds = await productsService.updateProduct(pid, fields);
+async function putProduct(req, res, next){
+    try {
+        let pid = req.params.pid, infoUserLoggedIn = req.user, fields = req.body;
         
-//         return res.status(200).json({status: 'ok', updatedProducts: updatedProds});
-//     } catch (error) {
-//         req.logger.fatal(`Error al modificar un producto. Detalle: ${error.message}`);
-//         next(error);
-//     }
-// }
+        for(const value of Object.values(fields)){
+            if(!value) CustomError.CustomError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(fields));
+        }
+        
+        let productSelected = await productsService.getProductById(pid);
+        
+        if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email !== productSelected[0].owner){
+            throw new Error('No posee los permisos para eliminar el producto seleccionado');
+        }
+        
+        let updatedProds = await productsService.updateProduct(pid, fields);
+        
+        return res.status(200).json({status: 'ok', updatedProducts: updatedProds});
+    } catch (error) {
+        req.logger.fatal(`Error al modificar un producto. Detalle: ${error.message}`);
+        next(error);
+    }
+}
 
-// async function deleteProduct(req,res, next){
-//     try {
-//         let pid = req.params.pid;
-//         let delProduct = await productsService.deleteProduct(pid);
-    
-//         return res.status(200).json({status: 'ok', deletedProduct: delProduct});
-//     } catch (error) {
-//         req.logger.fatal(`Error al eliminar un producto. Detalle: ${error.message}`);
-//         next(error);
-//     }
-// }
+async function deleteProduct(req,res){
+    try {
+        let pid = req.params.pid, infoUserLoggedIn = req.user;
+        
+        let productSelected = await productsService.getProductById(pid);
+        
+        if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email !== productSelected[0].owner){
+            throw new Error('No posee los permisos para eliminar el producto seleccionado');
+        }
+        
+        // Admin o un usuario premium quiere eliminar su propio producto
+        let delProduct = await productsService.deleteProduct(pid);
+        
+        return res.status(200).json({status: 'ok', deletedProduct: delProduct});
+    } catch (error) {
+        req.logger.fatal(`Error al eliminar un producto. Detalle: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detalle:error.message});
+    }
+}
 
-// export default {getProducts, getProductById, postProduct, putProduct, deleteProduct};
-
-export default {getProducts, getProductById, postProduct};
+export default {getProducts, getProductById, postProduct, putProduct, deleteProduct};

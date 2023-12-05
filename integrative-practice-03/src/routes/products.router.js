@@ -17,9 +17,9 @@ router.get('/:pid', productsController.getProductById);
 
 router.post('/', passport.authenticate('current', {session:false}), authorization([userRole.ADMIN, userRole.PREMIUM]), sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.postProduct);
 
-// router.put('/:pid', passport.authenticate('current', {session:false}), authorization('admin'), sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.putProduct); 
+router.put('/:pid', passport.authenticate('current', {session:false}), authorization([userRole.ADMIN, userRole.PREMIUM]), sameTitleMid, sameDescriptionMid, sameCodeMid, priceStockNegMid, productsController.putProduct); 
 
-// router.delete('/:pid', passport.authenticate('current', {session:false}), authorization('admin'), productsController.deleteProduct); 
+router.delete('/:pid', passport.authenticate('current', {session:false}), authorization([userRole.ADMIN, userRole.PREMIUM]), productsController.deleteProduct); 
 
 
 
