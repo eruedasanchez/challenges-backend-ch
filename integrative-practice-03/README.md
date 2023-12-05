@@ -1,4 +1,4 @@
-# Integrative Practice 03. Mailing & Optimization 
+# Integrative Practice 03. Reset Password & Permissions Optimization 
 
 This project was generated with the following dependencies: 
 
@@ -38,6 +38,16 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 - If you try to reset the password with the same user password, you are prevented or told that you cannot enter the same password
 
 - If the link has expired, you will be redirected to a view that allows you to generate the restoration email again, which will have a new duration of 1 hour.
+
+2. A new role is established for the user schema called **premium** which will also be enabled to create products.
+
+3. The product schema is modified to have an **owner** field, which refers to the person who created the product. By default, *admin* is set. The owner field saves only the *email* in case the product has been created by a premium user.
+
+4. Product deletion and modification permissions are modified so that a premium user can only delete the products that belong to them and the admin can delete any product, even if it belongs to an **owner**.
+
+5. The cart logic is modified so that a **premium user** cannot add a product that belongs to them to their cart.
+
+6. A new route is implemented in the users router, **/api/users/premium/:uid** which allows changing the role of a user, from **user** to **premium** and viceversa.
 
 ## Quick Start
 
