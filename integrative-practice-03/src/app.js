@@ -85,5 +85,5 @@ try {
     logger.fatal(`Error al conectarse con MongoDB Atlas. Detalle: ${error.message}`);
 }
 
-// Ultimo commit Challenge-09+RuedaSanchez 
+// Ultimo commit Integrative-Practice-03+RuedaSanchez 
 
