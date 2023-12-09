@@ -1,0 +1,38 @@
+{"level":"info","message":"Persistencia en MONGODB iniciada","timestamp":"2023-12-04T01:13:22.608Z"}
+{"level":"info","message":"Server escuchando en puerto 8080","timestamp":"2023-12-04T01:13:22.756Z"}
+{"level":"info","message":"MongoDB Atlas Conectada","timestamp":"2023-12-04T01:13:25.410Z"}
+{"level":"fatal","message":"Error al modificar el rol del usuario. Detalle: Cannot read properties of null (reading 'role')","timestamp":"2023-12-04T14:16:41.139Z"}
+{"level":"fatal","message":"Error al modificar el rol del usuario. Detalle: Cannot read properties of null (reading 'role')","timestamp":"2023-12-04T14:20:09.461Z"}
+{"level":"error","message":"Error al ingresar al middleware de invalidUserId. Detalle: El uid ingresado tiene un formato invalido","timestamp":"2023-12-04T14:57:12.720Z"}
+{"level":"error","message":"Error al ingresar al middleware de invalidUserId. Detalle: El uid ingresado tiene un formato invalido","timestamp":"2023-12-04T15:00:26.905Z"}
+{"level":"error","message":"Error al ingresar al middleware de invalidUserId. Detalle: El uid ingresado tiene un formato invalido","timestamp":"2023-12-04T15:01:18.735Z"}
+{"level":"error","message":"Error al ingresar al middleware de invalidUserId. Detalle: El uid ingresado tiene un formato invalido","timestamp":"2023-12-04T15:02:45.315Z"}
+{"level":"fatal","message":"Error al modificar el rol del usuario. Detalle: Cannot read properties of null (reading 'role')","timestamp":"2023-12-04T15:13:16.360Z"}
+{"level":"error","message":"Error al ingresar al middleware de nonExistentUserId. Detail: El uid ingresado no corresponde a un usuario registrado","timestamp":"2023-12-04T15:20:30.588Z"}
+{"level":"fatal","message":"Error al modificar el rol del usuario. Detalle: No posee los permisos para cambiar el rol de uid ingresado","timestamp":"2023-12-04T15:24:30.019Z"}
+{"level":"fatal","message":"Error al modificar el rol del usuario. Detalle: No posee los permisos para cambiar el rol de uid ingresado","timestamp":"2023-12-04T15:33:32.869Z"}
+{"level":"error","message":"Error al ingresar al middleware de invalidUserId. Detail: El uid ingresado tiene un formato invalido","timestamp":"2023-12-04T15:34:59.764Z"}
+{"level":"fatal","message":"Error al publicar un producto. Detalle: E11000 duplicate key error collection: ecommerce.products index: title_1 dup key: { title: \"Producto uno\" }","timestamp":"2023-12-04T19:10:13.260Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: CustomError.CustomError is not a constructor","timestamp":"2023-12-04T19:26:39.246Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: undefined","timestamp":"2023-12-04T19:27:58.101Z"}
+{"level":"error","message":"Error al obtener los productos. Detalle: undefined","timestamp":"2023-12-04T19:28:53.343Z"}
+{"level":"error","message":"Error al obtener los productos. Detail: Price y stock inválidos","timestamp":"2023-12-04T19:51:53.760Z"}
+{"level":"error","message":"Error al obtener los productos. Detail: Los campos price y stock deben ser positivos","timestamp":"2023-12-04T19:55:10.153Z"}
+{"level":"error","message":"Error al obtener los productos. Detail: Los campos price y stock deben ser positivos","timestamp":"2023-12-04T19:56:43.177Z"}
+{"level":"error","message":"Datos invalidos. Detail: Los campos price y stock deben ser positivos","timestamp":"2023-12-04T20:02:40.666Z"}
+{"level":"fatal","message":"Error al publicar un producto. Detalle: Cannot read properties of undefined (reading 'role')","timestamp":"2023-12-04T20:11:21.459Z"}
+{"level":"fatal","message":"ValidationError. Detail: products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\"","timestamp":"2023-12-04T22:55:07.196Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T00:38:16.119Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T00:40:20.858Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T00:46:12.244Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T00:48:16.119Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T00:51:11.531Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T00:53:51.521Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T00:55:45.600Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T01:02:52.623Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T01:05:58.360Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T01:10:46.652Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-05T01:13:59.548Z"}
+{"level":"fatal","message":"Error al eliminar un producto. Detalle: invalidObjectIdMid is not defined","timestamp":"2023-12-05T01:16:36.937Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: userRole is not defined","timestamp":"2023-12-05T01:56:22.573Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No puede agregar a su carrito un producto que le pertenece","timestamp":"2023-12-05T01:58:07.026Z"}
