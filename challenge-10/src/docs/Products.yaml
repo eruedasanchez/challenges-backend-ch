@@ -1,0 +1,171 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene los primeros diez productos almacenados en la DB
+      tags:
+        - Products
+      responses:
+        "201":
+          description: Devuelve un objeto con el status "success" y un payload con los primeros diez productos de la DB 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+        "500":
+          description: Devuelve un objeto con un Error Customizado donde la primer componente muestra la descripción del error y la segunda el detalle del error
+    post:
+      summary: Crea un producto nuevo en la DB
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+            $ref: '#components/requestBodies/createProduct'
+      responses:
+        "201":
+          description: Devuelve un objeto con el status "ok" y un campo newProduct que contiene el producto recientemente agregado
+        "500":
+          description: Devuelve un objeto con un Error Customizado donde la primer componente muestra la descripción del error y la segunda el detalle del error
+  /api/products/{pid}:
+    get:
+      summary: Obtiene el producto de la DB que coincida con el pid pasado por params
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Ingrese el PID del producto que desea solicitar
+        schema:
+          type: ObjectId
+      responses:
+        "200":
+          description: Devuelve un objeto con el status "ok" y un campo MongoDBProduct con el producto de pid solicitado
+        "500":
+          description: Devuelve un objeto con un Error donde la primer componente muestra la descripción del error y la segunda el detalle del error
+    put:
+      summary: Modifica el producto de la DB que coincida con el pid pasado por params
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+            $ref: '#components/requestBodies/createProduct'
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: Ingrese el PID del producto que desea modificar
+          schema:
+            type: ObjectId
+      responses:
+        "200":
+          description: Devuelve un objeto con el status "ok" y un campo updatedProducts con el producto de pid solicitado modificado
+        "500":
+          description: Devuelve un Error en el caso de no tener los permisos necesarios para modificar el producto o un Error Customizado donde la primer componente muestra la descripción del error y la segunda el detalle del error en cualquier otro caso
+    delete:
+      summary: Elimina el producto de la DB que coincida con el pid pasado por params
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Ingrese el PID del producto que desea eliminar
+        schema:
+          type: ObjectId
+      responses:
+        "200":
+          description: Devuelve un objeto con el status "ok" y un campo deletedProduct con el producto de pid solicitado eliminado
+        "500":
+          description: Devuelve un Error en el caso de no tener los permisos necesarios para eliminar el producto o un Error Customizado donde la primer componente muestra la descripción del error y la segunda el detalle del error en cualquier otro caso
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por Mongo
+        title:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripción del producto   
+        code:
+          type: string
+          description: Código del producto
+        status:
+          type: bool
+          description: Estado/disponibilidad del producto
+        stock: 
+          type: number
+          description: Stock actual del producto
+        category:
+          type: string
+          description: Categoria del producto
+        thumbnails:
+          type: array
+          items:
+            type: string
+          description: Arreglo con enlaces a miniaturas del producto  
+        owner:
+          type: string
+          description: Propietario del producto  
+      example:
+          _id: ObjectId("656e5a832943f50a737deae9")
+          title: Producto dos
+          description: Este es un producto prueba dos 
+          code: abc123p2 
+          price: 202
+          status: true
+          stock: 32
+          category: muebles 
+          thumbnails: [thumbnail-p2-1, thumbnail-p2-2, thumbnail-p2-3]
+          owner: admin
+  requestBodies:
+    createProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripción del producto   
+        code:
+          type: string
+          description: Código del producto
+        status:
+          type: bool
+          description: Estado del producto
+        stock: 
+          type: number
+          description: Stock actual del producto
+        category:
+          type: string
+          description: Categoria del producto
+        thumbnails:
+          type: array
+          items:
+            type: string
+          description: Arreglo con enlaces a miniaturas del producto
+      example:
+        title: Producto tres
+        description: Este es un producto prueba tres 
+        code: abc123p3 
+        price: 203
+        status: true
+        stock: 33
+        category: muebles 
+        thumbnails: [thumbnail-p3-1, thumbnail-p3-2, thumbnail-p3-3]
+
+
+

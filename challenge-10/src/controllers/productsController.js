@@ -579,8 +579,7 @@ async function getProducts(req, res) {
         if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
             throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
         }
-            
-        // let productsData = await mongoProductManager.getProductsPaginate(limit, page);
+        
         let productsData = await productsService.getProductsPaginate(limit, page);
             
         if(limit < 1 || limit > productsData.totalDocs){

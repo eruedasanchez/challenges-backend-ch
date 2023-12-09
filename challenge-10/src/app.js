@@ -1,3 +1,5 @@
+// archivo app.js
+
 import __dirname from './utils.js';
 import path from 'path';
 import express from 'express';
@@ -18,6 +20,8 @@ import { initPassport } from './config/passport.config.js';
 import { config } from './config/config.js';
 import { errorHandler } from './services/errors/errorsHandler.js';
 import { middLog, logger } from './utilsWinston.js';
+import swaggerJsDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express'; 
 
 const PORT = config.PORT;
 
@@ -25,6 +29,23 @@ const PERSISTENCE = config.PERSISTENCE;
 logger.info(`Persistencia en ${PERSISTENCE} iniciada`);
 
 const app = express();
+
+// Inicializacion de Swagger
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Documentación e-commerce',
+            version: '1.0.0',
+            description: 'Descripción de la documentación del proyecto e-commerce'
+        }
+    },
+    apis: [path.join(__dirname, 'docs', '*.yaml')]
+}
+
+const specs = swaggerJsDoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));

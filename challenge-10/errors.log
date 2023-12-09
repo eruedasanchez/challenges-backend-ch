@@ -36,3 +36,5 @@
 {"level":"fatal","message":"Error al eliminar un producto. Detalle: invalidObjectIdMid is not defined","timestamp":"2023-12-05T01:16:36.937Z"}
 {"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: userRole is not defined","timestamp":"2023-12-05T01:56:22.573Z"}
 {"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No puede agregar a su carrito un producto que le pertenece","timestamp":"2023-12-05T01:58:07.026Z"}
+{"level":"fatal","message":"Error al conectarse con MongoDB Atlas. Detalle: querySrv ECONNREFUSED _mongodb._tcp.cluster0.4vp9khz.mongodb.net","timestamp":"2023-12-09T18:22:33.412Z"}
+{"level":"fatal","message":"Error al conectarse con MongoDB Atlas. Detalle: querySrv ECONNREFUSED _mongodb._tcp.cluster0.4vp9khz.mongodb.net","timestamp":"2023-12-09T18:23:54.482Z"}
