@@ -1,5 +1,3 @@
-// archivo app.js
-
 import __dirname from './utils.js';
 import path from 'path';
 import express from 'express';
@@ -29,8 +27,6 @@ const PERSISTENCE = config.PERSISTENCE;
 logger.info(`Persistencia en ${PERSISTENCE} iniciada`);
 
 const app = express();
-
-// Inicializacion de Swagger
 
 const options = {
     definition: {
