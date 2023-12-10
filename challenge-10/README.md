@@ -1,4 +1,4 @@
-# Integrative Practice 03. Reset Password & Permissions Optimization 
+# Challenge 10. Document API 
 
 This project was generated with the following dependencies: 
 
@@ -20,6 +20,8 @@ This project was generated with the following dependencies:
 - [Passport Jwt](https://github.com/mikenicholson/passport-jwt): Version 4.0.1
 - [Passport Local](https://github.com/jaredhanson/passport-local): Version 0.6.0
 - [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2
+- [Swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc): Version 6.2.8
+- [Swagger-ui-express](https://github.com/scottie1984/swagger-ui-express): Version 5.0.0
 - [Uuid](https://github.com/uuidjs/uuid): Version 9.0.1
 - [Winston](https://github.com/winstonjs/winston): Version 3.11.0
 
@@ -31,23 +33,9 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-1. A password recovery system is created, which sends a button via email that redirects to a page to reset the password.
+1. The product module is documented
 
-- The link in the email must expire after 1 hour of being sent.
-
-- If you try to reset the password with the same user password, you are prevented or told that you cannot enter the same password
-
-- If the link has expired, you will be redirected to a view that allows you to generate the restoration email again, which will have a new duration of 1 hour.
-
-2. A new role is established for the user schema called **premium** which will also be enabled to create products.
-
-3. The product schema is modified to have an **owner** field, which refers to the person who created the product. By default, *admin* is set. The owner field saves only the *email* in case the product has been created by a premium user.
-
-4. Product deletion and modification permissions are modified so that a premium user can only delete the products that belong to them and the admin can delete any product, even if it belongs to an **owner**.
-
-5. The cart logic is modified so that a **premium user** cannot add a product that belongs to them to their cart.
-
-6. A new route is implemented in the users router, **/api/users/premium/:uid** which allows changing the role of a user, from **user** to **premium** and viceversa.
+2. The cart module is documented
 
 ## Quick Start
 
@@ -71,10 +59,10 @@ Clone the repository in that folder:
 $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 ```
 
-Open preentrega-03 folder and install dependencies: 
+Open challenge-10 folder and install dependencies: 
 
 ```bash
-$ cd integrative-practice-03
+$ cd challenge-10
 $ npm install
 ```
 
@@ -100,6 +88,9 @@ Visit the website at: http://localhost:8080/carts/:cid to view the cart with the
 <br>
 <br>
 Visit the website at: http://localhost:8080/loggerTest to test all the logs
+<br>
+<br>
+Visit the website at: http://localhost:8080/api-docs/ to view the documentation
 <br>
 <br>
 Perform the flow by [Postman](https://www.postman.com/) for Products, Carts and Messages collections
