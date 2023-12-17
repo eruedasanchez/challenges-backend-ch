@@ -1,7 +1,7 @@
 import mongoose  from 'mongoose';
 import { CustomError } from '../services/errors/customError.js';
 import { errorTypes } from '../services/errors/enumsError.js';
-import { generateProductErrorInfo, invalidSortError, negativeQueryError, noNumberError, noNumberLimitPageError, overflowError, priceStockNegativeError, sameFieldError} from '../services/errors/infoProductsErrors.js';
+import { generateProductErrorInfo, invalidPidError, invalidSortError, negativeQueryError, noNumberError, noNumberLimitPageError, overflowError, priceStockNegativeError, sameFieldError, unauthorizedErrorInfo} from '../services/errors/infoProductsErrors.js';
 import { productsService } from '../services/products.service.js';
 import { sorting, userRole } from '../utils.js';
 
@@ -59,7 +59,7 @@ export const noParamsMid = async (req, res, next) => {
             let productsData = await productsService.getProductsPaginate(10, 1);
             let products = formatResults(productsData, productsData.docs);
             
-            return res.status(201).json({MongoDBProducts:products});  
+            return res.status(200).json({MongoDBProducts:products});  
         }
         next();
     } catch (error) {
@@ -73,24 +73,25 @@ export const noParamsMid = async (req, res, next) => {
 export const limitMid = async (req, res, next) => {
     try {
         let {limit, page, query, sort}  = req.query;
-    
+        
         if(limit && !page && !query && !sort){
             if(isNaN(limit)){
-                throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.DATA_ERR, noNumberError('LIMIT'));
+                throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.BAD_REQUEST, noNumberError('LIMIT'));
             } 
 
             let productsData = await productsService.getProductsPaginate(limit, 1);
-
+            
             if(limit < 1 || limit > productsData.totalDocs){
-                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
             }
             
             let products = formatResults(productsData, productsData.docs);
             return res.status(201).json({MongoDBProductsLimited:products});
         }
+        next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
 
     }
 }
@@ -102,13 +103,13 @@ export const pageMid = async (req, res, next) => {
     
         if(!limit && page && !query && !sort){
             if(isNaN(page)){
-                throw CustomError.createError("Error de datos", "PAGE inválido", errorTypes.DATA_ERR, noNumberError('PAGE'));
+                throw CustomError.createError("Error de datos", "PAGE inválido", errorTypes.BAD_REQUEST, noNumberError('PAGE'));
             } 
             
             let productsData = await productsService.getProductsPaginate(10, page);
             
             if(page < 1 || page > productsData.totalPages){
-                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
             }
             
             let products = formatResults(productsData, productsData.docs);
@@ -117,7 +118,7 @@ export const pageMid = async (req, res, next) => {
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -128,19 +129,19 @@ export const queryMid = async (req, res, next) => {
     
         if(!limit && !page && query && !sort){
             if(!isNaN(query) && query < 0){
-                throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+                throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
             } 
             
             let productsData = await productsService.getProductsPaginate(10, 1);
             let filteredProducts = filterByCategory(productsData.docs, query);
             let products = formatResults(productsData, filteredProducts);
             
-            return res.status(201).json({MongoDBProductsRequested:products});  
+            return res.status(200).json({MongoDBProductsRequested:products});  
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -151,19 +152,19 @@ export const sortMid = async (req, res, next) => {
     
         if(!limit && !page && !query && sort){
             if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
             }
             
             let productsData = await productsService.getProductsPaginate(10, 1);
             let productsSorted = sortProducts(productsData.docs, sort);
             let products = formatResults(productsData, productsSorted);
             
-            return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+            return res.status(200).json({MongoDBProdsSortedAscPrice:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -174,26 +175,26 @@ export const limitPageMid = async (req, res, next) => {
     
         if(limit && page && !query && !sort){
             if(isNaN(limit) || isNaN(page)){
-                throw CustomError.createError("Error de datos", "LIMIT o PAGE inválidos", errorTypes.DATA_ERR, noNumberLimitPageError());
+                throw CustomError.createError("Error de datos", "LIMIT o PAGE inválidos", errorTypes.BAD_REQUEST, noNumberLimitPageError());
             }
 
             let productsData = await productsService.getProductsPaginate(limit, page);
 
             if(limit < 1 || limit > productsData.totalDocs){
-                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
             }
 
             if(page < 1 || page > productsData.totalPages){
-                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
             }
 
             let products = formatResults(productsData, productsData.docs);
-            return res.status(201).json({MongoDBProdsLimitPage:products});
+            return res.status(200).json({MongoDBProdsLimitPage:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -203,25 +204,25 @@ export const limitQueryMid = async (req, res, next) => {
         let {limit, page, query, sort}  = req.query;
     
         if(limit && !page && query && !sort){
-            if(isNaN(limit)) throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.DATA_ERR, noNumberError('LIMIT')); 
+            if(isNaN(limit)) throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.BAD_REQUEST, noNumberError('LIMIT')); 
             
-            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
             
             let productsData = await productsService.getProductsPaginate(limit, 1);
 
             if(limit < 1 || limit > productsData.totalDocs){
-                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
             }
 
             let filteredProducts = filterByCategory(productsData.docs, query);
             let products = formatResults(productsData, filteredProducts);
             
-            return res.status(201).json({MongoDBProductsRequested:products}); 
+            return res.status(200).json({MongoDBProductsRequested:products}); 
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -232,28 +233,28 @@ export const limitSortMid = async (req, res, next) => {
     
         if(limit && !page && !query && sort){
             if(isNaN(limit)){
-                throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.DATA_ERR, noNumberError('LIMIT'));
+                throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.BAD_REQUEST, noNumberError('LIMIT'));
             }
 
             if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
             }
             
             let productsData = await productsService.getProductsPaginate(limit, 1);
 
             if(limit < 1 || limit > productsData.totalDocs){
-                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
             }
             
             let productsSorted = sortProducts(productsData.docs, sort);
             let products = formatResults(productsData, productsSorted);
             
-            return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+            return res.status(200).json({MongoDBProdsSortedAscPrice:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -264,25 +265,25 @@ export const pageQueryMid = async (req, res, next) => {
     
         if(!limit && page && query && !sort){
             
-            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
             
-            if(isNaN(page)) throw CustomError.createErrorr("Error de datos", "PAGE inválido", errorTypes.DATA_ERR, noNumberError('PAGE')); 
+            if(isNaN(page)) throw CustomError.createErrorr("Error de datos", "PAGE inválido", errorTypes.BAD_REQUEST, noNumberError('PAGE')); 
             
             let productsData = await productsService.getProductsPaginate(10, page);
             
             if(page < 1 || page > productsData.totalPages){
-                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
             }
 
             let filteredProducts = filterByCategory(productsData.docs, query);
             let products = formatResults(productsData, filteredProducts);
             
-            return res.status(201).json({MongoDBProdsLimitPage:products});
+            return res.status(200).json({MongoDBProdsLimitPage:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -293,28 +294,28 @@ export const pageSortMid = async (req, res, next) => {
         
         if(!limit && page && !query && sort){
             if(isNaN(page)){
-                throw CustomError.createError("Error de datos", "PAGE inválido", errorTypes.DATA_ERR, noNumberError('PAGE'));
+                throw CustomError.createError("Error de datos", "PAGE inválido", errorTypes.BAD_REQUEST, noNumberError('PAGE'));
             }
 
             if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
             }
 
             let productsData = await productsService.getProductsPaginate(10, page);
             
             if(page < 1 || page > productsData.totalPages){
-                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
             }
             
             let productsSorted = sortProducts(productsData.docs, sort);
             let products = formatResults(productsData, productsSorted);
             
-            return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+            return res.status(200).json({MongoDBProdsSortedAscPrice:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -324,10 +325,10 @@ export const querySortMid = async (req, res, next) => {
         let {limit, page, query, sort}  = req.query;
     
         if(!limit && !page && query && sort){
-            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
             
             if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
             }
             
             let productsData = await productsService.getProductsPaginate(10, 1);
@@ -336,12 +337,12 @@ export const querySortMid = async (req, res, next) => {
             let productsSorted = sortProducts(filteredProducts, sort);
             let products = formatResults(productsData, productsSorted);
             
-            return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+            return res.status(200).json({MongoDBProdsSortedAscPrice:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -351,29 +352,29 @@ export const limitPageQueryMid = async (req, res, next) => {
         let {limit, page, query, sort}  = req.query;
     
         if(limit && page && query && !sort){
-            if(isNaN(limit)) throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.DATA_ERR, noNumberError('LIMIT')); 
+            if(isNaN(limit)) throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.BAD_REQUEST, noNumberError('LIMIT')); 
                 
-            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
                 
             let productsData = await productsService.getProductsPaginate(limit, page);
 
             if(limit < 1 || limit > productsData.totalDocs){
-                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
             }
 
             if(page < 1 || page > productsData.totalPages){
-                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
             }
 
             let filteredProducts = filterByCategory(productsData.docs, query);
             let products = formatResults(productsData, filteredProducts);
                 
-            return res.status(201).json({MongoDBProdsLimitPage:products});
+            return res.status(200).json({MongoDBProdsLimitPage:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -384,32 +385,32 @@ export const limitPageSortMid = async (req, res, next) => {
         
         if(limit && page && !query && sort){
             if(isNaN(limit) || isNaN(page)){
-                throw CustomError.createError("Error de datos", "LIMIT o PAGE inválidos", errorTypes.DATA_ERR, noNumberLimitPageError());
+                throw CustomError.createError("Error de datos", "LIMIT o PAGE inválidos", errorTypes.BAD_REQUEST, noNumberLimitPageError());
             }
 
             if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
             }
 
             let productsData = await productsService.getProductsPaginate(limit, page);
 
             if(limit < 1 || limit > productsData.totalDocs){
-                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
             }
 
             if(page < 1 || page > productsData.totalPages){
-                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
             }
 
             let productsSorted = sortProducts(productsData.docs, sort);
             let products = formatResults(productsData, productsSorted);
             
-            return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+            return res.status(200).json({MongoDBProdsSortedAscPrice:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -420,31 +421,31 @@ export const limitQuerySortMid = async (req, res, next) => {
     
         if(limit && !page && query && sort){
 
-            if(isNaN(limit)) throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.DATA_ERR, noNumberError('LIMIT'));
+            if(isNaN(limit)) throw CustomError.createError("Error de datos", "LIMIT inválido", errorTypes.BAD_REQUEST, noNumberError('LIMIT'));
 
-            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
 
             if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
             }
             
             // let productsData = await mongoProductManager.getProductsPaginate(limit, 1);
             let productsData = await productsService.getProductsPaginate(limit, 1);
 
             if(limit < 1 || limit > productsData.totalDocs){
-                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+                throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
             }
             
             let filteredProducts = filterByCategory(productsData.docs, query);
             let productsSorted = sortProducts(filteredProducts, sort);
             let products = formatResults(productsData, productsSorted);
             
-            return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+            return res.status(200).json({MongoDBProdsSortedAscPrice:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -455,30 +456,30 @@ export const pageQuerySortMid = async (req, res, next) => {
     
         if(!limit && page && query && sort){
             
-            if(isNaN(page)) throw CustomError.createError("Error de datos", "PAGE inválido", errorTypes.DATA_ERR, noNumberError('PAGE'));
+            if(isNaN(page)) throw CustomError.createError("Error de datos", "PAGE inválido", errorTypes.BAD_REQUEST, noNumberError('PAGE'));
             
-            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+            if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
             
             if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+                throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
             }
             
             let productsData = await productsService.getProductsPaginate(10, page);
             
             if(page < 1 || page > productsData.totalPages){
-                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+                throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
             }
 
             let filteredProducts = filterByCategory(productsData.docs, query);
             let productsSorted = sortProducts(filteredProducts, sort);
             let products = formatResults(productsData, productsSorted);
             
-            return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+            return res.status(200).json({MongoDBProdsSortedAscPrice:products});
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -492,12 +493,12 @@ export const sameTitleMid = async (req, res, next) => {
     
         const productWithSameTitle = await productsService.findByTitle(title);
         if(productWithSameTitle){
-            throw CustomError.createError("Error de datos", "Titulo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('titulo', title));
+            throw CustomError.createError("Error de datos", "Titulo inválido", errorTypes.BAD_REQUEST, sameFieldError('titulo', title));
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -507,27 +508,27 @@ export const sameDescriptionMid = async (req, res, next) => {
         const productWithSameDescription = await productsService.findByDescription(description); 
         
         if(productWithSameDescription){
-            throw CustomError.createError("Error de datos", "Descripción inválida", errorTypes.INVALID_ARGS_ERR, sameFieldError('descripcion', description));
+            throw CustomError.createError("Error de datos", "Descripción inválida", errorTypes.BAD_REQUEST, sameFieldError('descripcion', description));
         }
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }    
 }
 
 export const sameCodeMid = async (req, res, next) => {
     try {
         let {code} = req.body;
-    
+        
         const productWithSameCode = await productsService.findByCode(code);
         if(productWithSameCode){
-            CustomError.createError("Error de datos", "Codigo inválido", errorTypes.INVALID_ARGS_ERR, sameFieldError('codigo', code));
+            throw CustomError.createError("Error de datos", "Codigo inválido", errorTypes.BAD_REQUEST, sameFieldError('codigo', code));
         }
         next();
     } catch (error) {
-        req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        req.logger.error(`${error.name}. Detail: ${error.message} . Code: ${error.code}`);
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -536,13 +537,13 @@ export const priceStockNegMid = (req, res, next) => {
         let {price, stock} = req.body;
         
         if(price <= 0 || stock <= 0){
-            throw CustomError.createError("Datos invalidos", "Price y stock inválidos", errorTypes.INVALID_ARGS_ERR, priceStockNegativeError());
+            throw CustomError.createError("Datos invalidos", "Price y stock inválidos", errorTypes.BAD_REQUEST, priceStockNegativeError());
         }
 
         next();
     } catch (error) {
         req.logger.error(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detail:error.message});
+        return res.status(error.code).json({error:error.description, detail:error.message});
     }
 }
 
@@ -574,20 +575,20 @@ async function getProducts(req, res) {
     try {
         let {limit, page, query, sort}  = req.query;
             
-        if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.DATA_ERR, negativeQueryError());
+        if(!isNaN(query) && query < 0) throw CustomError.createError("Error de datos", "QUERY inválido", errorTypes.BAD_REQUEST, negativeQueryError());
 
         if(!isNaN(sort) || (sort !== ASC && sort !== DESC)){
-            throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.DATA_ERR, invalidSortError());
+            throw CustomError.createError("Error de datos", "SORT inválido", errorTypes.BAD_REQUEST, invalidSortError());
         }
         
         let productsData = await productsService.getProductsPaginate(limit, page);
             
         if(limit < 1 || limit > productsData.totalDocs){
-            throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(limit, productsData));
+            throw CustomError.createError("Argumentos invalidos", "LIMIT fuera de rango", errorTypes.BAD_REQUEST, overflowError(limit, productsData));
         }
             
         if(page < 1 || page > productsData.totalPages){
-            throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.INVALID_ARGS_ERR, overflowError(page, productsData));
+            throw CustomError.createError("Argumentos invalidos", "PAGE fuera de rango", errorTypes.BAD_REQUEST, overflowError(page, productsData));
         }
             
         let filteredProducts = filterByCategory(productsData.docs, query);
@@ -597,7 +598,7 @@ async function getProducts(req, res) {
         return res.status(200).json({MongoDBProdsSortedAscPrice:products});
     } catch (error) {
         req.logger.fatal(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detalle:error.message});
+        return res.status(error.code).json({error:error.description, detalle:error.message});
     }
 }
 
@@ -606,7 +607,7 @@ async function getProductById(req, res) {
         let pid = req.params.pid;
 
         if(!mongoose.Types.ObjectId.isValid(pid)){
-            throw new Error('El PID solicitado tiene un formato invalido');
+            throw CustomError.createError("Error de datos", "PID inválido", errorTypes.NOT_FOUND, invalidPidError(pid));
         }
         
         let productSelected = await productsService.getProductById(pid);
@@ -614,17 +615,18 @@ async function getProductById(req, res) {
         return res.status(200).json({status:'ok', MongoDBProduct:productSelected});                          
     } catch (error) {
         req.logger.fatal(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detalle:error.message});
+        return res.status(error.code).json({error:error.description, detalle:error.message});
     }
 }
 
 async function postProduct(req, res){
     try {
-        let owner, newProd = req.body;
+        let owner; 
+        let newProd = req.body;
         
         for(const value of Object.values(newProd)){
             if(!value){
-                throw CustomError.createError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(newProd));
+                throw CustomError.createError("Faltan datos", "Complete todos los campos", errorTypes.NOT_FOUND, generateProductErrorInfo(newProd));
             }
         }
         
@@ -637,7 +639,7 @@ async function postProduct(req, res){
         return res.status(201).json({status: 'ok', newProduct:productAdded});
     } catch (error) {
         req.logger.fatal(`${error.name}. Detail: ${error.message}`);
-        return res.status(500).json({error:error.description, detalle:error.message});
+        return res.status(error.code).json({error:error.description, detalle:error.message});
     }
 }
 
@@ -646,13 +648,13 @@ async function putProduct(req, res){
         let pid = req.params.pid, infoUserLoggedIn = req.user, fields = req.body;
         
         for(const value of Object.values(fields)){
-            if(!value) CustomError.createError("Faltan datos", "Complete todos los campos", errorTypes.INVALID_ARGS_ERR, generateProductErrorInfo(fields));
+            if(!value) throw CustomError.createError("Faltan datos", "Complete todos los campos", errorTypes.BAD_REQUEST, generateProductErrorInfo(fields));
         }
         
         let productSelected = await productsService.getProductById(pid);
         
         if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email !== productSelected[0].owner){
-            throw new Error('No posee los permisos para eliminar el producto seleccionado');
+            throw CustomError.createError("Error al modificar un producto", "Unauthorized", errorTypes.UNAUTHORIZED, unauthorizedErrorInfo());
         }
         
         let updatedProds = await productsService.updateProduct(pid, fields);
@@ -660,7 +662,7 @@ async function putProduct(req, res){
         return res.status(200).json({status: 'ok', updatedProducts: updatedProds});
     } catch (error) {
         req.logger.fatal(`Error al modificar un producto. Detalle: ${error.message}`);
-        return res.status(500).json({error:error.description, detalle:error.message});
+        return res.status(error.code).json({error:error.description, detalle:error.message});
     }
 }
 
@@ -671,7 +673,7 @@ async function deleteProduct(req,res){
         let productSelected = await productsService.getProductById(pid);
         
         if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email !== productSelected[0].owner){
-            throw new Error('No posee los permisos para eliminar el producto seleccionado');
+            throw CustomError.createError("Error al modificar un producto", "Unauthorized", errorTypes.UNAUTHORIZED, unauthorizedErrorInfo());
         }
         
         // Admin o un usuario premium quiere eliminar su propio producto
@@ -680,7 +682,7 @@ async function deleteProduct(req,res){
         return res.status(200).json({status: 'ok', deletedProduct: delProduct});
     } catch (error) {
         req.logger.fatal(`Error al eliminar un producto. Detalle: ${error.message}`);
-        return res.status(500).json({error:'Unexpected', detalle:error.message});
+        return res.status(error.code).json({error:error.description, detalle:error.message});
     }
 }
 

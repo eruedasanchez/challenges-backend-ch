@@ -22,12 +22,16 @@ export const noNumberLimitPageError = () => {
     return 'Los parametros LIMIT y PAGE son de tipo number';
 }
 
+export const invalidPidError = pid => {
+    return `El PID ${pid} solicitado tiene un formato invalido`;
+}
+
 /*------------------------*\
     #MIDDLEWARES POST '/'
 \*------------------------*/
 
 export const sameFieldError = (param, name)  => {
-    return `Se ingreso un campo ${param} con el valor ${name} que ya se encuentra definido en la colección`;
+    return `Se ingreso un campo ${param} con el valor "${name}" que ya se encuentra definido en la colección`;
 }
 
 export const priceStockNegativeError = () => {
@@ -49,6 +53,12 @@ export const generateProductErrorInfo = product => {
             * stock: Necesita ser de tipo Number - recibida ${product.stock},
             * category: Necesita ser de tipo String - recibida ${product.category}`
 }
+
+export const unauthorizedErrorInfo = () => {
+    return 'No posee los permisos para modificar el producto seleccionado';
+}
+
+
 
 
 
