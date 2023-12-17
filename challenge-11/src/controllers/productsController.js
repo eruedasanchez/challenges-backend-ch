@@ -594,7 +594,7 @@ async function getProducts(req, res) {
         let productsSorted = sortProducts(filteredProducts, sort);
         let products = formatResults(productsData, productsSorted);
             
-        return res.status(201).json({MongoDBProdsSortedAscPrice:products});
+        return res.status(200).json({MongoDBProdsSortedAscPrice:products});
     } catch (error) {
         req.logger.fatal(`${error.name}. Detail: ${error.message}`);
         return res.status(500).json({error:error.description, detalle:error.message});

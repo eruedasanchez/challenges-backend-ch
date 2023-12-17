@@ -5,16 +5,17 @@ paths:
       tags:
         - Products
       responses:
-        "201":
-          description: Devuelve un objeto con el status "success" y un payload con los primeros diez productos de la DB 
+        "200":
+          description: Devuelve un objeto "MongoDBProducts" con la propiedad "status" success y la propiedad "payload" con los primeros diez productos de la DB 
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/Product'
+                type: object
+                properties:  # Agrega esta sección para definir las propiedades del objeto
+                  MongoDBProducts:
+                    $ref: '#components/schemas/MongoDBProducts'
         "500":
-          description: Devuelve un objeto con un Error Customizado donde la primer componente muestra la descripción del error y la segunda el detalle del error
+          description: Devuelve un objeto con un error donde la primer propiedad muestra la descripción del error y la segunda el detalle del error
     post:
       summary: Crea un producto nuevo en la DB
       tags:
@@ -103,7 +104,7 @@ components:
           type: string
           description: Código del producto
         status:
-          type: bool
+          type: boolean
           description: Estado/disponibilidad del producto
         stock: 
           type: number
@@ -119,17 +120,76 @@ components:
         owner:
           type: string
           description: Propietario del producto  
+        __v:
+          type: number
       example:
-          _id: ObjectId("656e5a832943f50a737deae9")
-          title: Producto dos
-          description: Este es un producto prueba dos 
-          code: abc123p2 
-          price: 202
-          status: true
-          stock: 32
-          category: muebles 
-          thumbnails: [thumbnail-p2-1, thumbnail-p2-2, thumbnail-p2-3]
-          owner: admin
+        _id: ObjectId("656e5a832943f50a737deae9")
+        title: Producto dos
+        description: Este es un producto prueba dos 
+        code: abc123p2 
+        price: 202
+        status: true
+        stock: 32
+        category: muebles 
+        thumbnails: [thumbnail-p2-1, thumbnail-p2-2, thumbnail-p2-3]
+        owner: admin
+    MongoDBProducts:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la solicitud
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+          description: Resultado de la solicitud
+        totalPages:
+          type: number
+        prevPage:
+          type: number
+          nullable: true 
+        nextPage:
+          type: number  
+          nullable: true
+        page:
+          type: number
+        hasPrevPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        prevLink:
+          type: number
+          nullable: true
+        nextLink:
+          type: number
+          nullable: true
+      example:
+        status: "success"
+        payload:
+          - _id: "656e5a832943f50a737deae9"
+            title: "Producto dos"
+            description: "Este es un producto prueba dos"
+            code: "abc123p2"
+            price: 202
+            status: true
+            stock: 32
+            category: "muebles"
+            thumbnails:
+              - "thumbnail-p2-1"
+              - "thumbnail-p2-2"
+              - "thumbnail-p2-3"
+            owner: "admin"
+            __v: 0
+            id: "656e5a832943f50a737deae9"
+        totalPages: 1
+        prevPage: null
+        nextPage: null
+        page: 1
+        hasPrevPage: false
+        hasNextPage: false
+        prevLink: null
+        nextLink: null
   requestBodies:
     createProduct:
       type: object
@@ -144,7 +204,7 @@ components:
           type: string
           description: Código del producto
         status:
-          type: bool
+          type: boolean
           description: Estado del producto
         stock: 
           type: number
