@@ -93,3 +93,19 @@
 {"level":"fatal","message":"Error al modificar un producto. Detalle:  Uno o más propiedades están incompletas o son inválidas.\n        Lista de propiedades requeridas:\n            * title: Necesita ser de tipo String - recibida Producto dos modificados,\n            * description: Necesita ser de tipo String - recibida Este es un producto prueba dos modificados,\n            * code: Necesita ser de tipo String - recibida ,\n            * price: Necesita ser de tipo Number - recibida 202,\n            * status: Necesita ser de tipo Bool y por defecto debe ser true - recibida true,\n            * stock: Necesita ser de tipo Number - recibida 32,\n            * category: Necesita ser de tipo String - recibida muebles","timestamp":"2023-12-17T16:13:26.569Z"}
 {"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para eliminar el producto seleccionado","timestamp":"2023-12-17T16:49:18.740Z"}
 {"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para modificar el producto seleccionado","timestamp":"2023-12-17T16:50:03.374Z"}
+{"level":"fatal","message":"Error al crear un carrito. Detalle: cartAdded is not defined","timestamp":"2023-12-17T18:36:41.924Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: El hola ingresado tiene un formato invalido","timestamp":"2023-12-17T19:09:18.248Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-17T19:13:21.121Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-17T22:47:59.182Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-17T22:50:07.324Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-17T22:58:36.860Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: noNumberError is not defined","timestamp":"2023-12-17T23:11:59.393Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El parametro LIMIT es de tipo number","timestamp":"2023-12-17T23:12:34.559Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El parametro LIMIT es de tipo number","timestamp":"2023-12-17T23:14:25.841Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El parametro LIMIT es de tipo number","timestamp":"2023-12-17T23:15:23.419Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: noNumberError is not defined","timestamp":"2023-12-17T23:22:24.144Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El parametro LIMIT es de tipo number","timestamp":"2023-12-17T23:23:24.323Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-17T23:26:02.997Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-18T00:11:18.940Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: cartUpdt is not defined","timestamp":"2023-12-18T00:12:42.834Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-18T00:12:58.057Z"}

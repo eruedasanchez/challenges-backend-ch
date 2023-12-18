@@ -54,8 +54,8 @@ export const generateProductErrorInfo = product => {
             * category: Necesita ser de tipo String - recibida ${product.category}`
 }
 
-export const unauthorizedErrorInfo = () => {
-    return 'No posee los permisos para modificar el producto seleccionado';
+export const unauthorizedErrorInfo = item => {
+    return `No posee los permisos para modificar el ${item} seleccionado`;
 }
 
 

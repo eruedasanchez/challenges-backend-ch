@@ -4,7 +4,7 @@ import { ops } from "../utils.js";
 
 export const invalidObjectIdMid = id => {
     if(!mongoose.Types.ObjectId.isValid(id)){
-        throw new Error(`El ${id} ingresado tiene un formato invalido`);
+        throw new Error(`Id ${id} ingresado tiene un formato invalido`);
     }
 }
 
