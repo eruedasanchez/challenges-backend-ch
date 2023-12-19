@@ -120,7 +120,6 @@ export const initPassport = () => {
         },
         (jwtContent, done) => {
             try {
-                // console.log('Current strategy executed successfully.');
                 return done(null, jwtContent.user) // jwtContent porque en la funcion generateJWT el 1er parametro en jwt.sign es {user}
             } catch (error) {
                 return done(error);

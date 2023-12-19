@@ -109,3 +109,6 @@
 {"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-18T00:11:18.940Z"}
 {"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: cartUpdt is not defined","timestamp":"2023-12-18T00:12:42.834Z"}
 {"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-18T00:12:58.057Z"}
+{"level":"fatal","message":"Error al conectarse con MongoDB Atlas. Detalle: mongoose is not defined","timestamp":"2023-12-18T19:01:23.351Z"}
+{"level":"fatal","message":"TypeError. Detail: Cannot read properties of undefined (reading 'role')","timestamp":"2023-12-18T20:45:54.462Z"}
+{"level":"error","message":"Error de datos. Detail: Se ingreso un campo titulo con el valor \"Producto siete\" que ya se encuentra definido en la colección","timestamp":"2023-12-19T00:03:50.780Z"}
