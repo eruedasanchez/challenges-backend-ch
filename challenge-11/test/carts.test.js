@@ -26,16 +26,7 @@ describe("Tests del proyecto Ecommerce", function(){
         before(async function(){
             coderCookie = jwtoken;
         })
-
-        // before(async function(){
-        //     cidTest = undefined;
-        // })
         
-        // beforeEach(async function(){
-            // cidTest = undefined;
-        //     await mongoose.connection.collection('carts').deleteMany({category:'mesas'});
-        // })
-
         afterEach(async function(){
             await cartsModel.deleteOne({_id:cidTest});
         })
@@ -439,14 +430,7 @@ describe("Tests del proyecto Ecommerce", function(){
             expect(req.path).is.eq(`/api/carts/${cid}/product/${pid}`);
             expect(req.method).is.eq('POST');
         })
-
-
-
-
-
-
-
-
+        
         it("El endpoint /:cid/product/:pid con método POST arroja un error cuando se pasa un cid inválido por params", async function(){
             const cid = productTestData.INVALID_PID;
             const pid = productTestData.PID_EIGHT;
