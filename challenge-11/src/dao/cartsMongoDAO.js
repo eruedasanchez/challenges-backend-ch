@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 import { cartsModel } from "./models/carts.model.js";
 import { ops } from "../utils.js"; 
+import { CustomError } from "../services/errors/customError.js";
+import { errorTypes } from "../services/errors/enumsError.js";
+import { invalidCidError, invalidPidError } from "../services/errors/infoProductsErrors.js";
 
 export const invalidObjectIdMid = id => {
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -33,7 +36,13 @@ export class CartsMongoDAO{
     }
     
     async add(cid, pid){
-        invalidObjectIdMid(pid);
+        if(!mongoose.Types.ObjectId.isValid(cid)){
+            throw CustomError.createError("Error de datos", "CID inválido", errorTypes.BAD_REQUEST, invalidCidError(cid));
+        }
+
+        if(!mongoose.Types.ObjectId.isValid(pid)){
+            throw CustomError.createError("Error de datos", "PID inválido", errorTypes.BAD_REQUEST, invalidPidError(pid));
+        }
         
         let cartSelected = await this.get({_id:cid});
         let productsSelected = cartSelected[0].products;

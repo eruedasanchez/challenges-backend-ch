@@ -496,3 +496,704 @@
 {"level":"error","message":"Error de datos. Detail: Se ingreso un campo codigo con el valor \"abc123p3v2\" que ya se encuentra definido en la colección . Code: 400","timestamp":"2023-12-20T01:30:54.402Z"}
 {"level":"fatal","message":"Error al modificar un producto. Detalle: No posee los permisos para modificar el undefined seleccionado","timestamp":"2023-12-20T01:30:55.420Z"}
 {"level":"fatal","message":"Error al eliminar un producto. Detalle: No posee los permisos para modificar el undefined seleccionado","timestamp":"2023-12-20T01:30:56.782Z"}
+{"level":"error","message":"Error de datos. Detail: Se ingreso un campo codigo con el valor \"abc123p7\" que ya se encuentra definido en la colección . Code: 400","timestamp":"2023-12-20T14:49:36.346Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T14:51:27.144Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T14:56:46.450Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T15:59:56.403Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T15:59:56.410Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:03:59.576Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:19:13.008Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:29:26.516Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:31:31.914Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:31:32.514Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:32:21.855Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:32:22.428Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:32:41.894Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:32:42.462Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:33:25.226Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:33:25.799Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:40:11.624Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:40:12.204Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:50:23.109Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T16:50:23.683Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:06:19.936Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:06:20.512Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:06:21.066Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:06:21.072Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:08:16.792Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:08:17.402Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:08:17.965Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:26:25.608Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:26:26.226Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:26:26.791Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: newProducts is not iterable","timestamp":"2023-12-20T17:26:26.972Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: newProducts is not iterable","timestamp":"2023-12-20T17:26:26.980Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:28:49.737Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:28:50.324Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:28:50.863Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: newProducts is not iterable","timestamp":"2023-12-20T17:28:51.046Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e82d3aecef67c8207a314 no existe en el carrito con CID 656df5b5f045035c7d4dd8ab.","timestamp":"2023-12-20T17:28:51.227Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:35:04.837Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:35:05.412Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:35:05.969Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: newProducts is not iterable","timestamp":"2023-12-20T17:35:06.150Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:42:57.918Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:42:58.502Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:42:59.043Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:48:02.055Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:48:02.633Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:48:03.188Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:50:02.733Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:50:03.323Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:50:03.866Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:50:23.475Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:50:24.033Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:50:24.568Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:51:38.743Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:51:39.313Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:51:39.853Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:52:17.543Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:52:18.129Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:52:18.677Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:54:01.692Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:54:02.286Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:54:02.847Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:54:36.595Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:54:37.168Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:54:37.725Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:55:22.788Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:55:23.364Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:55:23.904Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:56:31.703Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:56:32.276Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:56:32.814Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:56:58.670Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:56:59.251Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:56:59.796Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:57:28.223Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:57:28.784Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:57:29.321Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:59:37.971Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:59:38.579Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T17:59:39.118Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:00:22.206Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:00:22.770Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:00:23.308Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:00:49.809Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:00:50.370Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:00:50.936Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:01:24.357Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:01:24.923Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:01:25.471Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:05:54.688Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:05:55.268Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:05:55.821Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:05:56.724Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:05:56.905Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:10:28.100Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:10:28.669Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:10:29.207Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:10:30.102Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:12:17.842Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:12:18.435Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:12:18.974Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:12:19.867Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:13:24.777Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:13:25.337Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:13:25.874Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:13:26.764Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:17:21.744Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:17:22.323Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:17:22.872Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:17:23.759Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:17:23.945Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:17:23.952Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:19:57.885Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:19:58.457Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:19:58.995Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:19:59.886Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:20:00.072Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:24:29.803Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:24:30.374Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:24:30.926Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:24:31.820Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:24:32.008Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:24:32.195Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:26:53.012Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:26:53.589Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:26:54.135Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:26:55.021Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:26:55.208Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:26:55.387Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:26:55.566Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:26:55.572Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:28:07.430Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:28:08.006Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:28:08.546Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:28:09.444Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:28:09.646Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:28:09.831Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:28:10.014Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:29:24.620Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:29:25.189Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:29:25.745Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:29:26.649Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:29:26.836Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:29:27.030Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:29:27.204Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:30:10.183Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:30:10.754Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:30:11.293Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T18:30:12.210Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:30:12.396Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:30:12.575Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T18:30:12.753Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:45:23.522Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:45:24.110Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:45:24.661Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:45:25.552Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:45:25.739Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:45:25.925Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:45:26.099Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:50:53.462Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:50:54.074Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:50:54.617Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:50:55.566Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:50:55.751Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:50:55.933Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:50:56.111Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:54:15.259Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:54:15.833Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:54:16.378Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 6582ff09679223d1fed21650 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:54:16.730Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:54:17.092Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:54:17.279Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:54:17.458Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:54:17.666Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 6582ff09679223d1fed21650 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:54:18.045Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:55:28.919Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:55:29.473Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:55:30.005Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:55:30.905Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:55:31.087Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:55:31.267Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:55:31.450Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:56:43.741Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:56:44.290Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:56:44.825Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:56:45.745Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:56:45.939Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:56:46.120Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:56:46.318Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:56:47.226Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:56:47.401Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:59:00.338Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:59:00.927Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:59:01.471Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:59:02.415Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:59:02.604Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:59:02.778Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T19:59:02.966Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T19:59:03.844Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:02:47.074Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:02:47.626Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:02:48.161Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:02:49.100Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:02:49.284Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:02:49.849Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:02:50.029Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:02:50.957Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:02:51.136Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:05:59.860Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:06:00.434Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:06:00.973Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:06:01.889Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:06:02.071Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:06:02.251Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:06:02.431Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:06:03.321Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:06:03.499Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:06:03.504Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:03.339Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:03.934Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:04.490Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:11:05.417Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:05.604Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:05.784Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:05.968Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:11:06.846Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:07.024Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:07.202Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:07.409Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:54.081Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:54.685Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:55.234Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:11:56.139Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:56.340Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:56.522Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:56.700Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:11:57.607Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:57.795Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:57.975Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:11:58.154Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:03.125Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:03.914Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:04.452Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:29:05.352Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:05.539Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:05.712Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:05.897Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:29:06.775Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:06.970Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:07.151Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:29:07.352Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:09.057Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:09.606Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:10.142Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:30:11.044Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:11.231Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:11.413Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:11.604Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:30:12.510Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:12.686Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:12.868Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:30:13.076Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:00.169Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:00.752Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:01.279Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:38:02.196Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:02.384Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:02.563Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:02.741Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:38:03.628Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:03.804Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:03.983Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:38:04.162Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:55.756Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:56.325Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:56.918Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:43:57.835Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:58.017Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:58.201Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:58.379Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:43:59.306Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:59.488Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:59.683Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:43:59.861Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:29.119Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:29.698Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:30.242Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:50:31.158Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:31.344Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:31.523Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:31.703Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:50:32.610Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:32.787Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:32.966Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:33.147Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:50:34.218Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:46.647Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:47.225Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:47.778Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:52:48.733Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:48.926Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:49.112Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:49.334Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:52:50.260Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:50.463Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:50.641Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:50.825Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:52:51.942Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:16.561Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:17.161Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:17.707Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:55:18.625Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:18.813Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:18.990Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:19.165Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:55:20.062Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:20.242Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:20.430Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:20.606Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:55:21.709Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:31.112Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:31.704Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:32.251Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:58:33.174Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:33.361Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:33.544Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:33.733Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:58:34.730Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:34.911Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:35.115Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:35.290Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: id is not defined","timestamp":"2023-12-20T20:58:36.385Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:58.294Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:58.873Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:58:59.495Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:59:00.409Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:59:00.595Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:59:00.781Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:59:00.961Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T20:59:01.869Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:59:02.050Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:59:02.235Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:59:02.415Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T20:59:03.507Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:37.705Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:38.286Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:38.853Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:00:39.838Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:40.025Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:40.209Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:40.389Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:00:41.361Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:41.540Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:41.719Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:41.898Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:00:42.973Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:20.638Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:21.233Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:21.800Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:06:22.759Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:22.946Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:23.125Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:23.306Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:06:24.204Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:24.383Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:24.562Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:06:24.742Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:06:26.255Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:06:26.483Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:09:58.707Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:09:59.299Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:09:59.847Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:10:00.761Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:10:00.946Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:10:01.126Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:10:01.303Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:10:02.201Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:10:02.384Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:10:02.567Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:10:02.745Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:10:03.855Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:49.252Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:49.822Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:50.354Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:12:51.271Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:51.456Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:51.634Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:51.821Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:12:52.736Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:52.922Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:53.104Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:12:53.287Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:12:54.386Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Cast to ObjectId failed for value \"hola\" (type string) at path \"_id\" for model \"products\"","timestamp":"2023-12-20T21:12:54.578Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:46.240Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:46.836Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:47.405Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:13:48.359Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:48.545Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:48.724Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:48.896Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:13:49.770Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:49.947Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:50.124Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:13:50.299Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:13:51.398Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Cast to ObjectId failed for value \"hola\" (type string) at path \"_id\" for model \"products\"","timestamp":"2023-12-20T21:13:51.583Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:48.804Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:49.388Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:49.925Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:16:50.842Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:51.031Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:51.210Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:51.404Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:16:52.303Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:52.491Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:52.669Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:16:52.842Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:16:53.998Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Cast to ObjectId failed for value \"hola\" (type string) at path \"_id\" for model \"products\"","timestamp":"2023-12-20T21:16:54.185Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: pid is not defined","timestamp":"2023-12-20T21:19:49.488Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:50.069Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:50.605Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:19:51.508Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:51.691Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:51.872Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:52.052Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:19:52.928Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:53.109Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:53.288Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:19:53.464Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:19:54.544Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: Cast to ObjectId failed for value \"hola\" (type string) at path \"_id\" for model \"products\"","timestamp":"2023-12-20T21:19:54.725Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:10.772Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:11.355Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:11.892Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:27:12.813Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:13.001Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:13.181Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:13.365Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:27:14.261Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:14.441Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:14.618Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:27:14.821Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:27:15.883Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:27:16.256Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:27:16.436Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:41.891Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:42.485Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:43.055Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:29:43.960Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:44.148Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:44.331Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:44.506Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:29:45.420Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:45.603Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:45.804Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:29:46.059Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:29:47.179Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:29:47.539Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:29:47.716Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:08.234Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:08.799Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:09.332Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:30:10.218Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:10.402Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:10.583Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:10.767Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:30:11.642Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:11.821Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:11.998Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:30:12.174Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:30:13.308Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:30:13.660Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:30.911Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:31.500Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:32.041Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:38:32.973Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:33.158Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:33.333Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:33.512Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:38:34.424Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:35.013Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:35.206Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:38:35.381Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:38:36.481Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:38:36.838Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:23.792Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:24.365Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:24.903Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:47:25.793Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:26.043Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:26.249Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:26.455Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:47:27.543Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:27.721Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:27.904Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:47:28.088Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:47:29.159Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:47:29.514Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:51.340Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:51.907Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:52.456Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:48:53.350Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:53.550Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:53.730Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:53.906Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:48:54.765Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:54.958Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:55.128Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:48:55.298Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T21:48:56.446Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T21:48:56.792Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:23.675Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:24.276Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:24.817Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:52:25.747Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:25.935Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:26.118Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:26.299Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T21:52:27.197Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:27.377Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:27.584Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T21:52:27.767Z"}
+{"level":"error","message":"Error de datos. Detail: Se ingreso un campo codigo con el valor \"abc1239m\" que ya se encuentra definido en la colección . Code: 400","timestamp":"2023-12-20T22:06:48.839Z"}
+{"level":"error","message":"Error de datos. Detail: Se ingreso un campo codigo con el valor \"abc12311m\" que ya se encuentra definido en la colección . Code: 400","timestamp":"2023-12-20T22:07:27.986Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:40.900Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:41.510Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:42.034Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 6582ff09679223d1fed21650 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:27:42.394Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:27:42.766Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:42.945Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:43.146Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:43.320Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 6582ff09679223d1fed21650 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:27:43.676Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:27:44.018Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:44.195Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:44.372Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:27:44.550Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:27:45.656Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:49.756Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:50.333Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:50.876Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:31:51.755Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:51.969Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:52.147Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:52.377Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:31:53.633Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:53.820Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:54.000Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:31:54.175Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:31:55.226Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T22:31:55.567Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:50.746Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:51.308Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:51.835Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:35:52.732Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:52.916Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:53.098Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:53.280Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:35:54.160Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:54.335Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:54.511Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:35:54.680Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:35:55.733Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T22:35:56.079Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:27.166Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:27.727Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:28.324Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:39:29.290Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:29.474Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:29.653Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:29.833Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:39:31.111Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:31.289Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:31.465Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:39:31.639Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:39:32.708Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T22:39:33.060Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:01.940Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:02.503Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:03.045Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:40:03.929Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:04.113Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:04.326Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:04.537Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:40:05.812Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:05.989Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:06.165Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:40:06.351Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:40:07.446Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T22:40:07.800Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:55.597Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:56.150Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:56.686Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:48:57.599Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:57.784Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:58.360Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:58.532Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:48:59.402Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:59.578Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:59.754Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:48:59.928Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:49:01.008Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T22:49:02.639Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T22:49:02.811Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:04.187Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:04.745Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:05.300Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:51:06.589Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:06.773Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:06.950Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:07.125Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:51:08.077Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:08.254Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:08.429Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:51:08.604Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:51:09.659Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:54.227Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:54.822Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:55.352Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:53:56.247Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:56.454Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:56.631Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:56.805Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:53:57.705Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:57.879Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:58.090Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:53:58.261Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:53:59.323Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T22:53:59.671Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:42.676Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:43.249Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:43.776Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:54:45.047Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:45.228Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:45.404Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:45.581Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:54:46.488Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:46.671Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:46.864Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:54:47.042Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:54:48.129Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T22:54:48.496Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T22:54:49.405Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T22:54:49.577Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:03.418Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:03.984Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:04.509Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:58:05.522Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:05.712Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:05.898Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:06.075Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T22:58:06.945Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:07.131Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:07.307Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T22:58:07.510Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T22:58:08.645Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T22:58:09.026Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T22:58:09.937Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T22:58:10.112Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:40.961Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:41.540Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:42.067Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T23:02:42.971Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:43.157Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:43.358Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:43.950Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T23:02:45.232Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:45.411Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:45.591Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:02:45.773Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T23:02:46.830Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T23:02:47.697Z"}
+{"level":"fatal","message":"Error al confirmar la compra. Detalle: Cannot read properties of undefined (reading 'products')","timestamp":"2023-12-20T23:02:47.873Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:30.015Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:30.579Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:31.238Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T23:05:32.116Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:32.309Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:32.484Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:32.707Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T23:05:33.581Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:33.753Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:33.928Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:05:34.112Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T23:05:35.217Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T23:05:35.967Z"}
+{"level":"fatal","message":"Error al obtener un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:11.167Z"}
+{"level":"fatal","message":"Error al modificar un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:11.729Z"}
+{"level":"fatal","message":"Error al eliminar todos los productos en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:12.248Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T23:09:13.137Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:13.326Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:13.502Z"}
+{"level":"fatal","message":"Error al modificar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:13.677Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: El producto con PID 656e5a832943f50a737deae9 no existe en el carrito con CID 656dff57aea2a8a45e4c4714.","timestamp":"2023-12-20T23:09:14.556Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:14.722Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:14.927Z"}
+{"level":"fatal","message":"Error al eliminar un producto en un carrito determinado. Detalle: Id hola ingresado tiene un formato invalido","timestamp":"2023-12-20T23:09:15.101Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: El CID hola solicitado tiene un formato invalido","timestamp":"2023-12-20T23:09:16.158Z"}
+{"level":"fatal","message":"Error al agregar un producto al carrito. Detalle: No posee los permisos para modificar el carrito seleccionado","timestamp":"2023-12-20T23:09:16.888Z"}

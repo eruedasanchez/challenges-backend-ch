@@ -1,8 +1,9 @@
-export const jwtoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NmRmZjU4YWVhMmE4YTQ1ZTRjNDcxNiIsImZpcnN0X25hbWUiOiJKdWxpYW4iLCJsYXN0X25hbWUiOiJMb3BleiIsImVtYWlsIjoiamxvcGV6QGdtYWlsLmNvbSIsImFnZSI6MjgsInBhc3N3b3JkIjoiJDJiJDEwJGRaYnJHRHJWZENid2lTajZSQ3dUWWVrckgvZGNwWktOTzB5cnV5cXlsaVhDWDYycXZTMGVxIiwiY2FydCI6IjY1NmRmZjU3YWVhMmE4YTQ1ZTRjNDcxNCIsInJvbGUiOiJwcmVtaXVtIiwiX192IjowfSwiaWF0IjoxNzAzMDMyNTEwLCJleHAiOjE3MDMwMzYxMTB9.tPJnW_7fKU2OhTOctyokqla8V1FJ5vry3SjYMQnJLlY';
+export const jwtoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1ODM2ODkwZDg2NGE1ZDhkMmJmNzdiZSIsImZpcnN0X25hbWUiOiJKdWFuIiwibGFzdF9uYW1lIjoiU2F0aXNmYWN0b3JpYSIsImVtYWlsIjoianVhbi5zYXRpc2ZhY3RvcmlhQGdtYWlsLmNvbSIsImFnZSI6MjUsInBhc3N3b3JkIjoiJDJiJDEwJGlRQmcwMDFPVWd0R0ZDblFUZ2NXaXUvVDROb2dKRDcvMUFmLlFGYTdsNVNyWjJ4QlgxU082IiwiY2FydCI6IjY1ODM2ODkwZDg2NGE1ZDhkMmJmNzdiYyIsInJvbGUiOiJ1c2VyIiwiX192IjowfSwiaWF0IjoxNzAzMTEzODI2LCJleHAiOjE3MDMxMTc0MjZ9.9KZGtY81JxMbeJnU3diiRn_Um75aTe-ilV7hiPudGmM';
 
 export const productTestData = {
     PID_TWO: '656e82f9aecef67c8207a31e',
     PID_FIVE: '656e82d3aecef67c8207a314',
+    PID_EIGHT: '6582ff09679223d1fed21650',
     PID_ADMIN:'656e5a832943f50a737deae9',
     PID_DELETE: '6582437526e81f7ba845cab2',
     INVALID_PID: 'hola',
@@ -132,6 +133,13 @@ export const buildProductVersion = async (property, version) => {
     }    
     
     return productTest;
+}
+
+export const cartTestData = {
+    CID_JLOPEZ: '656dff57aea2a8a45e4c4714',
+    CID_ERUEDA: '656df5b5f045035c7d4dd8ab',
+    CID_JSATISFACTORIA: '65836890d864a5d8d2bf77bc',
+    CID_RINSATISFACTORIA: '65836e3288221564b513657f'
 }
 
 

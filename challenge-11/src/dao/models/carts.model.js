@@ -5,7 +5,7 @@ const productIdQuantity = new mongoose.Schema({
     quantity: Number
 }, {strict: true});
 
-const cartsCollection = 'carts';                                            // 'carts' coresponde al nombre de la coleccion definida en Atlas
+const cartsCollection = 'carts';                                            
 const cartsSchema = new mongoose.Schema({
     products: {type: [productIdQuantity], require: true}
 }, {strict: true})  

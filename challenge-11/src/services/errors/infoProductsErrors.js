@@ -26,6 +26,10 @@ export const invalidPidError = pid => {
     return `El PID ${pid} solicitado tiene un formato invalido`;
 }
 
+export const invalidCidError = cid => {
+    return `El CID ${cid} solicitado tiene un formato invalido`;
+}
+
 /*------------------------*\
     #MIDDLEWARES POST '/'
 \*------------------------*/
