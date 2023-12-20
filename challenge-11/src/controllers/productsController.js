@@ -673,7 +673,7 @@ async function deleteProduct(req,res){
         let productSelected = await productsService.getProductById(pid);
         
         if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email !== productSelected[0].owner){
-            throw CustomError.createError("Error al modificar un producto", "Unauthorized", errorTypes.UNAUTHORIZED, unauthorizedErrorInfo());
+            throw CustomError.createError("Error al eliminar un producto", "Unauthorized", errorTypes.UNAUTHORIZED, unauthorizedErrorInfo());
         }
         
         // Admin o un usuario premium quiere eliminar su propio producto
