@@ -3,6 +3,7 @@
 This project was generated with the following dependencies: 
 
 - [BCrypt](https://github.com/pyca/bcrypt): Version 5.1.1 
+- [Chai](https://github.com/chaijs/chai): Version 4.3.10
 - [Commander.js](https://github.com/tj/commander.js?): Version 11.1.0
 - [Cookie Parser](https://github.com/expressjs/cookie-parser): Version 1.4.6
 - [Connect Mongo](https://github.com/mongodb-js/connect-mongodb-session): Version 5.0.0
@@ -12,6 +13,7 @@ This project was generated with the following dependencies:
 - [Express session](https://github.com/expressjs/session): Version 1.17.3
 - [Faker-JS](https://github.com/faker-js/faker): Version 8.3.1 
 - [Jsonwebtoken](https://github.com/auth0/node-jsonwebtoken): Version 9.0.2
+- [Mocha](https://github.com/mochajs/mocha): Version 10.2.0
 - [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2
 - [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4  
 - [Nodemailer](https://github.com/nodemailer/nodemailer): Version 6.9.7  
@@ -20,6 +22,7 @@ This project was generated with the following dependencies:
 - [Passport Jwt](https://github.com/mikenicholson/passport-jwt): Version 4.0.1
 - [Passport Local](https://github.com/jaredhanson/passport-local): Version 0.6.0
 - [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2
+- [Supertest](https://github.com/ladjs/supertest): Version 6.3.3
 - [Swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc): Version 6.2.8
 - [Swagger-ui-express](https://github.com/scottie1984/swagger-ui-express): Version 5.0.0
 - [Uuid](https://github.com/uuidjs/uuid): Version 9.0.1
@@ -33,9 +36,13 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-1. The product module is documented
+Tests are developed to:
 
-2. The cart module is documented
+- Products Router
+
+- Carts Router
+
+- Sessions Router
 
 ## Quick Start
 
@@ -59,10 +66,10 @@ Clone the repository in that folder:
 $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 ```
 
-Open challenge-10 folder and install dependencies: 
+Open challenge-11 folder and install dependencies: 
 
 ```bash
-$ cd challenge-10
+$ cd challenge-11
 $ npm install
 ```
 
