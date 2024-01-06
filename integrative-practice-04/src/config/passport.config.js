@@ -1,3 +1,5 @@
+// archivo passport.config.js
+
 import passport from 'passport';
 import local from 'passport-local';
 import github from 'passport-github2';

@@ -1,9 +1,13 @@
+// archivo sessionStorage.router.js
+
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
+import moment from 'moment-timezone';
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { DtoUsers } from '../DTO/dtousers.js';
 import { userRole } from '../utils.js';
+import { usersModel } from '../dao/models/users.model.js';
 export const router = Router();
 
 /*------------------------------*\
@@ -76,13 +80,16 @@ router.post('/login', function(req, res, next) {
         if (err) return next(err);
         
         if (!user) return res.redirect(`/login?error=${info.message ? info.message : info.toString()}`);
+
+        user.last_connection = moment().tz('America/Argentina/Buenos_Aires').format('DD-MM-YYYYTHH:mm:ss.SSS[Z]');
+        user.save();
         
         req.user = user;
         return next(); // para poder ejecutar lo que quiera debajo
     })(req, res, next);
 }, (req, res) => {
     let user = req.user;
-
+    
     // Generacion de la cookie luego de logearme. Hay que generar el token
     let token = jwt.sign({user}, config.SECRET, {expiresIn: '1h'});
     
@@ -99,8 +106,13 @@ router.post('/login', function(req, res, next) {
     #GET /LOGOUT
 \*-------------------*/
 
-router.get('/logout', (req, res) => {
+router.get('/logout', passport.authenticate('current', { session: false }), async (req, res) => {
     try {
+        if(req.isAuthenticated){
+            let updatedConnection = moment().tz('America/Argentina/Buenos_Aires').format('DD-MM-YYYYTHH:mm:ss.SSS[Z]');
+            await usersModel.findByIdAndUpdate(req.user._id, { last_connection: updatedConnection });
+        }
+        
         res.clearCookie('coderCookie');
         return res.redirect('/login?message=logout correcto!');
     } catch (error) {
