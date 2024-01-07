@@ -145,10 +145,17 @@ router.get('/login', activeSessionMid, (req,res) => {
 })
 
 router.get('/products', passport.authenticate('current', {session:false}), async (req,res) => {
-    let {limit, page, userFirstName, userLastName, userEmail, userRole, cartId} = req.query;
+    let profileSuccessfullyLoad = false, productsSuccessfullyLoad = false, documentsSuccessfullyLoad = false;
+    let {limit, page, userId, userFirstName, userLastName, userEmail, userRole, cartId, successProfile, } = req.query;
     
     if(!limit) limit = 10;
     if(!page) page = 1;
+
+    if(successProfile) profileSuccessfullyLoad = successProfile;
+
+    if(successProducts) productsSuccessfullyLoad = successProducts;
+
+    if(successDocuments) documentsSuccessfullyLoad = successDocuments;
 
     const products = await productsService.getProductsPaginate(limit, page);
 
@@ -163,11 +170,15 @@ router.get('/products', passport.authenticate('current', {session:false}), async
         hasNextPage: hasNextPage , 
         prevPage: prevPage, 
         nextPage: nextPage,
+        userId: userId,
         userFirstName: userFirstName, 
         userLastName: userLastName, 
         userEmail: userEmail, 
         userRole: userRole,
-        cartId: cartId
+        cartId: cartId,
+        profileSuccessfullyLoad: profileSuccessfullyLoad,
+        productsSuccessfullyLoad: productsSuccessfullyLoad, 
+        documentsSuccessfullyLoad: documentsSuccessfullyLoad
     });
 });
 

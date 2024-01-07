@@ -2,6 +2,32 @@
 <hr>
 <h3>Informacion del {{userRole}}: Email: {{userEmail}}, Rol: {{userRole}}</h3>
 <hr>
+<h3>Carga/actualiza tus datos/productos</h3>
+<form action="/api/users/{{userId}}/profiles" method="post" enctype="multipart/form-data">
+    <p>Cargar imagen de perfil</p>
+    {{#if profileSuccessfullyLoad}}
+        <div class="success">Se ha cargado exitosamente su imagen de perfil</div>
+    {{/if}}
+    <input type="file" name="profiles">
+    <input type="submit" value="Subir imagen de perfil">
+</form>
+<form action="/api/users/{{userId}}/products" method="post" enctype="multipart/form-data">
+    <p>Cargar imagenes de productos</p>
+    {{#if productsSuccessfullyLoad}}
+        <div class="success">Se han cargado exitosamente los productos</div>
+    {{/if}}
+    <input type="file" name="products" multiple>
+    <input type="submit" value="Subir imagenes de tus productos">
+</form>
+<form action="/api/users/{{userId}}/documents" method="post" enctype="multipart/form-data">
+    <p>Cargar documentación personal o de la cuenta</p>
+    {{#if documentsSuccessfullyLoad}}
+        <div class="success">Se han cargado exitosamente los documentos</div>
+    {{/if}}
+    <input type="file" name="documents" multiple>
+    <input type="submit" value="Subir documentación personal o información de tu cuenta">
+</form>
+<hr>
 <h3>Listado de productos almacenados en MongoDB Atlas</h3>
 <hr>
 <ul>

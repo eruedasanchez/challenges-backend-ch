@@ -1,5 +1,3 @@
-// archivo sessionStorage.router.js
-
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import moment from 'moment-timezone';
@@ -99,7 +97,7 @@ router.post('/login', function(req, res, next) {
         httpOnly: true          // se tilda la opcion httpOnly, es decir, que al ejecutar document.cookie no las deja acceder 
     })
     
-    res.redirect(`/products?userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}`);
+    res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}`);
 });
 
 /*-------------------*\
@@ -108,9 +106,11 @@ router.post('/login', function(req, res, next) {
 
 router.get('/logout', passport.authenticate('current', { session: false }), async (req, res) => {
     try {
+        let userLoggedIn = req.user;
+
         if(req.isAuthenticated){
             let updatedConnection = moment().tz('America/Argentina/Buenos_Aires').format('DD-MM-YYYYTHH:mm:ss.SSS[Z]');
-            await usersModel.findByIdAndUpdate(req.user._id, { last_connection: updatedConnection });
+            await usersModel.findByIdAndUpdate(userLoggedIn._id, { last_connection: updatedConnection });
         }
         
         res.clearCookie('coderCookie');

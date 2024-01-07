@@ -1,5 +1,3 @@
-// archivo users.model.js
-
 import mongoose from "mongoose";
 
 const usersCollection = 'users'; 

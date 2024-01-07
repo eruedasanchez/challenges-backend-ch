@@ -1,11 +1,36 @@
+import __dirname from '../utils.js';
+import path from 'path';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
+import multer from 'multer';
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';
 import { generateHash, validateHash, userRole } from '../utils.js';
+import passport from 'passport';
 export const router = Router();
+
+/*------------------------------------*\
+    #UPLOADS FILES WITH MULTER
+\*------------------------------------*/
+
+const configureMulter = folder => {
+    return multer({
+        storage: multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, path.join(__dirname, `/tmp/uploads/${folder}`));
+            },
+            filename: function (req, file, cb) {
+                cb(null, file.originalname);
+            }
+        })
+    });
+};
+
+const uploadProfiles = configureMulter('profiles');
+const uploadProducts = configureMulter('products') ;
+const uploadDocuments = configureMulter('documents');
 
 /*------------------------------------*\
     #FUNCTIONS RESET PASSWORD
@@ -152,3 +177,49 @@ router.put('/premium/:uid', invalidUserIdMid, nonExistentUserIdMid, async (req, 
     }
 });
 
+/*------------------------*\
+    #POST /:uid/PROFILES
+\*------------------------*/
+
+router.post('/:uid/profiles', passport.authenticate('current', { session: false }), uploadProfiles.single('profiles'), async (req, res) => {
+    try {
+        let userId = req.params.uid;
+        
+        console.log('req.file', req.file);
+        return res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}&successProfile=${`Carga correcta del perfil`}`);
+    } catch (error) {
+        req.logger.fatal(`Error al cargar la documentación. Detalle: ${error.message}`);
+        return res.status(400).json({ error: 'Unexpected', detalle: error.message });
+    }
+});
+
+/*------------------------*\
+    #POST /:uid/PRODUCTS
+\*------------------------*/
+
+router.post('/:uid/products', passport.authenticate('current', { session: false }), uploadProducts.array('products'), async (req, res) => {
+    try {
+        let userId = req.params.uid;
+        
+        return res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}&successProducts=${`Carga correcta de los productos`}`);
+    } catch (error) {
+        req.logger.fatal(`Error al cargar la documentación. Detalle: ${error.message}`);
+        return res.status(400).json({ error: 'Unexpected', detalle: error.message });
+    }
+});
+
+/*------------------------*\
+    #POST /:uid/DOCUMENTS
+\*------------------------*/
+
+router.post('/:uid/documents', passport.authenticate('current', { session: false }), uploadDocuments.array('documents'), async (req, res) => {
+    try {
+        let resultado = 'docs';
+        let userId = req.params.uid;
+        
+        return res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}&successDocuments=${`Carga correcta de los productos`}`);
+    } catch (error) {
+        req.logger.fatal(`Error al cargar la documentación. Detalle: ${error.message}`);
+        return res.status(400).json({ error: 'Unexpected', detalle: error.message });
+    }
+});

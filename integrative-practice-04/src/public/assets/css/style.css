@@ -57,6 +57,7 @@ body {
   input[type="number"],
   input[type="email"],
   input[type="password"],
+  input[type="file"],
   textarea {
     display: block;
     width: 100%;
