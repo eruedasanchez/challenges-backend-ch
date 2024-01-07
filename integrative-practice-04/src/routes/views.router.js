@@ -146,7 +146,7 @@ router.get('/login', activeSessionMid, (req,res) => {
 
 router.get('/products', passport.authenticate('current', {session:false}), async (req,res) => {
     let profileSuccessfullyLoad = false, productsSuccessfullyLoad = false, documentsSuccessfullyLoad = false;
-    let {limit, page, userId, userFirstName, userLastName, userEmail, userRole, cartId, successProfile, } = req.query;
+    let {limit, page, userId, userFirstName, userLastName, userEmail, userRole, cartId, successProfile, successProducts, successDocuments} = req.query;
     
     if(!limit) limit = 10;
     if(!page) page = 1;

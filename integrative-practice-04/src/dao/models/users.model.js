@@ -9,7 +9,13 @@ const usersSchema = new mongoose.Schema({
 	password: {type: String, require: true},
 	cart: { type: mongoose.Schema.Types.ObjectId, ref: 'carts'},
 	role: {type: String, default: 'user'},
-	last_connection: {type: Object} 
+	last_connection: {type: Object},
+	documents: [
+		{
+			name: { type: String },
+			reference: { type: String }
+		}
+	]
 })
 
 export const usersModel = mongoose.model(usersCollection, usersSchema);

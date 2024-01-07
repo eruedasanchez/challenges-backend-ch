@@ -184,8 +184,18 @@ router.put('/premium/:uid', invalidUserIdMid, nonExistentUserIdMid, async (req, 
 router.post('/:uid/profiles', passport.authenticate('current', { session: false }), uploadProfiles.single('profiles'), async (req, res) => {
     try {
         let userId = req.params.uid;
+        let { originalname, path } = req.file;
         
-        console.log('req.file', req.file);
+        let user = await usersModel.findOne({_id:userId});
+
+        let newDocument = {
+            name: originalname,
+			reference: path
+        }
+
+        user.documents.push(newDocument);
+        user.save();
+        
         return res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}&successProfile=${`Carga correcta del perfil`}`);
     } catch (error) {
         req.logger.fatal(`Error al cargar la documentación. Detalle: ${error.message}`);
@@ -200,6 +210,18 @@ router.post('/:uid/profiles', passport.authenticate('current', { session: false 
 router.post('/:uid/products', passport.authenticate('current', { session: false }), uploadProducts.array('products'), async (req, res) => {
     try {
         let userId = req.params.uid;
+        const loadedProducts = req.files;
+        
+        let user = await usersModel.findOne({_id:userId});
+
+        const newDocuments = loadedProducts.map(product => ({
+            name: product.originalname,
+            reference: product.path
+        }));
+
+        user.documents.push(...newDocuments);
+
+        await user.save();
         
         return res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}&successProducts=${`Carga correcta de los productos`}`);
     } catch (error) {
@@ -214,8 +236,19 @@ router.post('/:uid/products', passport.authenticate('current', { session: false 
 
 router.post('/:uid/documents', passport.authenticate('current', { session: false }), uploadDocuments.array('documents'), async (req, res) => {
     try {
-        let resultado = 'docs';
         let userId = req.params.uid;
+        const loadedProducts = req.files;
+        
+        let user = await usersModel.findOne({_id:userId});
+
+        const newDocuments = loadedProducts.map(product => ({
+            name: product.originalname,
+            reference: product.path
+        }));
+
+        user.documents.push(...newDocuments);
+
+        await user.save();
         
         return res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}&successDocuments=${`Carga correcta de los productos`}`);
     } catch (error) {

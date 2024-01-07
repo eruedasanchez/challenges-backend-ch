@@ -1201,3 +1201,4 @@
 {"level":"fatal","message":"Error al cargar la documentación. Detalle: fileType is not defined","timestamp":"2024-01-07T17:36:08.776Z"}
 {"level":"fatal","message":"Error al cargar la documentación. Detalle: Cannot read properties of undefined (reading '_id')","timestamp":"2024-01-07T21:14:05.619Z"}
 {"level":"fatal","message":"Error al cargar la documentación. Detalle: Cannot read properties of undefined (reading '_id')","timestamp":"2024-01-07T21:21:08.870Z"}
+{"level":"fatal","message":"Error al cargar la documentación. Detalle: Cannot destructure property 'originalname' of 'req.file' as it is undefined.","timestamp":"2024-01-07T22:37:54.982Z"}
