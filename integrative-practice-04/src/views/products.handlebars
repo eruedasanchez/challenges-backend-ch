@@ -1,7 +1,11 @@
 <h1>Bienvenido {{userFirstName}} {{userLastName}}</h1>
 <hr>
-<h3>Informacion del {{userRole}}: Email: {{userEmail}}, Rol: {{userRole}}</h3>
+<h3>Informacion del usuario: Email: {{userEmail}}, Rol: {{userRole}}</h3>
 <hr>
+<script>
+    var userRole = '{{userRole}}';
+</script>
+<br>
 <h3>Carga/actualiza tus datos/productos</h3>
 <form action="/api/users/{{userId}}/profiles" method="post" enctype="multipart/form-data">
     <p>Cargar imagen de perfil</p>
@@ -81,5 +85,23 @@
 </form>
 <hr>  
 <br>
+<form id="premiumForm" action="/api/users/premium/{{userId}}" method="post">
+    <button type="submit">Cambiar a usuario modo user</button>
+</form>
+
+<form id="userForm" action="/api/users/premium/{{userId}}" method="post">
+    {{#if mandatoryDocumentEmpty}}
+        <div class="error">Error. Debes cargar tu foto de perfil o documentación para poder cambiar de rol</div>
+    {{/if}}
+    <button type="submit">Cambiar a usuario modo premium</button>
+</form>
+
+<script>
+    if (userRole === 'premium') {
+        document.getElementById('userForm').style.display = 'none';
+    } else {
+        document.getElementById('premiumForm').style.display = 'none';
+    }
+</script>
 <ul class="menu"><li> <a href="/api/sessions/logout">Logout</a></li></ul>
 

@@ -36,3 +36,10 @@ export const ops = {
     LEAN: 'lean'
 };
 
+export const documentation = {
+    EMPTY: 0,
+    FOLDER: 10, 
+    PROFILE: 'profiles',
+    DOCUMENT: 'documents'
+};
+

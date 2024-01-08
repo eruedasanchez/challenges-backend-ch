@@ -7,7 +7,7 @@ import multer from 'multer';
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';
-import { generateHash, validateHash, userRole } from '../utils.js';
+import { generateHash, validateHash, userRole, documentation } from '../utils.js';
 import passport from 'passport';
 export const router = Router();
 
@@ -152,31 +152,6 @@ router.post('/confirmPassword', async (req, res) => {
     }
 });
 
-/*----------------------*\
-    #PUT /PREMIUM/:UID
-\*----------------------*/
-
-router.put('/premium/:uid', invalidUserIdMid, nonExistentUserIdMid, async (req, res) => {
-    try {
-        let userId = req.params.uid;
-
-        let user = await usersModel.findOne({_id:userId});
-
-        if(user.role === userRole.ADMIN){
-            throw new Error('No posee los permisos para cambiar el rol de uid ingresado');
-        }
-        
-        // Luego de pasar por el middleware de admin, solo puede tener el rol 'user' o 'premium'
-        user.role === userRole.PREMIUM ? user.role = userRole.USER : user.role = userRole.PREMIUM;
-        
-        await user.save();
-        return res.status(200).json({status: 'ok', updatedRoleUser: user});
-    } catch (error) {
-        req.logger.fatal(`Error al modificar el rol del usuario. Detalle: ${error.message}`);
-        return res.status(500).json({error:'Unexpected', detalle:error.message});
-    }
-});
-
 /*------------------------*\
     #POST /:uid/PROFILES
 \*------------------------*/
@@ -254,5 +229,49 @@ router.post('/:uid/documents', passport.authenticate('current', { session: false
     } catch (error) {
         req.logger.fatal(`Error al cargar la documentación. Detalle: ${error.message}`);
         return res.status(400).json({ error: 'Unexpected', detalle: error.message });
+    }
+});
+
+/*----------------------*\
+    #PUT /PREMIUM/:UID
+\*----------------------*/
+
+router.post('/premium/:uid', async (req, res) => {
+    try {
+        let userId = req.params.uid;
+
+        let user = await usersModel.findOne({_id:userId});
+
+        if(user.role === userRole.ADMIN){
+            throw new Error('No posee los permisos para cambiar el rol de uid ingresado');
+        }
+
+        if(user.role === userRole.USER){
+            const documentationLoaded = user.documents;
+            console.log('documentationLoaded:', documentationLoaded); 
+
+            let documentType, cantMandatoryDocumentation = 0;
+            for(const document of documentationLoaded){
+                documentType = document.reference.split('/')[documentation.FOLDER]; // se accede a la carpeta donde esta guardado el archivo
+                console.log('documentType:', documentType);
+
+                if(documentType === documentation.PROFILE || documentType === documentation.DOCUMENT){  
+                    cantMandatoryDocumentation++;
+                }
+            }
+
+            if(cantMandatoryDocumentation === documentation.EMPTY){
+                return res.redirect(`/products?userId=${user._id}&userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${user.role}&cartId=${user.cart}&unsuccessChangeRole=${`Error al cambiar de rol`}`);
+            }
+        }
+        
+        // Luego de pasar por el middleware de admin y chequar si está cargada la información, solo puede tener el rol 'user' o 'premium'
+        user.role === userRole.PREMIUM ? user.role = userRole.USER : user.role = userRole.PREMIUM;
+        
+        await user.save();
+        return res.redirect(`/products?userId=${user._id}&userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${user.role}&cartId=${user.cart}`);
+    } catch (error) {
+        req.logger.fatal(`Error al modificar el rol del usuario. Detalle: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detalle:error.message});
     }
 });
