@@ -1,4 +1,4 @@
-# Challenge 11. Advanced Testing 
+# Integrative Practice 04. Roles change and upload documentation
 
 This project was generated with the following dependencies: 
 
@@ -15,7 +15,8 @@ This project was generated with the following dependencies:
 - [Jsonwebtoken](https://github.com/auth0/node-jsonwebtoken): Version 9.0.2
 - [Mocha](https://github.com/mochajs/mocha): Version 10.2.0
 - [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2
-- [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4  
+- [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4
+- [Multer](https://github.com/expressjs/multer): Version 1.4.5-lts.1  
 - [Nodemailer](https://github.com/nodemailer/nodemailer): Version 6.9.7  
 - [Passport](https://github.com/jaredhanson/passport): Version 0.6.0
 - [Passport Github2](https://github.com/passport/todos-express-password): Version 0.6.0
@@ -36,13 +37,21 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-Tests are developed to:
+1. Move the route /api/users/premium/:uid to the specific router for users.
 
-- Products Router
+2. *"documents"* and *"last_connection"* properties are added to the users model.
 
-- Carts Router
+3. The endpoint api/users/:uid/documents is created with the POST method that allows uploading one or multiple files. Furthermore, it's used by Multer to be able to receive the documents that are uploaded and update the "documents" property in the user indicating that a particular document has already been uploaded.
 
-- Sessions Router
+The multer middleware is modified so that it can save the different files that are uploaded in different folders:
+
+-  If a profile image is uploaded, it will be saved in the profiles folder
+
+- If you receive the image of a product, it is saved in the products folder,
+
+- While when you upload a document, Multer saves it in the documents folder.
+
+4. The endpoint /api/users/premium/:uid is modified so that it only upgrades the user to **premium** if the user has already uploaded the documents identification, proof of address or proof of account status..
 
 ## Quick Start
 
@@ -66,10 +75,10 @@ Clone the repository in that folder:
 $ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
 ```
 
-Open challenge-11 folder and install dependencies: 
+Open integrative-practice-04 folder and install dependencies: 
 
 ```bash
-$ cd challenge-11
+$ cd integrative-practice-04
 $ npm install
 ```
 
