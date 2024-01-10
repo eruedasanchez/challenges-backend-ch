@@ -1,4 +1,4 @@
-# Integrative Practice 04. Roles change and upload documentation
+# Final project 
 
 This project was generated with the following dependencies: 
 
@@ -37,21 +37,11 @@ Before installing, download and install Node.js. Node.js 0.10 or higher is requi
 
 ## Description
 
-1. Move the route /api/users/premium/:uid to the specific router for users.
+1. The endpoint that deletes products is modified so that, if the product belongs to a premium user, it sends them an email indicating that the product was deleted.
 
-2. *"documents"* and *"last_connection"* properties are added to the users model.
+2. The pending views are finalized for the completion of the complete purchase flow.
 
-3. The endpoint api/users/:uid/documents is created with the POST method that allows uploading one or multiple files. Furthermore, it's used by Multer to be able to receive the documents that are uploaded and update the "documents" property in the user indicating that a particular document has already been uploaded.
-
-The multer middleware is modified so that it can save the different files that are uploaded in different folders:
-
--  If a profile image is uploaded, it will be saved in the profiles folder
-
-- If you receive the image of a product, it is saved in the products folder,
-
-- While when you upload a document, Multer saves it in the documents folder.
-
-4. The endpoint /api/users/premium/:uid is modified so that it only upgrades the user to **premium** if the user has already uploaded the documents identification, proof of address or proof of account status..
+3. The application is deployed on **Railway.app** platform and it is confirmed that a complete purchasing process can be carried out.
 
 ## Quick Start
 
