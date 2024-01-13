@@ -2,6 +2,7 @@ import {fileURLToPath} from 'url';
 import { dirname } from 'path';
 import bcrypt from 'bcrypt';
 
+export const TWO_DAYS = 2;
 export const PRIVATE_KEY = 'secretPass';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

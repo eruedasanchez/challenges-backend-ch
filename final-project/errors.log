@@ -2,3 +2,11 @@
 {"level":"fatal","message":"Error al cargar la documentación. Detalle: Cannot read properties of undefined (reading '_id')","timestamp":"2024-01-07T21:14:05.619Z"}
 {"level":"fatal","message":"Error al cargar la documentación. Detalle: Cannot read properties of undefined (reading '_id')","timestamp":"2024-01-07T21:21:08.870Z"}
 {"level":"fatal","message":"Error al cargar la documentación. Detalle: Cannot destructure property 'originalname' of 'req.file' as it is undefined.","timestamp":"2024-01-07T22:37:54.982Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2024-01-13T14:34:58.957Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2024-01-13T14:34:58.968Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2024-01-13T14:35:05.276Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2024-01-13T14:35:05.277Z"}
+{"level":"fatal","message":"Prueba log - nivel fatal","timestamp":"2024-01-13T14:35:12.897Z"}
+{"level":"error","message":"Prueba log - nivel error","timestamp":"2024-01-13T14:35:12.898Z"}
+{"level":"fatal","message":"Error al realizar la limpieza de usuarios. Detalle: last_connection is not defined","timestamp":"2024-01-13T16:04:14.093Z"}
+{"level":"fatal","message":"Error al realizar la limpieza de usuarios. Detalle: now.diff is not a function","timestamp":"2024-01-13T16:04:53.672Z"}

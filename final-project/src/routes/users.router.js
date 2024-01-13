@@ -1,4 +1,4 @@
-import __dirname from '../utils.js';
+import __dirname, { TWO_DAYS } from '../utils.js';
 import path from 'path';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
@@ -9,6 +9,8 @@ import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';
 import { generateHash, validateHash, userRole, documentation } from '../utils.js';
 import passport from 'passport';
+import moment from 'moment-timezone';
+
 export const router = Router();
 
 /*------------------------------------*\
@@ -61,6 +63,24 @@ const sendEmail = async (jwtoken, to)  => {
     });
 }
 
+const sendEmailUnsubscribedAccount = async to => {
+    return transporter.sendMail({
+        from: 'Ezequiel <ezequiel.ruedasanchez@gmail.com>',
+        to: to,
+        subject: 'Unsubscribed Account',
+        html: `
+        <h2>Su cuenta ha sido de baja por inactivad</h2>
+        <p>Lo sentimos mucho. Si desea seguir utilizando nuestros servicios, haga click en el siguiente enlace para volver a suscribirse:</p>
+        <a style="color:white; background-color:blue" href="http://localhost:8080/signup">Registrarme nuevamente</a>
+        <br>
+        <br>
+        <p>Este es un mensaje meramente informativo. No responda este mensaje por favor.</p>
+        `,
+    });
+}
+
+
+
 /*------------------------------------*\
     #MIDDLEWARES PUT '/premium/:uid'
 \*------------------------------------*/
@@ -111,9 +131,7 @@ router.post('/resetPassword', async (req, res, next) => {
     
     // Se busca al usuario en la DB que coincida con el email ingresado 
     let user = await usersModel.findOne({email:requestedEmail});
-    console.log("user", user);
-    console.log("typo user", typeof user);
-            
+    
     if(!user){
         // El email ingresado no corresponde a un usuario registrado
         return res.redirect('/resetPassword?unregisteredEmail=El email ingresado no corresponde a un cliente registrado');
@@ -275,3 +293,55 @@ router.post('/premium/:uid', async (req, res) => {
         return res.status(500).json({error:'Unexpected', detalle:error.message});
     }
 });
+
+/*----------*\
+    #GET /
+\*----------*/
+
+router.get('/', async (req, res) => {
+    try {
+        let usersDB = await usersModel.find();
+        
+        let registeredUsers = usersDB.map(user => {
+            return {
+                first_name: user.first_name,
+                email: user.email,
+                role: user.role
+            }
+        })
+        
+        return res.status(200).json({status:'ok', registeredUsers:registeredUsers});
+    } catch (error) {
+        req.logger.fatal(`${error.name}. Detail: ${error.message}`);
+        return res.status(error.code).json({error:error.description, detalle:error.message});
+    }
+});
+
+/*-------------*\
+    #DELETE /
+\*-------------*/
+
+router.delete('/', async (req, res) => {
+    try {
+        let usersDB = await usersModel.find();
+
+        for (const user of usersDB) {
+            if(user.last_connection){
+                const lastConnectionParsed = moment.tz(user.last_connection, 'DD-MM-YYYYTHH:mm:ss.SSSZ', 'America/Argentina/Buenos_Aires');
+                const differenceInDays = moment().tz('America/Argentina/Buenos_Aires').diff(lastConnectionParsed, 'days');
+                
+                if(differenceInDays > TWO_DAYS){
+                    await sendEmailUnsubscribedAccount(user.email);
+                    await usersModel.deleteOne({_id: user._id});
+                }
+            }             
+        }
+
+        usersDB = await usersModel.find();
+        return res.status(200).json({status: 'ok', usersDBUpdated: usersDB});
+    } catch (error) {
+        req.logger.fatal(`Error al realizar la limpieza de usuarios. Detalle: ${error.message}`);
+        return res.status(error.code).json({error:error.description, detalle:error.message});
+    }
+});
+

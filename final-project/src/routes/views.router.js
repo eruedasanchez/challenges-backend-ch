@@ -237,3 +237,6 @@ router.get('/loggerTest', (req, res) => {
     res.status(200).render('loggerTest');
 });
 
+// Crear una vista para poder visualizar, modificar el rol y eliminar un usuario. Esta vista únicamente será accesible para el administrador del ecommerce
+
+
