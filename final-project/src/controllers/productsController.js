@@ -1,11 +1,41 @@
 import mongoose  from 'mongoose';
+import nodemailer from 'nodemailer';
 import { CustomError } from '../services/errors/customError.js';
 import { errorTypes } from '../services/errors/enumsError.js';
 import { generateProductErrorInfo, invalidPidError, invalidSortError, negativeQueryError, noNumberError, noNumberLimitPageError, overflowError, priceStockNegativeError, sameFieldError, unauthorizedErrorInfo} from '../services/errors/infoProductsErrors.js';
 import { productsService } from '../services/products.service.js';
 import { sorting, userRole } from '../utils.js';
+import { config } from '../config/config.js';
 
 const ASC = sorting.ASC, DESC = sorting.DESC;
+
+/*------------------------------------*\
+    #FUNCTIONS RESET PASSWORD
+\*------------------------------------*/
+
+const transporter = nodemailer.createTransport({
+    service: config.NODEMAILER_SERVICE,
+    port: config.NODEMAILER_PORT,
+    auth: {
+        user: config.TRANSPORT_USER,
+        pass: config.TRANSPORT_PASS
+    }
+})
+
+const sendEmailDeletedProduct = async (to, name) => {
+    return transporter.sendMail({
+        from: 'Ezequiel <ezequiel.ruedasanchez@gmail.com>',
+        to: to,
+        subject: 'Producto eliminado del sistema',
+        html: `
+        <h2>Su producto "${name}" ha sido eliminado de la Base de Datos</h2>
+        <p>Recuerde que para cargar cualquier tipo de producto en el sistema debe ser un usuario premium.</p>
+        <br>
+        <br>
+        <p>En caso de no haber realizado la eliminación del producto, desestime este mensaje</p>
+        `,
+    });
+}
 
 /*------------------------------*\
     #MIDDLEWARES FUNCTIONS
@@ -672,11 +702,17 @@ async function deleteProduct(req,res){
         
         let productSelected = await productsService.getProductById(pid);
         
-        if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email !== productSelected[0].owner){
-            throw CustomError.createError("Error al eliminar un producto", "Unauthorized", errorTypes.UNAUTHORIZED, unauthorizedErrorInfo());
+        if(infoUserLoggedIn.role === userRole.PREMIUM){
+            if(infoUserLoggedIn.email !== productSelected[0].owner){
+                throw CustomError.createError("Error al eliminar un producto", "Unauthorized", errorTypes.UNAUTHORIZED, unauthorizedErrorInfo());
+            } else {
+                // notificación por email al usuario premium que elimina su propio producto
+                let productName = productSelected[0].title;
+                await sendEmailDeletedProduct(infoUserLoggedIn.email, productName);
+            }
         }
         
-        // Admin o un usuario premium quiere eliminar su propio producto
+        // Admin o un usuario premium elimina el producto
         let delProduct = await productsService.deleteProduct(pid);
         
         return res.status(200).json({status: 'ok', deletedProduct: delProduct});
