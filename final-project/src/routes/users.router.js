@@ -285,7 +285,7 @@ router.post('/premium/:uid', async (req, res) => {
         if(req.rawHeaders[URL_ORIGIN] != urlAdmin.PANEL && req.rawHeaders[URL_ORIGIN] != urlAdmin.ROLE_SUCCESS){
             return res.redirect(`/products?userId=${user._id}&userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${user.role}&cartId=${user.cart}`);
         } else {
-            return res.redirect(`${urlAdmin.ROLE_SUCCESS}`);
+            return res.redirect('/adminPanel?successChangeRole=cambio-exitoso-de-rol');
         }
     } catch (error) {
         req.logger.fatal(`Error al modificar el rol del usuario. Detalle: ${error.message}`);

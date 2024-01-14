@@ -4,6 +4,9 @@
 <br>
 <h2>Usuarios registrados en la DB</h2>
 <hr>
+{{#if changeRoleSuccessfully}}
+    <div class="success">Cambio de rol realizado con exito</div>
+{{/if}}
 <ul>
     {{#each users}}
         <div id="adminDetails">
@@ -11,9 +14,6 @@
             <li>Email del usuario: {{this.email}}</li>
             <li>Rol del usuario: {{this.role}}</li>
             <form action="/api/users/premium/{{this._id}}" method="post">
-                {{#if changeRoleSuccessfully}}
-                    <div class="success">Cambio de rol realizado con exito</div>
-                {{/if}}
                 <button type="submit">Modificar el rol del usuario</button>
             </form>
             <form action="/api/users/delete/{{this._id}}" method="post">
