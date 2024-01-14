@@ -3,7 +3,13 @@ import { dirname } from 'path';
 import bcrypt from 'bcrypt';
 
 export const TWO_DAYS = 2;
-export const PRIVATE_KEY = 'secretPass';
+export const URL_ORIGIN = 33;
+
+export const urlAdmin = {
+    PANEL: 'http://localhost:8080/adminPanel',
+    ROLE_SUCCESS: 'http://localhost:8080/adminPanel?successChangeRole=cambio-exitoso-de-rol'
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 

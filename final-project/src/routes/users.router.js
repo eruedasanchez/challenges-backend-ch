@@ -1,4 +1,4 @@
-import __dirname, { TWO_DAYS } from '../utils.js';
+import __dirname, { TWO_DAYS, URL_ORIGIN, urlAdmin } from '../utils.js';
 import path from 'path';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
@@ -251,28 +251,22 @@ router.post('/:uid/documents', passport.authenticate('current', { session: false
 });
 
 /*----------------------*\
-    #PUT /PREMIUM/:UID
+    #POST /PREMIUM/:UID
 \*----------------------*/
 
 router.post('/premium/:uid', async (req, res) => {
     try {
         let userId = req.params.uid;
-
+        
         let user = await usersModel.findOne({_id:userId});
-
-        if(user.role === userRole.ADMIN){
-            throw new Error('No posee los permisos para cambiar el rol de uid ingresado');
-        }
-
-        if(user.role === userRole.USER){
+        
+        if(user.role === userRole.USER && req.rawHeaders[URL_ORIGIN] != urlAdmin.PANEL && req.rawHeaders[URL_ORIGIN] != urlAdmin.ROLE_SUCCESS){
             const documentationLoaded = user.documents;
-            console.log('documentationLoaded:', documentationLoaded); 
-
+            
             let documentType, cantMandatoryDocumentation = 0;
             for(const document of documentationLoaded){
                 documentType = document.reference.split('/')[documentation.FOLDER]; // se accede a la carpeta donde esta guardado el archivo
-                console.log('documentType:', documentType);
-
+                
                 if(documentType === documentation.PROFILE || documentType === documentation.DOCUMENT){  
                     cantMandatoryDocumentation++;
                 }
@@ -287,7 +281,12 @@ router.post('/premium/:uid', async (req, res) => {
         user.role === userRole.PREMIUM ? user.role = userRole.USER : user.role = userRole.PREMIUM;
         
         await user.save();
-        return res.redirect(`/products?userId=${user._id}&userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${user.role}&cartId=${user.cart}`);
+
+        if(req.rawHeaders[URL_ORIGIN] != urlAdmin.PANEL && req.rawHeaders[URL_ORIGIN] != urlAdmin.ROLE_SUCCESS){
+            return res.redirect(`/products?userId=${user._id}&userFirstName=${user.first_name}&userLastName=${user.last_name}&userEmail=${user.email}&userRole=${user.role}&cartId=${user.cart}`);
+        } else {
+            return res.redirect(`${urlAdmin.ROLE_SUCCESS}`);
+        }
     } catch (error) {
         req.logger.fatal(`Error al modificar el rol del usuario. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected', detalle:error.message});
@@ -324,7 +323,7 @@ router.get('/', async (req, res) => {
 router.delete('/', async (req, res) => {
     try {
         let usersDB = await usersModel.find();
-
+        
         for (const user of usersDB) {
             if(user.last_connection){
                 const lastConnectionParsed = moment.tz(user.last_connection, 'DD-MM-YYYYTHH:mm:ss.SSSZ', 'America/Argentina/Buenos_Aires');
@@ -342,6 +341,24 @@ router.delete('/', async (req, res) => {
     } catch (error) {
         req.logger.fatal(`Error al realizar la limpieza de usuarios. Detalle: ${error.message}`);
         return res.status(error.code).json({error:error.description, detalle:error.message});
+    }
+});
+
+/*----------------------*\
+    #POST /DELETE/:UID
+\*----------------------*/
+
+router.post('/delete/:uid', async (req, res) => {
+    try {
+        let userId = req.params.uid;
+        
+        await usersModel.deleteOne({_id: userId});
+        
+        return res.redirect('/adminPanel?successDeletedUser=usuario-eliminado-exitosamente');
+        
+    } catch (error) {
+        req.logger.fatal(`Error al eliminar el usuario. Detalle: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detalle:error.message});
     }
 });
 

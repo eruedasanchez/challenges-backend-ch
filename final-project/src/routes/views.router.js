@@ -1,4 +1,4 @@
-import __dirname from '../utils.js';
+import __dirname, { userRole } from '../utils.js';
 import express from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken'
@@ -7,6 +7,8 @@ import { productsService } from '../services/products.service.js';
 import { invalidObjectIdMid } from '../dao/cartsMongoDAO.js'; // inexistsCidMid
 import { fakerES_MX as faker } from '@faker-js/faker';
 import { config } from '../config/config.js';
+import { usersModel } from '../dao/models/users.model.js';
+import { authorization } from './sessions.router.js';
 
 export const router = express.Router();
 
@@ -237,6 +239,25 @@ router.get('/loggerTest', (req, res) => {
     res.status(200).render('loggerTest');
 });
 
-// Crear una vista para poder visualizar, modificar el rol y eliminar un usuario. Esta vista únicamente será accesible para el administrador del ecommerce
+router.get('/adminPanel', passport.authenticate('current', {session:false}), authorization([userRole.ADMIN]), async (req, res) => {
+    let changeRoleSuccessfully = false;
+    let {successChangeRole} = req.query;
+    
+    let usersDB = await usersModel.find().lean();
+
+    if(successChangeRole) changeRoleSuccessfully = successChangeRole;
+    
+    res.setHeader('Content-Type','text/html');
+    res.status(200).render('adminPanel', {
+        header: 'Panel de administración',
+        users: usersDB,
+        changeRoleSuccessfully: changeRoleSuccessfully,
+    });
+});
+
+
+
+
+
 
 
