@@ -66,8 +66,6 @@ export class CartsFsDAO{
         
 		let idxPid = productsSelected.findIndex(prod => prod.productId === parseInt(pid));
         if(idxPid === -1){
-			// El producto no se encuentra definido en esta orden de compra.
-			// Se agrega de a una unidad como solicita el enunciado
 			let productAdded = {
 				productId: parseInt(pid),
 				quantity: 1 
@@ -76,7 +74,6 @@ export class CartsFsDAO{
 			productsSelected.push(productAdded);
 			carts[idxCart].products = productsSelected; 
 		} else {
-			// Se aumenta en uno la cantidad del producto como solicita el enunciado
 			productsSelected[idxPid].quantity += 1;
 		}
 
@@ -115,7 +112,6 @@ export class CartsFsDAO{
         let idxPid = productsSelected.findIndex(prod => prod.productId === parseInt(pid));
 
         if(idxPid === -1){
-            // inexistsPidInProductCartMid
             throw new Error(`El producto con PID ${pid} no existe en el carrito con CID ${cid}.`);
         }
 
@@ -139,7 +135,6 @@ export class CartsFsDAO{
         let idxPid = productsSelected.findIndex(prod => prod.productId === parseInt(pid));
 
         if(idxPid === -1){
-            // inexistsPidInProductCartMid
             throw new Error(`El producto con PID ${pid} no existe en el carrito con CID ${cid}.`);
         }
         
