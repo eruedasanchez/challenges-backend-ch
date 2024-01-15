@@ -1,14 +1,13 @@
 import express from 'express';
 import passport from 'passport';
-import jwt from 'jsonwebtoken'
 import __dirname, { userRole } from '../utils.js';
 import { cartsService } from '../services/carts.service.js';
 import { productsService } from '../services/products.service.js';
 import { invalidObjectIdMid } from '../dao/cartsMongoDAO.js'; 
 import { fakerES_MX as faker } from '@faker-js/faker';
-import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';
 import { authorization } from './sessions.router.js';
+import { activeSessionMid, auth } from '../middlewares/viewsRouterMiddlewares.js';
 
 export const router = express.Router();
 
@@ -51,32 +50,6 @@ const generateMockProduct = idx => {
     };
 
     return mockProduct;
-}
-
-/*------------------------------------------------------------------*\
-    #MIDDLEWARES GET '/', '/login', '/signup', /confirmNewPassword
-\*------------------------------------------------------------------*/
-
-// Se intenta logearse o registrarse pero ya se encuentra una sesión activa
-const activeSessionMid = (req, res, next) => {
-    if(req.session.users){
-        let {first_name, last_name, email, rol} = req.session.users;
-        return res.redirect(`/products?userFirstName=${first_name}&userLastName=${last_name}&userEmail=${email}&userRole=${rol}`);
-    } 
-
-    next();
-}
-
-const auth = async (req, res, next) => {
-    let token = req.query.token;
-    try {
-        let infoUser = jwt.verify(token, config.SECRET); // Se obtiene la info del usuario
-        req.user = infoUser.user;
-        next();
-    } catch (error) {
-        // Token expirado
-        return res.redirect('/resetPassword?expiredToken=El link se encuentra vencido. Por favor, envíe nuevamente la solicitud');
-    }
 }
 
 /*-----------------*\
@@ -187,7 +160,6 @@ router.get('/products', passport.authenticate('current', {session:false}), async
     });
 });
 
-// inexistsCidMid
 router.get('/carts/:cid', async (req, res) => {
     try {
         let cid = req.params.cid;
