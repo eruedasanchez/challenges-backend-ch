@@ -1,7 +1,62 @@
 import fs from 'fs';
 import __dirname from '../utils.js';
 
-const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+const letters = [
+    'a', 
+    'b', 
+    'c', 
+    'd', 
+    'e', 
+    'f', 
+    'g', 
+    'h', 
+    'i', 
+    'j', 
+    'k', 
+    'l', 
+    'm', 
+    'n', 
+    'ñ', 
+    'o', 
+    'p', 
+    'q', 
+    'r', 
+    's', 
+    't', 
+    'u', 
+    'v', 
+    'w', 
+    'x', 
+    'y', 
+    'z', 
+    'A', 
+    'B', 
+    'C', 
+    'D', 
+    'E', 
+    'F', 
+    'G', 
+    'H', 
+    'I', 
+    'J', 
+    'K', 
+    'L', 
+    'M', 
+    'N', 
+    'Ñ', 
+    'O', 
+    'P', 
+    'Q', 
+    'R', 
+    'S', 
+    'T', 
+    'U', 
+    'V', 
+    'W', 
+    'X', 
+    'Y', 
+    'Z'
+];
 let path = __dirname + '/data/products.json';
 
 const invalidPidMid = id => {
@@ -83,7 +138,6 @@ export class ProductsFsDAO{
         let products = this.get();
         let idxSelected = products.findIndex(prod => prod._id === parseInt(id));
         
-        // El producto existe. Se modifican las propiedades pasadas por el body
         for(const entry of Object.entries(fields)){
             products[idxSelected][entry[0]] = entry[1];
         }

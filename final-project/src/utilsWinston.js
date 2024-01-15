@@ -36,14 +36,12 @@ const transportProdConsole = new winston.transports.Console({
     )
 })
 
-// Seleccion de Development o Production Mode
 if(config.MODE !== 'production'){
     logger.add(transportDevConsole);
 } else {
     logger.add(transportProdConsole);
 } 
 
-// Inserción del logger en un middleware
 export const middLog = (req, res, next) => {
     req.logger = logger;
     next();

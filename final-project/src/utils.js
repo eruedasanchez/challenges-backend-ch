@@ -1,6 +1,6 @@
-import {fileURLToPath} from 'url';
-import { dirname } from 'path';
 import bcrypt from 'bcrypt';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 export const TWO_DAYS = 2;
 export const URL_ORIGIN = 33;

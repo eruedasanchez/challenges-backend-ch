@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const productsCollection = 'products'; // 'products' coresponde al nombre de la coleccion definida en Atlas
+const productsCollection = 'products';
 const productsSchema = new mongoose.Schema({
     title: {type: String, require: true},
 	description: {type: String, require: true},

@@ -1,9 +1,9 @@
 import express from 'express';
 import passport from 'passport';
-import { messagesService } from '../services/messages.service.js';
 import messagesController from '../controllers/messagesController.js';
+import { messagesService } from '../services/messages.service.js';
 import { authorization } from './sessions.router.js';
-import { serverSocket } from '../app.js';
+import { userRole } from '../utils.js';
 
 export const router = express.Router();
 
@@ -11,7 +11,7 @@ export const router = express.Router();
     #CHAT ROUTES
 \*----------------*/
 
-router.get('/', passport.authenticate('current', {session:false}), authorization('user'), messagesController.renderChat);
+router.get('/', passport.authenticate('current', {session:false}), authorization(userRole.USER), messagesController.renderChat);
 
 let usersList = [];
 
@@ -20,30 +20,27 @@ export const initChat = serverSocketChat => {
         console.log(`Se ha conectado un cliente con ID ${socket.id} al chat`);
         
         socket.on('userEmail', async userEmail => {
-            // Se guardan a los usuarios que se van conectando en un arreglo para saber cuando alguno se retire, quien es  
             usersList.push({
                 id: socket.id,
                 userEmail: userEmail
             })
             
             let chatHistory = await messagesService.getChat();
-            socket.emit('historialChat', chatHistory);                       // server envia el historial de mensajes al nuevo usuario
+            socket.emit('historialChat', chatHistory);                       
             
-            socket.broadcast.emit('newUserConnectedAlert', userEmail);      // server notifica/emite a todos los usuarios menos al ultimo que se sumo (broadcast.emit), que se sumo un nuevo usuario
+            socket.broadcast.emit('newUserConnectedAlert', userEmail);      
         })
 
-        // Server recibe el nuevo mensaje enviado por el cliente
         socket.on('newMessage', message => {
             messagesService.addToChat(message);
-            serverSocketChat.emit('showMessage', message);                // server el emite a todos (serverSocketChat) los cliente el mensaje
+            serverSocketChat.emit('showMessage', message);                
         })
-
-        // La desconexion ocurre cuando un cliente cerra su ventana o navegador
+        
         socket.on('disconnect',() => {
-            let idx = usersList.findIndex(user => user.id === socket.id);
-            let user = usersList[idx];
-            serverSocketChat.emit('disconnectedUserAlert', user);          // se notifica a todos los usuarios que se retiro un usuario
-            usersList = usersList.filter(u => u !== user);
+            let index = usersList.findIndex(user => user.id === socket.id);
+            let currentUser = usersList[index];
+            serverSocketChat.emit('disconnectedUserAlert', currentUser);          
+            usersList = usersList.filter(user => user !== currentUser);
         })
     })
 }

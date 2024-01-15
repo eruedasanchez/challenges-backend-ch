@@ -47,5 +47,3 @@ class ProductsService {
 }
 
 export const productsService = new ProductsService(DAO);
-
-// capa intermedia que relaciona la capa de datos/persistencia con la capa de negocio/controllers
