@@ -1,15 +1,14 @@
-import __dirname, { TWO_DAYS, URL_ORIGIN, urlAdmin } from '../utils.js';
 import path from 'path';
-import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import multer from 'multer';
+import passport from 'passport';
+import moment from 'moment-timezone';
+import __dirname from '../utils.js';
+import { generateHash, validateHash, userRole, documentation, TWO_DAYS, URL_ORIGIN, urlAdmin } from '../utils.js';
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';
-import { generateHash, validateHash, userRole, documentation } from '../utils.js';
-import passport from 'passport';
-import moment from 'moment-timezone';
 
 export const router = Router();
 
@@ -34,9 +33,9 @@ const uploadProfiles = configureMulter('profiles');
 const uploadProducts = configureMulter('products') ;
 const uploadDocuments = configureMulter('documents');
 
-/*------------------------------------*\
-    #FUNCTIONS RESET PASSWORD
-\*------------------------------------*/
+/*---------------------*\
+    #FUNCTIONS MAILING
+\*---------------------*/
 
 const transporter = nodemailer.createTransport({
     service: config.NODEMAILER_SERVICE,
@@ -79,44 +78,6 @@ const sendEmailUnsubscribedAccount = async to => {
     });
 }
 
-
-
-/*------------------------------------*\
-    #MIDDLEWARES PUT '/premium/:uid'
-\*------------------------------------*/
-
-// 1. Formato invalido del UserId 
-const invalidUserIdMid = async (req, res, next) => {
-    try {
-        let userId = req.params.uid;
-
-        if(!mongoose.Types.ObjectId.isValid(userId)){
-            throw new Error('El uid ingresado tiene un formato invalido');
-        }
-        next();
-    } catch (error) {
-        req.logger.error(`Error al ingresar al middleware de invalidUserId. Detail: ${error.message}`);
-        return res.status(500).json({error:'Unexpected', detail:error.message});
-    }
-}
-
-// 2. Usuario inexistente en la DB 
-const nonExistentUserIdMid = async (req, res, next) => {
-    try {
-        let userId = req.params.uid;
-
-        let user = await usersModel.findOne({_id:userId});
-        
-        if(!user){
-            throw new Error('El uid ingresado no corresponde a un usuario registrado');
-        }
-        next();
-    } catch (error) {
-        req.logger.error(`Error al ingresar al middleware de nonExistentUserId. Detail: ${error.message}`);
-        return res.status(500).json({error:'Unexpected', detail:error.message});
-    }
-}
-
 /*------------------------*\
     #POST /RESETPASSWORD
 \*------------------------*/
@@ -127,17 +88,12 @@ router.post('/resetPassword', async (req, res, next) => {
 
     if(!requestedEmail) return res.redirect('/resetPassword?error=Ingrese un email válido');
     
-    /**** Se completó el campo con un email ****/
-    
-    // Se busca al usuario en la DB que coincida con el email ingresado 
     let user = await usersModel.findOne({email:requestedEmail});
     
     if(!user){
-        // El email ingresado no corresponde a un usuario registrado
         return res.redirect('/resetPassword?unregisteredEmail=El email ingresado no corresponde a un cliente registrado');
     }
-
-    // El email ingresado se encuentra registrado en la DB
+    
     let jwtoken = jwt.sign({user}, config.SECRET, {expiresIn: '1h'}); 
     await sendEmail(jwtoken, user.email);
     
@@ -152,14 +108,12 @@ router.post('/confirmPassword', async (req, res) => {
     try {
         let {password, email} = req.body;
         
-        // Se busca al usuario en la DB que coincida con el email ingresado 
         let user = await usersModel.findOne({email:email});
         
         if(validateHash(user, password)){
             return res.redirect('/resetPassword?samePassword=La contraseña ingresada es igual a la actual. Por favor, realice una nueva solicitud.');
         }
         
-        // Modificación de la contaseña en la DB
         user.password = generateHash(password);
         await user.save();
         
@@ -265,7 +219,7 @@ router.post('/premium/:uid', async (req, res) => {
             
             let documentType, cantMandatoryDocumentation = 0;
             for(const document of documentationLoaded){
-                documentType = document.reference.split('/')[documentation.FOLDER]; // se accede a la carpeta donde esta guardado el archivo
+                documentType = document.reference.split('/')[documentation.FOLDER]; 
                 
                 if(documentType === documentation.PROFILE || documentType === documentation.DOCUMENT){  
                     cantMandatoryDocumentation++;
@@ -277,7 +231,6 @@ router.post('/premium/:uid', async (req, res) => {
             }
         }
         
-        // Luego de pasar por el middleware de admin y chequar si está cargada la información, solo puede tener el rol 'user' o 'premium'
         user.role === userRole.PREMIUM ? user.role = userRole.USER : user.role = userRole.PREMIUM;
         
         await user.save();
@@ -355,7 +308,6 @@ router.post('/delete/:uid', async (req, res) => {
         await usersModel.deleteOne({_id: userId});
         
         return res.redirect('/adminPanel?successDeletedUser=usuario-eliminado-exitosamente');
-        
     } catch (error) {
         req.logger.fatal(`Error al eliminar el usuario. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected', detalle:error.message});
