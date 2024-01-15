@@ -6,6 +6,7 @@ import { config } from '../config/config.js';
 import { DtoUsers } from '../DTO/dtousers.js';
 import { userRole } from '../utils.js';
 import { usersModel } from '../dao/models/users.model.js';
+
 export const router = Router();
 
 /*------------------------------*\
@@ -21,12 +22,6 @@ export const authorization = roles => {
         next();
     }
 }
-
-/*------------------------------*\
-        #SESSIONS ROUTES
-\*------------------------------*/
-
-// 3. Carga del middleware de passport 
 
 /*------------------------*\
     #CONNECT WITH GITHUB
@@ -63,7 +58,7 @@ router.post('/signup', function(req, res, next) {
         }
         
         req.user = user;
-        return next();      // pasa la ejecucion a la funcion de abajo
+        return next();      
     })(req, res, next);
 }, (req, res) => {
     res.status(200).redirect(`/login?createdUser=Usuario:${req.user.first_name} registrado correctamente. Username:${req.user.email}`);
@@ -83,26 +78,23 @@ router.post('/login', function(req, res, next) {
         user.save();
         
         req.user = user;
-        return next(); // para poder ejecutar lo que quiera debajo
+        return next(); 
     })(req, res, next);
 }, (req, res) => {
     let user = req.user;
-    
-    // Generacion de la cookie luego de logearme. Hay que generar el token
     let token = jwt.sign({user}, config.SECRET, {expiresIn: '1h'});
     
-    // Aplico la utilizacion de cookie parser. Se almacena el token en la cookie coderCookie
     res.cookie('coderCookie', token, {
-        maxAge: 1000 * 60 * 60, // 1hs de duracion
-        httpOnly: true          // se tilda la opcion httpOnly, es decir, que al ejecutar document.cookie no las deja acceder 
+        maxAge: 1000 * 60 * 60, 
+        httpOnly: true           
     })
     
     res.redirect(`/products?userId=${req.user._id}&userFirstName=${req.user.first_name}&userLastName=${req.user.last_name}&userEmail=${req.user.email}&userRole=${req.user.role}&cartId=${req.user.cart}`);
 });
 
-/*-------------------*\
+/*----------------*\
     #GET /LOGOUT
-\*-------------------*/
+\*----------------*/
 
 router.get('/logout', passport.authenticate('current', { session: false }), async (req, res) => {
     try {
@@ -120,9 +112,9 @@ router.get('/logout', passport.authenticate('current', { session: false }), asyn
     }
 })
 
-/*-------------------*\
+/*----------------*\
     #GET /CURRENT
-\*-------------------*/
+\*----------------*/
 
 router.get('/current', passport.authenticate('current', {session:false}), authorization([userRole.USER, userRole.PREMIUM]), (req, res) => {
     try {

@@ -11,5 +11,3 @@ class TicketsService {
 }
 
 export const ticketsService = new TicketsService(DAO);
-
-// capa intermedia que relaciona la capa de datos/persistencia con la capa de negocio/controllers
