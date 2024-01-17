@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { cartsModel } from "./models/carts.model.js";
-import { ops } from "../utils.js"; 
+import { ops } from "../utils.js";
 import { CustomError } from "../services/errors/customError.js";
 import { errorTypes } from "../services/errors/enumsError.js";
 import { invalidCidError, invalidPidError } from "../services/errors/infoProductsErrors.js";
@@ -86,7 +86,6 @@ export class CartsMongoDAO{
         let idxPid = productsSelected.findIndex(prod => prod.productId.equals(new mongoose.Types.ObjectId(pid)));
 
         if(idxPid === -1){
-            // inexistsPidInProductCartMid
             throw new Error(`El producto con PID ${pid} no existe en el carrito con CID ${cid}.`);
         }
         
@@ -107,7 +106,6 @@ export class CartsMongoDAO{
         let idxPid = productsSelected.findIndex(prod => prod.productId.equals(new mongoose.Types.ObjectId(pid)));
         
         if(idxPid === -1){
-            // inexistsPidInProductCartMid
             throw new Error(`El producto con PID ${pid} no existe en el carrito con CID ${cid}.`);
         }
         

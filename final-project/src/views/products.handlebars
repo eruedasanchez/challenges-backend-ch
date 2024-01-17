@@ -80,9 +80,7 @@
 <a href="/products?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}&page={{totalPages}}">Ult.Pag</a>
 <hr>  
 <br>
-<form action="/api/carts/{{cartId}}/purchase?userEmail={{userEmail}}" method="post">
-    <button type="submit">Comprar</button>
-</form>
+<ul class="menu"><li> <a href="/orderDetail/{{cartId}}/purchase?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}">Comprar</a></li></ul>
 <hr>  
 <br>
 <form id="premiumForm" action="/api/users/premium/{{userId}}" method="post">

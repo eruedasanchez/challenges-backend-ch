@@ -2,7 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import productsController from '../controllers/productsController.js';
 import { authorization } from './sessions.router.js';
-import { userRole } from '../utils.js'; 
+import { userRole } from '../utils.js';
 import { 
         noParamsMid,
         limitMid, 

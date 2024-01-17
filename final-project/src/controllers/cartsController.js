@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { cartsService } from "../services/carts.service.js";
 import { productsService } from "../services/products.service.js";
 import { ticketsService } from "../services/tickets.service.js";
-import { userRole } from "../utils.js";
+import { userRole } from '../utils.js';
 import { CustomError } from '../services/errors/customError.js';
 import { errorTypes } from '../services/errors/enumsError.js';
 import { unauthorizedErrorInfo } from "../services/errors/infoProductsErrors.js";

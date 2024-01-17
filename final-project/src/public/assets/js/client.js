@@ -1,4 +1,4 @@
-const socket = io();  // Dejamos a nuestro frontend atento para conectarse a un servidor
+const socket = io();  
 
 socket.on('newProduct', (newProduct, products) => {
     console.log(`Se ha agregado el ${newProduct.title} a la lista de productos`);

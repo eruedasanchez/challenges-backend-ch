@@ -46,8 +46,6 @@ class CartManager{
 		
 		let idxPid = productsSelected.findIndex(prod => prod.productId === pid);
 		if(idxPid === -1){
-			// El producto no se encuentra definido en esta orden de compra.
-			// Se agrega de a una unidad como solicita el enunciado
 			let newProductAdded = {
 				productId: pid,
 				quantity: 1 
@@ -55,7 +53,6 @@ class CartManager{
 			productsSelected.push(newProductAdded);
 			carts[idxCart].products = productsSelected; 
 		} else {
-			// Se aumenta en uno la cantidad del producto como solicita el enunciado
 			productsSelected[idxPid].quantity += 1;
 		}
 

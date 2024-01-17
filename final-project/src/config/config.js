@@ -1,7 +1,7 @@
 import path from 'path';
 import dotenv from 'dotenv';
 import __dirname from '../utils.js';
-import {Command, Option} from 'commander';
+import { Command, Option } from 'commander';
 
 let program = new Command();
 
@@ -31,10 +31,7 @@ export const config = {
     MODE: process.env.MODE || 'development',
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-    GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL
+    GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
+    ACCESS_TOKEN: process.env.ACCESS_TOKEN
 }
-
-
-
-
 

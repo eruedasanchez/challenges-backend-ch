@@ -1,8 +1,14 @@
 import express from 'express';
 import passport from 'passport';
-import __dirname, { userRole } from '../utils.js';
+import mongoose from 'mongoose';
+import nodemailer from 'nodemailer';
+import moment from 'moment-timezone';
+import { v4 as uuidv4 } from 'uuid';
+import __dirname, { userRole} from '../utils.js';
+import { config } from '../config/config.js';
 import { cartsService } from '../services/carts.service.js';
 import { productsService } from '../services/products.service.js';
+import { ticketsService } from '../services/tickets.service.js';
 import { invalidObjectIdMid } from '../dao/cartsMongoDAO.js'; 
 import { fakerES_MX as faker } from '@faker-js/faker';
 import { usersModel } from '../dao/models/users.model.js';
@@ -50,6 +56,48 @@ const generateMockProduct = idx => {
     };
 
     return mockProduct;
+}
+
+/*-------------------------------*\
+    #PURCHASE CONFIRMATION EMAIL
+\*-------------------------------*/
+
+const transporter = nodemailer.createTransport({
+    service: config.NODEMAILER_SERVICE,
+    port: config.NODEMAILER_PORT,
+    auth: {
+        user: config.TRANSPORT_USER,
+        pass: config.TRANSPORT_PASS
+    }
+})
+
+const purchaseConfirmationEmail = async ticket => {
+    const productDetails = ticket.productsWithStock.map(product => `
+        <p>Nombre del producto: ${product.productId.title}</p>
+        <p>Precio del producto: $${product.productId.price}</p>
+        <p>Cantidad: ${product.quantity}</p>
+        <p>Subtotal: $${product.productId.price * product.quantity}</p>
+        <br>
+    `).join('');
+    
+    return transporter.sendMail({
+        from: 'Ezequiel <ezequiel.ruedasanchez@gmail.com>',
+        to: ticket.purchaser,
+        subject: 'Su compra ha sido procesada con exito',
+        html: `
+        <h2>Felicitaciones, su compra ha sido exitosa!</h2>
+        <p>A continuación le dejamos el detalle de su compra:</p>
+        <br>
+        ${productDetails}
+        <br>
+        <h2>Total: $${ticket.amount}</h2>
+        <br>                                                                         
+        <p>Por cualquier consulta relacionada a su pedido, nos puede contactar al 11 23456789 teniendo consigo el código de su pedido: ${ticket.code}</p>
+        <br>
+        <p>Nos encontramos en Avenida Rivadavia 5473 de lunes a viernes de 9 a 18hs. Sabados de 9hs a 14hs.</p>
+        <p>Recuerde no responder este mensaje</p>
+        `,
+    });
 }
 
 /*-----------------*\
@@ -227,7 +275,81 @@ router.get('/adminPanel', passport.authenticate('current', {session:false}), aut
     });
 });
 
+router.get('/orderDetail/:cid/purchase', passport.authenticate('current', {session:false}), authorization([userRole.PREMIUM, userRole.USER]), async (req,res) => {
+    let { cid } = req.params;
+    let {userFirstName, userLastName, userEmail, userRole, cartId } = req.query;
+    let cartAmount = 0, orderSuccessfully = false;
+    let productsWithoutStock = [], productsWithStock = [];
 
+    let cartSelected = await cartsService.getCartByIdLean(cid);
+    let productsSelected = cartSelected[0].products;
+    
+    for(const product of productsSelected){
+        if(product.productId.stock >= product.quantity){
+            product.subtotal = product.productId.price * product.quantity;
+            cartAmount += product.subtotal;  
+
+            productsWithStock.push(product);
+        } else {
+            productsWithoutStock.push(product); 
+        }
+    }
+    
+    if(productsWithoutStock.length === 0) orderSuccessfully = true;
+    
+    res.setHeader('Content-Type','text/html');
+    res.status(200).render('orderDetail', {
+        header: 'Checkout',
+        cartAmount: cartAmount,
+        userFirstName: userFirstName, 
+        userLastName: userLastName, 
+        userEmail: userEmail, 
+        userRole: userRole, 
+        cartId: cartId,
+        orderSuccessfully: orderSuccessfully,
+        productsWithStock: productsWithStock,
+        productsWithoutStock: productsWithoutStock
+    });
+});
+
+router.get('/successPurchase', async (req,res) => {
+    let { cartId, userEmail } = req.query;
+    let cid = new mongoose.Types.ObjectId(cartId);
+    
+    let cartUpdt, updateProd, updatedStock;
+    let productsWithStock = [], cartAmount = 0;
+
+    let cartSelected = await cartsService.getCartByIdLean(cid);
+    let productsSelected = cartSelected[0].products;
+
+    for(const product of productsSelected){
+        if(product.productId.stock >= product.quantity){
+            productsWithStock.push(product);
+            cartAmount += product.quantity * product.productId.price;  
+            
+            cartUpdt = await cartsService.deleteProduct(cid, product.productId._id); 
+            updatedStock = { stock: product.productId.stock - product.quantity };
+            updateProd = await productsService.updateProduct(product.productId._id, updatedStock); 
+        } 
+    }
+    
+    let ticket = {
+        code: uuidv4().toString().split('-').join(''),
+        purchase_datetime: moment().tz('America/Argentina/Buenos_Aires').format('DD-MM-YYYYTHH:mm:ss.SSS[Z]'),
+        amount: cartAmount,
+        purchaser: userEmail,
+        productsWithStock: productsWithStock
+    }
+    
+    await ticketsService.generateTicket(ticket);
+    await purchaseConfirmationEmail(ticket);
+    
+    res.setHeader('Content-Type','text/html');
+    res.status(200).render('successPurchase', {
+        header: 'Compra exitosa',
+        userEmail: userEmail, 
+    });
+});
 
 
 

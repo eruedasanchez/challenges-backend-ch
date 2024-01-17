@@ -5,7 +5,7 @@ import multer from 'multer';
 import passport from 'passport';
 import moment from 'moment-timezone';
 import __dirname from '../utils.js';
-import { generateHash, validateHash, userRole, documentation, TWO_DAYS, URL_ORIGIN, urlAdmin } from '../utils.js';
+import { generateHash, validateHash, userRole, documentation, urlAdmin, TWO_DAYS, URL_ORIGIN } from '../utils.js';
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';

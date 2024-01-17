@@ -7,6 +7,7 @@ import session from 'express-session';
 import ConnectMongo from 'connect-mongo';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'; 
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Server } from 'socket.io';
@@ -15,6 +16,7 @@ import { router as cartsRouter } from './routes/carts.router.js';
 import { router as viewsRouter } from './routes/views.router.js';
 import { router as sessionsRouter } from './routes/sessions.router.js';
 import { router as usersRouter } from './routes/users.router.js';
+import { router as mercadoPagoRouter } from './routes/mercadoPago.router.js';
 import { initChat, router as chatRouter } from './routes/chat.router.js';
 import { initPassport } from './config/passport.config.js';
 import { config } from './config/config.js';
@@ -45,6 +47,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(middLog);
+app.use(cors());
 
 app.engine('handlebars', handlebars.engine()); 
 app.set('views', __dirname + '/views');
@@ -75,6 +78,7 @@ app.use(passport.session());
 
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/users', usersRouter);
+app.use('/mercadoPago', mercadoPagoRouter);
 app.use('/', viewsRouter);
 app.use(errorHandler);
 

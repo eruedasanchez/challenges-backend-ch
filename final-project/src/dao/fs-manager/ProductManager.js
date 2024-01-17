@@ -52,7 +52,6 @@ class ProductManager{
         let products = this.getProducts();
         let idxSelectedProduct = products.findIndex(prod => prod.id === id);
         
-        // El producto existe. Se modifican las propiedades pasadas por el body
         for(const entry of Object.entries(fields)){
             products[idxSelectedProduct][entry[0]] = entry[1];
         }
