@@ -74,7 +74,6 @@ app.use(session({
 initPassport();
 app.use(passport.initialize());
 app.use(passport.session()); 
-// app.use(passport.session()); // por esto, siempre se ejecuta passport despues de la sesion (app.use(session(...)
 
 app.use('/api/sessions', sessionsRouter);
 app.use('/api/users', usersRouter);
@@ -97,5 +96,5 @@ try {
     logger.fatal(`Error al conectarse con MongoDB Atlas. Detalle: ${error.message}`);
 }
 
-// Ultimo commit Integrative-Practice-04+RuedaSanchez 
+// Ultimo commit Final-project+RuedaSanchez 
 

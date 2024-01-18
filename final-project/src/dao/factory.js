@@ -1,8 +1,10 @@
 import { config } from '../config/config.js';
 
-let productsDAO, cartsDAO, ticketsDAO;
+let productsDAO, cartsDAO;
 let messagesDAO = await import('./messagesMongoDAO.js');
 messagesDAO = messagesDAO.MessagesMongoDAO;
+let ticketsDAO = await import('./ticketsMongoDAO.js');
+ticketsDAO = ticketsDAO.TicketsMongoDAO;
 
 switch (config.PERSISTENCE) {
     case "FS":
@@ -15,10 +17,8 @@ switch (config.PERSISTENCE) {
     case "MONGODB":
         productsDAO = await import('./productsMongoDAO.js');
         cartsDAO = await import('./cartsMongoDAO.js');
-        ticketsDAO = await import('./ticketsMongoDAO.js');
         productsDAO = productsDAO.ProductsMongoDAO;
         cartsDAO = cartsDAO.CartsMongoDAO;
-        ticketsDAO = ticketsDAO.TicketsMongoDAO;
         break;
     
     default:
