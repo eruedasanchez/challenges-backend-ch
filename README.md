@@ -189,6 +189,9 @@ Visite http://localhost:8080/orderDetail/:cid/purchase para ver el detalle del p
 Visite http://localhost:8080/successPurchase para ver el mensaje de finalización de compra cuando es exitosa.
 <br>
 <br>
+Visite http://localhost:8080/cartDetail para ver el detalle de los productos agregados al carrito.
+<br>
+<br>
 Para los endpoints relacionados al CRUD para colecciones de Productos, Carros y Mensajes ejecutarlos con [Postman](https://www.postman.com/).
 
 ### Documentación
