@@ -168,8 +168,8 @@ router.get('/login', activeSessionMid, (req,res) => {
 })
 
 router.get('/products', passport.authenticate('current', {session:false}), async (req,res) => {
-    let profileSuccessfullyLoad = false, productsSuccessfullyLoad = false, documentsSuccessfullyLoad = false, mandatoryDocumentEmpty = false;
-    let {limit, page, userId, userFirstName, userLastName, userEmail, userRole, cartId, successProfile, successProducts, successDocuments, unsuccessChangeRole} = req.query;
+    let profileSuccessfullyLoad = false, productsSuccessfullyLoad = false, documentsSuccessfullyLoad = false, mandatoryDocumentEmpty = false, cartEmpty = false;
+    let {limit, page, userId, userFirstName, userLastName, userEmail, userRole, cartId, successProfile, successProducts, successDocuments, unsuccessChangeRole, emptyCart} = req.query;
     
     if(!limit) limit = 10;
     if(!page) page = 1;
@@ -181,6 +181,8 @@ router.get('/products', passport.authenticate('current', {session:false}), async
     if(successDocuments) documentsSuccessfullyLoad = successDocuments;
 
     if(unsuccessChangeRole) mandatoryDocumentEmpty = unsuccessChangeRole;
+
+    if(emptyCart) cartEmpty = emptyCart;
     
     const products = await productsService.getProductsPaginate(limit, page);
 
@@ -204,7 +206,8 @@ router.get('/products', passport.authenticate('current', {session:false}), async
         profileSuccessfullyLoad: profileSuccessfullyLoad,
         productsSuccessfullyLoad: productsSuccessfullyLoad, 
         documentsSuccessfullyLoad: documentsSuccessfullyLoad,
-        mandatoryDocumentEmpty: mandatoryDocumentEmpty
+        mandatoryDocumentEmpty: mandatoryDocumentEmpty,
+        cartEmpty: cartEmpty
     });
 });
 

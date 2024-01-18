@@ -9,6 +9,8 @@ import { generateHash, validateHash, userRole, documentation, urlAdmin, TWO_DAYS
 import { Router} from 'express';
 import { config } from '../config/config.js';
 import { usersModel } from '../dao/models/users.model.js';
+import { authorization } from './sessions.router.js';
+import { cartsService } from '../services/carts.service.js';
 
 export const router = Router();
 
@@ -310,6 +312,31 @@ router.post('/delete/:uid', async (req, res) => {
         return res.redirect('/adminPanel?successDeletedUser=usuario-eliminado-exitosamente');
     } catch (error) {
         req.logger.fatal(`Error al eliminar el usuario. Detalle: ${error.message}`);
+        return res.status(500).json({error:'Unexpected', detalle:error.message});
+    }
+});
+
+/*-------------------------*\
+    #POST /CARTSTATUS/:cid
+\*-------------------------*/
+
+router.post('/cartStatus/:cid', passport.authenticate('current', {session:false}), authorization([userRole.USER, userRole.PREMIUM]), async (req, res) => {
+    try {
+        let cartId = req.params.cid; 
+        let infoUserLoggedIn = req.user;
+        
+        let cartSelected = await cartsService.getCartByIdLean(cartId);
+        let productsSelected = cartSelected[0].products;
+
+        let cartLoaded = productsSelected.length > 0;
+        
+        if(cartLoaded){
+            return res.redirect(`/orderDetail/${cartId}/purchase?userFirstName=${infoUserLoggedIn.first_name}&userLastName=${infoUserLoggedIn.last_name}&userEmail=${infoUserLoggedIn.email}&userRole=${infoUserLoggedIn.role}&cartId=${cartId}`);
+        } else {
+            return res.redirect(`/products?userFirstName=${infoUserLoggedIn.first_name}&userLastName=${infoUserLoggedIn.last_name}&userEmail=${infoUserLoggedIn.email}&userRole=${infoUserLoggedIn.role}&cartId=${cartId}&emptyCart=${`Carrito vacio`}`);
+        }
+    } catch (error) {
+        req.logger.fatal(`Error al chequear el estado del carrito. Detalle: ${error.message}`);
         return res.status(500).json({error:'Unexpected', detalle:error.message});
     }
 });

@@ -82,21 +82,22 @@
 <br>
 <ul class="menu"><li> <a href="/cartDetail?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}">Ver Carrito</a></li></ul>
 <hr>    
-<br>
-<ul class="menu"><li> <a href="/orderDetail/{{cartId}}/purchase?userFirstName={{userFirstName}}&userLastName={{userLastName}}&userEmail={{userEmail}}&userRole={{userRole}}&cartId={{cartId}}">Comprar</a></li></ul>
+<form action="/api/users/cartStatus/{{cartId}}" method="post">
+    {{#if cartEmpty}}
+        <div class="error">El carrito está vacio. Recuerde agregar al menos un producto para continuar con el proceso de compra</div>
+    {{/if}}
+    <input type="submit" value="Comprar">
+</form>
 <hr>  
-<br>
 <form id="premiumForm" action="/api/users/premium/{{userId}}" method="post">
     <button type="submit">Cambiar a usuario modo user</button>
 </form>
-
 <form id="userForm" action="/api/users/premium/{{userId}}" method="post">
     {{#if mandatoryDocumentEmpty}}
         <div class="error">Error. Debes cargar tu foto de perfil o documentación para poder cambiar de rol</div>
     {{/if}}
     <button type="submit">Cambiar a usuario modo premium</button>
 </form>
-
 <script>
     if (userRole === 'premium') {
         document.getElementById('userForm').style.display = 'none';
