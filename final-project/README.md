@@ -7,12 +7,14 @@ This project was generated with the following dependencies:
 - [Commander.js](https://github.com/tj/commander.js?): Version 11.1.0
 - [Cookie Parser](https://github.com/expressjs/cookie-parser): Version 1.4.6
 - [Connect Mongo](https://github.com/mongodb-js/connect-mongodb-session): Version 5.0.0
+- [Cors](https://github.com/expressjs/cors): Version 2.8.5
 - [Dotenv](https://github.com/motdotla/dotenv): Version 16.3.1
 - [Express Handlebars](https://github.com/express-handlebars/express-handlebars): Version 7.1.2
 - [Express JS](https://github.com/expressjs/express): Version 4.18.2
 - [Express session](https://github.com/expressjs/session): Version 1.17.3
 - [Faker-JS](https://github.com/faker-js/faker): Version 8.3.1 
 - [Jsonwebtoken](https://github.com/auth0/node-jsonwebtoken): Version 9.0.2
+- [Mercadopago](https://github.com/mercadopago): Version 1.5.17
 - [Mocha](https://github.com/mochajs/mocha): Version 10.2.0
 - [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2
 - [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4

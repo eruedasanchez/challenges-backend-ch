@@ -351,6 +351,28 @@ router.get('/successPurchase', async (req,res) => {
     });
 });
 
+router.get('/cartDetail', passport.authenticate('current', {session:false}), authorization([userRole.PREMIUM, userRole.USER]), async (req,res) => {
+    let {userFirstName, userLastName, userEmail, userRole, cartId } = req.query;
+    
+    let cartSelected = await cartsService.getCartByIdLean(cartId);
+    let productsSelected = cartSelected[0].products;
+    
+    res.setHeader('Content-Type','text/html');
+    res.status(200).render('cartDetail', {
+        header: 'Detalle del carrito',
+        productsSelected: productsSelected,
+        userFirstName: userFirstName, 
+        userLastName: userLastName, 
+        userEmail: userEmail, 
+        userRole: userRole, 
+        cartId: cartId,
+        cartStatus: productsSelected.length === 0 ? 'empty' : 'loaded'
+    });
+});
+
+
+
+
 
 
 

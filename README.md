@@ -7,17 +7,20 @@
   <br/>
   <br/>
 
-  <h1 align="center">Challenges Backend</h1>
+  <h1 align="center">Servidor basado en Node.JS y Express.JS</h1>
   
-  Challenges Backend
+  Este proyecto consiste en una serie de desafíos diseñados para crear y poner en funcionamiento un servidor básico basado en [Node.JS](https://github.com/nodejs) y [Express JS](https://github.com/expressjs/express). 
 </div>
 <br/>
 
 # Índice
 
 1. [Resumen del proyecto](#resumen-del-proyecto)
-<!-- 2. [Capítulo 1](#capítulo-1)
-3. [Revisando código](#revisando-código) -->
+2. [Tecnologias y dependencias utilizadas](#tecnologias-y-dependencias-utilizadas)
+3. [Inicio Rápido](#inicio-rápido)
+4. [Vistas](#vistas)
+5. [Documentación](#documentación)
+6. [Recursos](#recursos)
 
 ### Resumen del proyecto
 
@@ -62,7 +65,136 @@ Este proyecto consiste en una serie de desafíos diseñados para crear y poner e
 
 - *final-project*: Se crea una vista para poder visualizar, modificar el rol y eliminar un usuario. Esta vista únicamente será accesible para el administrador del ecommerce. Se modifica el endpoint que elimina productos, para que, en caso de que el producto pertenezca a un usuario premium, le envíe un correo indicándole que el producto fue eliminado. Ademas, se finaliza las vistas pendientes para la realización de flujo completo de compra. 
 
-</div>
-<br/>
+### Tecnologias y dependencias utilizadas
 
+Este es un módulo de [Node.JS](https://github.com/nodejs) disponible a través del registro npm.
 
+Antes de instalar, descargue e instale [Node.JS](https://github.com/nodejs). Se requiere [Node.js 0.10](https://github.com/nodejs) o superior.
+
+El proyecto fue generado con las siguientes dependencias: 
+
+- [BCrypt](https://github.com/pyca/bcrypt): Version 5.1.1 
+- [Chai](https://github.com/chaijs/chai): Version 4.3.10
+- [Commander.js](https://github.com/tj/commander.js?): Version 11.1.0
+- [Cookie Parser](https://github.com/expressjs/cookie-parser): Version 1.4.6
+- [Cors](https://github.com/expressjs/cors): Version 2.8.5
+- [Connect Mongo](https://github.com/mongodb-js/connect-mongodb-session): Version 5.0.0
+- [Dotenv](https://github.com/motdotla/dotenv): Version 16.3.1
+- [Express Handlebars](https://github.com/express-handlebars/express-handlebars): Version 7.1.2
+- [Express JS](https://github.com/expressjs/express): Version 4.18.2
+- [Express session](https://github.com/expressjs/session): Version 1.17.3
+- [Faker-JS](https://github.com/faker-js/faker): Version 8.3.1 
+- [Jsonwebtoken](https://github.com/auth0/node-jsonwebtoken): Version 9.0.2
+- [Mercadopago](https://github.com/mercadopago): Version 1.5.17
+- [Mocha](https://github.com/mochajs/mocha): Version 10.2.0
+- [Mongoose](https://github.com/Automattic/mongoose): Version 7.5.2
+- [Mongoose-Paginate-v2](https://github.com/aravindnc/mongoose-paginate-v2): Version 1.7.4
+- [Multer](https://github.com/expressjs/multer): Version 1.4.5-lts.1  
+- [Nodemailer](https://github.com/nodemailer/nodemailer): Version 6.9.7  
+- [Passport](https://github.com/jaredhanson/passport): Version 0.6.0
+- [Passport Github2](https://github.com/passport/todos-express-password): Version 0.6.0
+- [Passport Jwt](https://github.com/mikenicholson/passport-jwt): Version 4.0.1
+- [Passport Local](https://github.com/jaredhanson/passport-local): Version 0.6.0
+- [Socket.io](https://github.com/socketio/socket.io): Version 4.7.2
+- [Supertest](https://github.com/ladjs/supertest): Version 6.3.3
+- [Swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc): Version 6.2.8
+- [Swagger-ui-express](https://github.com/scottie1984/swagger-ui-express): Version 5.0.0
+- [Uuid](https://github.com/uuidjs/uuid): Version 9.0.1
+- [Winston](https://github.com/winstonjs/winston): Version 3.11.0
+
+### Inicio Rápido
+
+La forma más rápida de ejecutar este proyecto con [Express JS](https://github.com/expressjs/express) es ejecutar los comandos para generar una aplicación como se muestra a continuación:
+
+Cree una carpeta en el directorio de su escritorio con el nombre que desee (por ejemplo: desafíos-backend-ch):
+
+```bash
+$ mkdir challenges-backend-ch
+```
+
+Abra el contenido de dicha carpeta:
+
+```bash
+$ cd challenges-backend-ch
+```
+
+Clone el repositorio en esa carpeta:
+
+```bash
+$ git clone https://github.com/eruedasanchez/challenges-backend-ch.git
+```
+
+Abra la carpeta final-project e instale todas las dependencias: 
+
+```bash
+$ cd final-project
+$ npm install
+```
+
+Inicie nodemon y el servidor con persistencia de archivos en MongoDB:
+
+```bash
+$ npm run dev -p mongodb
+```
+
+o inicie nodemon y el servidor con persistencia de archivos en FS:
+
+```bash
+$ npm run dev -p fs
+```
+
+### Vistas
+
+El proyecto cuenta con las siguientes vistas implementadas en [Handlebars](https://github.com/handlebars-lang/handlebars.js/): 
+
+Visite el sitio web en: http://localhost:8080/ para registrarse como usuario, iniciar sesión y ser redirigido a la vista de productos.
+<br>
+<br>
+Visite http://localhost:8080/chat para la aplicación de chat.
+<br>
+<br>
+Visite http://localhost:8080/signup para registrarse como usuario en el sistema.
+<br>
+<br>
+Visite http://localhost:8080/resetPassword para solicitar el reestablecimiento de su contraseña.
+<br>
+<br>
+Visite http://localhost:8080/confirmNewPassword para reestablecer y confirmar su nueva contraseña.
+<br>
+<br>
+Visite http://localhost:8080/login para iniciar su sesión como usuario.
+<br>
+<br>
+Visite http://localhost:8080/products para ver el listado de productos cargados en la base de datos.
+<br>
+<br>
+Visite http://localhost:8080/carts/:cid para ver el contenido del carrito con Id `cid`.
+<br>
+<br>
+Visite http://localhost:8080/realtimeproducts para ver el listado de productos en tiempo real.
+<br>
+<br>
+Visite http://localhost:8080/mockingproducts para ver el contenido de una serie de productos generados aleatoriamente.
+<br>
+<br>
+Visite http://localhost:8080/loggerTest para ver el contenido del sistema de *logs* creados
+<br>
+<br>
+Visite http://localhost:8080/adminPanel para ver el panel de administración que solo es accesible al administrador
+<br>
+<br>
+Visite http://localhost:8080/orderDetail/:cid/purchase para ver el detalle del pedido realizado por el usuario que tiene asignado el carrito con Id `cid`.
+<br>
+<br>
+Visite http://localhost:8080/successPurchase para ver el mensaje de finalización de compra cuando es exitosa.
+<br>
+<br>
+Para los endpoints relacionados al CRUD para colecciones de Productos, Carros y Mensajes ejecutarlos con [Postman](https://www.postman.com/).
+
+### Documentación
+
+La documentación referida a todos los endpoints relacionados al CRUD del servidor las puede encontrar en http://localhost:8080/api-docs/
+
+### Recursos
+
+El proyecto cuenta tanto con variables de entorno como con usuarios de prueba de MercadoPago para realizar la compra de productos. Estos recursos se encuentran adjuntos en un archivo privado enviado al usuario de la aplicación.

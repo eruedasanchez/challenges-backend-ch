@@ -78,15 +78,15 @@ async function confirmPurchase(req, res) {
 async function postProductInCart(req,res) {
     try {
         let {cid, pid} = req.params, infoUserLoggedIn = req.user;
-        
         let productSelected = await productsService.getProductById(pid);
         
         if(infoUserLoggedIn.role === userRole.PREMIUM && infoUserLoggedIn.email === productSelected[0].owner){
             throw CustomError.createError("Error de autorización", "Permisos inválidos", errorTypes.UNAUTHORIZED, unauthorizedErrorInfo('carrito'));
         }
         
-        let cartSel = await cartsService.addProduct(cid, pid);
-        return res.status(201).json({status:'ok', cartSelected:cartSel});
+        await cartsService.addProduct(cid, pid);
+        
+        return res.redirect(`/cartDetail?userFirstName=${infoUserLoggedIn.first_name}&userLastName=${infoUserLoggedIn.last_name}&userEmail=${infoUserLoggedIn.email}&userRole=${infoUserLoggedIn.role}&cartId=${cid}`);
     } catch (error) {
         req.logger.fatal(`Error al agregar un producto al carrito. Detalle: ${error.message}`);
         return res.status(error.code).json({error:error.name, detail:error.message});
