@@ -21,7 +21,8 @@
 4. [Vistas](#vistas)
 5. [Documentación](#documentación)
 6. [Recursos](#recursos)
-7. [Aclaración importante](#aclaración-importante)
+7. [Ngrok](#ngrok)
+8. [Aclaración importante](#aclaración-importante)
 
 ### Resumen del proyecto
 
@@ -203,6 +204,44 @@ La documentación referida a todos los endpoints relacionados al CRUD del servid
 
 El proyecto cuenta tanto con variables de entorno como con usuarios de prueba de MercadoPago para realizar la compra de productos. Estos recursos se encuentran adjuntos en un archivo privado enviado al usuario de la aplicación.
 
+### Ngrok
+
+Se utiliza la herramienta [Ngrok](https://ngrok.com/download) para exponer el aplicativo local a la web y crear un tunel sin la necesidad de subir la aplicación a un servidor. El objetivo es crear el tunel para poder realizar la integración de Mercadopago con nuestro aplicativo para procesar los pagos utilizandolo en la propiedad de *notification_url* en la *preference* en el archivo `mercadoPago.router.js`.
+
+En caso de que la URL brindada NO responda a la solicitud, se recomienda crearse una cuenta (gratuita) en Ngrok, descargar el ejecutable de [Ngrok](https://ngrok.com/download) en su computadora para su respectivo sistema operativo (en mi caso MacOS) y ejecutar los siguientes comandos:
+
+Comenzamos creando una carpeta en nuestro directorio llamada `ng` de la siguiente manera:
+
+```bash
+$ cd Desktop
+$ mkdir ng
+```
+
+Luego, abrimos la carpeta `ng`:
+
+```bash
+$ cd ng
+```
+
+Conectamos nuestra cuenta con el token de autorización que nos brinda Ngrok.
+
+![Ngrok](https://i.postimg.cc/PxfBQ1HM/ngrok-1.jpg "ngrok-1")
+
+Luego, ejecutamos:
+
+```bash
+$ ./ngrok config add-authtoken 2bBrHTSrYrDpfcLUczLwV3YfKHW_2U5f39oyiAiCZ8U1QhSvo 
+```
+
+Por último, creamos la direccion https para el servidor local (en nuestro caso 8080) que deseemos ejecutando el comando:
+
+```bash
+$ ./ngrok http 8080 
+```
+
+Obteniendo el tunel y copiandolo en el campo `notification_url` cuando creamos la `preference` de MercadoPago.
+
+![Ngrok](https://i.postimg.cc/nV6mYNwp/ngrok-2.jpg "ngrok-2")
 
 ### Aclaración importante
 
