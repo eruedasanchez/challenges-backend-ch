@@ -3,6 +3,7 @@ import passport from 'passport';
 import mongoose from 'mongoose';
 import nodemailer from 'nodemailer';
 import moment from 'moment-timezone';
+import mercadopago from 'mercadopago';
 import { v4 as uuidv4 } from 'uuid';
 import __dirname, { userRole} from '../utils.js';
 import { config } from '../config/config.js';
@@ -14,6 +15,7 @@ import { fakerES_MX as faker } from '@faker-js/faker';
 import { usersModel } from '../dao/models/users.model.js';
 import { authorization } from './sessions.router.js';
 import { activeSessionMid, auth } from '../middlewares/viewsRouterMiddlewares.js';
+
 
 export const router = express.Router();
 
@@ -72,11 +74,11 @@ const transporter = nodemailer.createTransport({
 })
 
 const purchaseConfirmationEmail = async ticket => {
-    const productDetails = ticket.productsWithStock.map(product => `
-        <p>Nombre del producto: ${product.productId.title}</p>
-        <p>Precio del producto: $${product.productId.price}</p>
-        <p>Cantidad: ${product.quantity}</p>
-        <p>Subtotal: $${product.productId.price * product.quantity}</p>
+    const productDetails = ticket.productsWithStock.map(item => `
+        <p>Nombre del producto: ${item.title}</p>
+        <p>Precio del producto: $${item.unit_price}</p>
+        <p>Cantidad: ${item.quantity}</p>
+        <p>Subtotal: $${item.unit_price * item.quantity}</p>
         <br>
     `).join('');
     
@@ -315,43 +317,53 @@ router.get('/orderDetail/:cid/purchase', passport.authenticate('current', {sessi
     });
 });
 
-router.get('/successPurchase', async (req,res) => {
+router.post('/successPurchase', async (req,res) => {
+    const { query } = req;
     let { cartId, userEmail } = req.query;
     let cid = new mongoose.Types.ObjectId(cartId);
     
-    let cartUpdt, updateProd, updatedStock;
-    let productsWithStock = [], cartAmount = 0;
+    const topic = query.topic || query.type;
+    
+    let merchantOrder;
 
-    let cartSelected = await cartsService.getCartByIdLean(cid);
-    let productsSelected = cartSelected[0].products;
+    if(topic === 'merchant_order'){
+        const orderId = query.id;
+        merchantOrder = await mercadopago.merchant_orders.findById(orderId);
 
-    for(const product of productsSelected){
-        if(product.productId.stock >= product.quantity){
-            productsWithStock.push(product);
-            cartAmount += product.quantity * product.productId.price;  
+        let paidAmount = 0;
+        merchantOrder.body.payments.forEach(payment => {
+            if(payment.status === 'approved'){
+                paidAmount += payment.transaction_amount;
+            }
+        });
+
+        if(paidAmount >= merchantOrder.body.total_amount){
+            let cartUpdt, updatedStock, updateProd;
+            let cartSelected = await cartsService.getCartByIdLean(cid);
+            let productsSelected = cartSelected[0].products;
+
+            for(const product of productsSelected){
+                if(product.productId.stock >= product.quantity){
+                    cartUpdt = await cartsService.deleteProduct(cid, product.productId._id); 
+                    updatedStock = { stock: product.productId.stock - product.quantity };
+                    updateProd = await productsService.updateProduct(product.productId._id, updatedStock); 
+                } 
+            }
             
-            cartUpdt = await cartsService.deleteProduct(cid, product.productId._id); 
-            updatedStock = { stock: product.productId.stock - product.quantity };
-            updateProd = await productsService.updateProduct(product.productId._id, updatedStock); 
-        } 
+            let ticket = {
+                code: uuidv4().toString().split('-').join(''),
+                purchase_datetime: moment().tz('America/Argentina/Buenos_Aires').format('DD-MM-YYYYTHH:mm:ss.SSS[Z]'),
+                amount: merchantOrder.body.total_amount,
+                purchaser: userEmail,
+                productsWithStock: merchantOrder.body.items
+            }
+            
+            await ticketsService.generateTicket(ticket);
+            await purchaseConfirmationEmail(ticket);
+        }
     }
     
-    let ticket = {
-        code: uuidv4().toString().split('-').join(''),
-        purchase_datetime: moment().tz('America/Argentina/Buenos_Aires').format('DD-MM-YYYYTHH:mm:ss.SSS[Z]'),
-        amount: cartAmount,
-        purchaser: userEmail,
-        productsWithStock: productsWithStock
-    }
-    
-    await ticketsService.generateTicket(ticket);
-    await purchaseConfirmationEmail(ticket);
-    
-    res.setHeader('Content-Type','text/html');
-    res.status(200).render('successPurchase', {
-        header: 'Compra exitosa',
-        userEmail: userEmail, 
-    });
+    return res.status(200).json({status: 'ok'});
 });
 
 router.get('/cartDetail', passport.authenticate('current', {session:false}), authorization([userRole.PREMIUM, userRole.USER]), async (req,res) => {
@@ -372,11 +384,4 @@ router.get('/cartDetail', passport.authenticate('current', {session:false}), aut
         cartStatus: productsSelected.length === 0 ? 'empty' : 'loaded'
     });
 });
-
-
-
-
-
-
-
 

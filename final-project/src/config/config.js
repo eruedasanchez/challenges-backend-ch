@@ -34,3 +34,4 @@ export const config = {
     GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
     ACCESS_TOKEN: process.env.ACCESS_TOKEN
 }
+
