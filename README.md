@@ -21,6 +21,7 @@
 4. [Vistas](#vistas)
 5. [Documentación](#documentación)
 6. [Recursos](#recursos)
+7. [Aclaración importante](#aclaración-importante)
 
 ### Resumen del proyecto
 
@@ -201,3 +202,8 @@ La documentación referida a todos los endpoints relacionados al CRUD del servid
 ### Recursos
 
 El proyecto cuenta tanto con variables de entorno como con usuarios de prueba de MercadoPago para realizar la compra de productos. Estos recursos se encuentran adjuntos en un archivo privado enviado al usuario de la aplicación.
+
+
+### Aclaración importante
+
+Los endpoints relacionados con el CRUD de la API que sean evaluados con Postman y requieran auteticación o permisos, su cookie que contiene el JWT deberá ser copiada manualmente con su respectivo nombre, valor y fecha de expiración previo a ejecutar el endpoint. Quedo abierto a cualquier sugerencia para que este proceso sea automatico y no manual. 
