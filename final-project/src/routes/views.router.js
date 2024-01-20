@@ -18,6 +18,7 @@ import { activeSessionMid, auth } from '../middlewares/viewsRouterMiddlewares.js
 
 
 export const router = express.Router();
+let counterQueriesMP = 0;
 
 /*----------------------*\
     #MOCKING FUNCTIONS
@@ -324,12 +325,14 @@ router.post('/successPurchase', async (req,res) => {
     
     const topic = query.topic || query.type;
     
+    if(query) counterQueriesMP = counterQueriesMP + 1;
+    
     let merchantOrder;
 
-    if(topic === 'merchant_order'){
+    if(topic === 'merchant_order' && counterQueriesMP === 4){
         const orderId = query.id;
         merchantOrder = await mercadopago.merchant_orders.findById(orderId);
-
+        
         let paidAmount = 0;
         merchantOrder.body.payments.forEach(payment => {
             if(payment.status === 'approved'){
